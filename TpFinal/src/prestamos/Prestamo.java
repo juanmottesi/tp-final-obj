@@ -1,5 +1,6 @@
 package prestamos;
 
+import java.util.Date;
 import java.util.List;
 
 import otros.*;
@@ -13,6 +14,7 @@ public class Prestamo {
 	private Cliente cliente;
 	private float montoTotal;
 	private List<Gasto> gastos;
+	private Date fechaDeCreacion;
 	
 	public EstadoPrestamo getEstado() {
 		return estado;
@@ -56,6 +58,14 @@ public class Prestamo {
 	
 	public Integer cantidadDeCuotas(){	
 		return this.getCuotas().size();
+	}
+
+	public Date getFechaDeCreacion() {
+		return fechaDeCreacion;
+	}
+
+	public void setFechaDeCreacion(Date fechaDeCreacion) {
+		this.fechaDeCreacion = fechaDeCreacion;
 	}
 	
 	
