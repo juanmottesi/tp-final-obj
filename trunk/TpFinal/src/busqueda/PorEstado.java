@@ -1,7 +1,5 @@
 package busqueda;
 
-import java.util.List;
-import java.util.Vector;
 
 import prestamos.Prestamo;
 import estadoPrestamos.EstadoPrestamo;
@@ -25,15 +23,8 @@ public class PorEstado extends Condicion {
 	}
 
 	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
-		
-		List<Prestamo> ret = new Vector<Prestamo>();
-		for(Prestamo p : prestamos){
-			if(p.getEstado() == this.getEstado()){
-				ret.add(p);
-			}
-		}
-		return ret;
+	public boolean respetaCondicion(Prestamo p){	
+		return(p.getEstado() == this.getEstado());
 	}
 	
 	

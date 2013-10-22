@@ -2,6 +2,8 @@ package busqueda;
 
 import java.util.Date;
 
+import prestamos.Prestamo;
+
 public class PorFechaHasta extends Condicion {
 	
 	private Date hasta;
@@ -20,5 +22,8 @@ public class PorFechaHasta extends Condicion {
 		
 	}
 	
+	public boolean respetaCondicion(Prestamo p){
+		return p.getFechaDeCreacion().after(this.getHasta());
+	}
 
 }

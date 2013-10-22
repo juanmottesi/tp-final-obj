@@ -1,7 +1,5 @@
 package busqueda;
 
-import java.util.List;
-import java.util.Vector;
 
 import prestamos.Prestamo;
 
@@ -24,16 +22,10 @@ public class PorMontoMinimo extends Condicion {
 	}
 
 	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
-		
-		List<Prestamo> ret = new Vector<Prestamo>();
-		for(Prestamo p : prestamos){
-			float montoAux = p.getMontoTotal();
-			if(montoAux> this.getMinimo()){
-				ret.add(p);
-			}
-		}
-		return ret;
+	public boolean respetaCondicion(Prestamo p){	
+	
+		float montoAux = p.getMontoTotal();
+		return(montoAux> this.getMinimo());
 	}
 	
 	

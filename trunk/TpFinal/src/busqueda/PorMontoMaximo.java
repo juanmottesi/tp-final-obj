@@ -1,7 +1,5 @@
 package busqueda;
 
-import java.util.List;
-import java.util.Vector;
 
 import prestamos.Prestamo;
 
@@ -24,16 +22,10 @@ public class PorMontoMaximo extends Condicion{
 	}
 
 	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
-		
-		List<Prestamo> ret = new Vector<Prestamo>();
-		for(Prestamo p : prestamos){
+	public boolean respetaCondicion(Prestamo p){	
 			float montoAux = p.getMontoTotal();
-			if(montoAux< this.getMaximo()){
-				ret.add(p);
-			}
-		}
-		return ret;
+			return (montoAux< this.getMaximo());
 	}
-
+	
+	
 }
