@@ -22,7 +22,7 @@ public class PorApellido extends Condicion {
 
 	@Override
 	public boolean respetaCondicion(Prestamo p){
-		return (p.getCliente().getApellido() == this.getApellido());
+		return (p.getCliente().getApellido().contains(this.getApellido()));
 	}
 	
 	
