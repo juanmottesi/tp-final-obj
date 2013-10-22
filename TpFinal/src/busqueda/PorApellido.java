@@ -26,7 +26,7 @@ public class PorApellido extends Condicion {
 	public List<Prestamo> buscar(List<Prestamo> prestamos) {
 		List<Prestamo> ret = new Vector<Prestamo>();
 		for(Prestamo p : prestamos){
-			if(p.getCliente().getNombreYApellido() == this.getApellido()){
+			if(p.getCliente().getApellido() == this.getApellido()){
 				ret.add(p);
 			}
 			

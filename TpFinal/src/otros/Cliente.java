@@ -2,16 +2,26 @@ package otros;
 
 public class Cliente {
 	
-	private String nombreYApellido;
+	private String apellido;
 	private Integer dni;
 	private String direccion;
+	private String nombre;
 	
-	public String getNombreYApellido() {
-		return nombreYApellido;
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
 	}
 	
-	public void setNombreYApellido(String nombreYApellido) {
-		this.nombreYApellido = nombreYApellido;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	
 	public Integer getDni() {
