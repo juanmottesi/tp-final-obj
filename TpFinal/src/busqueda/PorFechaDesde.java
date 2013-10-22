@@ -1,8 +1,8 @@
 package busqueda;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+
+
 
 import prestamos.Prestamo;
 
@@ -26,7 +26,8 @@ public class PorFechaDesde extends Condicion {
 	}
 
 	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
+	public boolean respetaCondicion(Prestamo p){	
+		return(p.getFechaDeCreacion().before(this.getDesde()));
 
 	}
 	

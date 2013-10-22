@@ -1,7 +1,6 @@
 package busqueda;
 
-import java.util.List;
-import java.util.Vector;
+
 
 import prestamos.Prestamo;
 
@@ -33,23 +32,16 @@ public class PorCuotas extends Condicion {
 		
 	}
 
-	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
-		List<Prestamo> ret = new Vector<Prestamo>();
-		for(Prestamo p : prestamos){
+	public boolean respetaCondicion(Prestamo p){	
 			Integer n = p.cantidadDeCuotas();
-			if(n>this.getDesde() && n<this.getHasta()){
-				ret.add(p);
-			}
-		}
-		return ret;
+			return (n>this.getDesde() && n<this.getHasta());
 	}
 	
 	
 	
 	
 	
-	
+
 	
 
 }

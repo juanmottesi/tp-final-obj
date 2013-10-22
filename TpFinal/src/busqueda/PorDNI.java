@@ -1,9 +1,7 @@
 package busqueda;
 
-import java.util.List;
-import java.util.Vector;
-
 import prestamos.Prestamo;
+
 
 public class PorDNI extends Condicion {
 	
@@ -22,17 +20,13 @@ public class PorDNI extends Condicion {
 		this.setDni(dni);
 		
 	}
-
+	
 	@Override
-	public List<Prestamo> buscar(List<Prestamo> prestamos) {
-		List<Prestamo> ret = new Vector<Prestamo>();
-		for(Prestamo p : prestamos){
-			if(p.getCliente().getDni() == this.getDni()){
-				ret.add(p);
-			}
-		}
-		return ret;
+	public boolean respetaCondicion(Prestamo p){
+			return (p.getCliente().getDni() == this.getDni());
+			
 	}
+
 	
 	
 
