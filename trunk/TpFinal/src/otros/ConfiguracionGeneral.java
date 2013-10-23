@@ -66,7 +66,7 @@ public class ConfiguracionGeneral {
 		
 		Set<Integer> claves = this.getTem().keySet();
 		for(Integer i : claves){
-			if(i > cuotas){
+			if(i >= cuotas){
 				return this.getTem().get(i);
 			}	
 		}
