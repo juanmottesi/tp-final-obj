@@ -2,6 +2,7 @@ package prestamos;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import otros.*;
 import estadoPrestamos.*;
@@ -68,6 +69,23 @@ public class Prestamo {
 		this.fechaDeCreacion = fechaDeCreacion;
 	}
 	
+	public List<Cuota> generarCuotas(Integer cantCoutas, ConfiguracionGeneral cg, float montoTotal){
+		List<Cuota> cuotas = new Vector<Cuota>();
+		Integer temCorrespondiente = cg.consultarTem(cantCoutas);
+		float valorCuota = this.getCalcularCuota().calcularCuota(temCorrespondiente,cantCoutas,montoTotal);
+		
+		return cuotas;
+	}
+	
+	
+	public Prestamo(float montoTotal, Integer cuotas, Date fechaDeCreacion,ConfiguracionGeneral cg){
+		
+		this.setEstado(new Solicitado());
+		this.setMontoTotal(montoTotal);
+		this.setFechaDeCreacion(fechaDeCreacion);
+		this.setCuotas(this.generarCuotas(cuotas,cg,montoTotal));
+		
+	}
 	
 	
 	

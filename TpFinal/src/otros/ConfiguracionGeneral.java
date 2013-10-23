@@ -76,7 +76,7 @@ public class ConfiguracionGeneral {
 	
 	public void agregarClaveValorATem(Integer c, Integer v){
 		
-		this.getTem().put(c, v);
+		this.getTem().put(c, v/100);
 		
 	}
 
