@@ -1,15 +1,19 @@
 package otros;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import gastos.Gasto;
 
 public class ConfiguracionGeneral {
 
 	private Date fechaInicio;
 	private Date fechaFin;
 	private SortedMap<Integer,Integer> tem;
+	private List<Gasto> gastos;
 	
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -34,6 +38,15 @@ public class ConfiguracionGeneral {
 	public void setTem(SortedMap<Integer, Integer> tem) {
 		this.tem = tem;
 	}
+	
+	public List<Gasto> getGastos() {
+		return gastos;
+	}
+
+	public void setGastos(List<Gasto> gastos) {
+		this.gastos = gastos;
+	}
+	
 	
 	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Integer>tem){
 		
@@ -62,8 +75,61 @@ public class ConfiguracionGeneral {
 	} 
 	
 	public void agregarClaveValorATem(Integer c, Integer v){
+		
 		this.getTem().put(c, v);
 		
 	}
+
+	public float sumarGastoGlobalPorcentual(){
+		
+		float ret = 0;
+		for(Gasto g  : this.getGastos()){
+			if(g.getNombre() == "Global"){
+				ret += g.gastoPorcentual();
+			}
+		}
+		
+		return ret;
+	}
+	
+	public float sumarGastoGlobalFijo(){
+		
+		float ret = 0;
+		for(Gasto g  : this.getGastos()){
+			if(g.getNombre() == "Global"){
+				ret += g.gastoFijo();
+			}
+		}
+		
+		return ret;
+	}
+	
+	public float sumarGastoMensualPorcentul(){
+		
+		float ret = 0;
+		for(Gasto g  : this.getGastos()){
+			if(g.getNombre() == "Mensual"){
+				ret += g.gastoPorcentual();
+			}
+		}
+		
+		return ret;
+	}
+	
+	
+	public float sumarGastoMensualFijo(){
+
+		float ret = 0;
+		for(Gasto g  : this.getGastos()){
+			if(g.getNombre() == "Mensual"){
+				ret += g.gastoFijo();
+			}
+		}
+		
+		return ret;
+	}
 	
 }
+	
+	
+
