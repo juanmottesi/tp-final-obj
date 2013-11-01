@@ -2,12 +2,11 @@ package gastos;
 
 public class GastoMensual extends Gasto {
 
-	public GastoMensual(float fijo, float porcentual){
+	public GastoMensual(float monto, TipoDeGasto tipoDeGasto){
 		
-		this.setFijo(fijo);
-		this.setNombre("Mensual");
-		this.setPorcentual(porcentual/100);
-		
+		this.setMonto(monto);
+		this.setTipoDeGasto(tipoDeGasto);
+	
 	}
 	
 	
