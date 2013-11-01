@@ -4,35 +4,20 @@ import java.util.List;
 
 import prestamos.Prestamo;
 
-public class PorAnd extends Condicion {
+public class PorAnd extends PorOperadorLogico {
 
-	private List<Condicion> condiciones;
-	
-	public List<Condicion> getCondiciones() {
-		return this.condiciones;
-	}
-	
-	public void setCondiciones(List<Condicion> condiciones) {
-		this.condiciones = condiciones;
-	}
-		
-	@Override
-	
-	public List<Prestamo> buscar(List<Prestamo> prestamos){
-		
-		if(this.getCondiciones().isEmpty()){
-			return prestamos;
-		}
-		else{
-			Condicion c =this.getCondiciones().get(0);
-			this.getCondiciones().remove(0);
-			return this.buscar(c.buscar(prestamos));		
-		}		
+	public PorAnd(List<Condicion> condiciones){
+		this.setCondiciones(condiciones);
 	}
 	
 	@Override
 	public boolean respetaCondicion(Prestamo p) {
-		return false;
+		boolean ret = true;
+		for(Condicion c : this.getCondiciones()){
+			ret = ret && c.respetaCondicion(p); 
+		}
+		
+	return ret;
 	}
 	
 	
