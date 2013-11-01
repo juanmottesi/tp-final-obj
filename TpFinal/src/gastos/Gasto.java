@@ -2,44 +2,26 @@ package gastos;
 
 public abstract class Gasto {
 	
-	private String nombre;
-	private float porcentual;
-	private float fijo;
-
-	public String getNombre(){
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public float getPorcentual() {
-		return porcentual;
-	}
-
-	public void setPorcentual(float porcentual) {
-		this.porcentual = porcentual;
-	}
-
-	public float getFijo() {
-		return fijo;
-	}
-
-	public void setFijo(float fijo) {
-		this.fijo = fijo;
-	}
-
+	private float monto;
+	private TipoDeGasto tipoDeGasto;
 	
-	public float gastoPorcentual() {
-		
-		return this.getPorcentual();
+	public float getMonto() {
+		return monto;
 	}
 
-	
-	public float gastoFijo() {
-		
-		return this.gastoFijo();
+	public void setMonto(float monto) {
+		this.monto = monto;
 	}
+
+	public TipoDeGasto getTipoDeGasto() {
+		return tipoDeGasto;
+	}
+
+	public void setTipoDeGasto(TipoDeGasto tipoDeGasto) {
+		this.tipoDeGasto = tipoDeGasto;
+	}
+
+	public abstract float calcularGasto();
+	
 	
 }
