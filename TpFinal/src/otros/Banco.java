@@ -1,7 +1,6 @@
 package otros;
 
 import java.util.List;
-
 import busqueda.BusquedaDePrestamo;
 import prestamos.Prestamo;
 
