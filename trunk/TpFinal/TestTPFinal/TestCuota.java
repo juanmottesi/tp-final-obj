@@ -22,11 +22,10 @@ public class TestCuota {
 	
 //	private Prestamo mockPrestamo;
 	
-	
 	@Before
 	public void setUp(){
-		float f = 0;
-		cuota= new Cuota(new Date(),1500,1,f,f,f,f,f,f);
+		double f = 0;
+		cuota= new Cuota(new Date(),1500,1,f,/*f,*/f,f,f,f);
 //		EstadoCuota mockEstado= mock(APagar.class);
 //		cuota.setEstadoCuota(mockEstado);
 		//mockPrestamo = mock(Prestamo.class);
@@ -34,7 +33,7 @@ public class TestCuota {
 
 	@Test
 	public void testPagar() {
-
+		
 		cuota.pagar(new Date());
 		
 		//verify(cuota, Mockito.times(0)).pagar(new Date());
