@@ -2,24 +2,27 @@ package prestamos;
 
 import java.util.Date;
 
+import cuotaEstados.APagar;
+import cuotaEstados.EstadoCuota;
+
 
 public class Cuota {
 	
 	private Date fechaVencimiento;
-	private float montoCuota;
+	private double montoCuota;
 	private Integer nroCuota;
-	private float interesPorMora;
+	private double interesPorMora;
 	private Date fechaDePago;
-	private float amortizacion;
-	private float interes;
-	private float gastoTotal;
-	private float saldoDeuda;
-	private float seguro;
+	private double amortizacion;
+	private double interes;
+	private double gastoTotal;
+	private double saldoDeuda;
+	private double seguro;
 	
-	public float getSeguro() {
+	public double getSeguro() {
 		return seguro;
 	}
-	public void setSeguro(float seguro) {
+	public void setSeguro(double seguro) {
 		this.seguro = seguro;
 	}
 
@@ -30,10 +33,10 @@ public class Cuota {
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
-	public float getMontoCuota() {
+	public double getMontoCuota() {
 		return montoCuota;
 	}
-	public void setMontoCuota(float montoCuota) {
+	public void setMontoCuota(double montoCuota) {
 		this.montoCuota = montoCuota;
 	}
 	public Integer getNroCuota() {
@@ -42,10 +45,10 @@ public class Cuota {
 	public void setNroCuota(Integer nroCuota) {
 		this.nroCuota = nroCuota;
 	}
-	public float getInteresPorMora() {
+	public double getInteresPorMora() {
 		return interesPorMora;
 	}
-	public void setInteresPorMora(float interesPorMora) {
+	public void setInteresPorMora(double interesPorMora) {
 		this.interesPorMora = interesPorMora;
 	}
 	public Date getFechaDePago() {
@@ -54,28 +57,28 @@ public class Cuota {
 	public void setFechaDePago(Date fechaDePago) {
 		this.fechaDePago = fechaDePago;
 	}
-	public float getAmortizacion() {
+	public double getAmortizacion() {
 		return amortizacion;
 	}
-	public void setAmortizacion(float amortizacion) {
+	public void setAmortizacion(double amortizacion) {
 		this.amortizacion = amortizacion;
 	}
-	public float getInteres() {
+	public double getInteres() {
 		return interes;
 	}
-	public void setInteres(float interes) {
+	public void setInteres(double interes) {
 		this.interes = interes;
 	}
-	public float getGastoTotal() {
+	public double getGastoTotal() {
 		return gastoTotal;
 	}
-	public void setGastoTotal(float gastoTotal) {
+	public void setGastoTotal(double gastoTotal) {
 		this.gastoTotal = gastoTotal;
 	}
-	public float getSaldoDeuda() {
+	public double getSaldoDeuda() {
 		return saldoDeuda;
 	}
-	public void setSaldoDeuda(float saldoDeuda) {
+	public void setSaldoDeuda(double saldoDeuda) {
 		this.saldoDeuda = saldoDeuda;
 	}
 	public EstadoCuota getEstadoCuota() {
@@ -95,14 +98,12 @@ public class Cuota {
 	 * @param seguro
 	 * @param gasto
 	 * @param saldoDeuda
-	 * 
-	 *  
 	 */
-	public Cuota(Date fechaVencimiento, float monto, Integer nroCuota, float interesPorMora, float amortizacion, float interes,float seguro, float gasto, float saldoDeuda){
+	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, /*float interesPorMora,*/ double amortizacion, double interes,double seguro, double gasto, double saldoDeuda){
 		this.setAmortizacion(amortizacion);
 		this.setFechaVencimiento(fechaVencimiento);
 		this.setGastoTotal(gasto);
-		this.setInteresPorMora(interesPorMora);
+		//this.setInteresPorMora(interesPorMora);
 		this.setInteres(interes);
 		this.setMontoCuota(monto);
 		this.setSaldoDeuda(saldoDeuda);
@@ -110,11 +111,45 @@ public class Cuota {
 		this.setNroCuota(nroCuota);
 		this.setEstadoCuota(new APagar());
 	}
+	
+	
+	/**
+	 * EstaPaga realiza una inspeccion del estado
+	 * 
+	 * @return un bool que chequea el estado
+	 */
 	public boolean estaPaga(){
 		return this.getEstadoCuota().estaPaga();
 	}
+	
+	/**
+	 * @param fechaPago
+	 * Pagar recibe la fecha en la que se efectua el pago
+	 */
 	public void pagar(Date fechaPago){
 		this.getEstadoCuota().pagar(this);
 		this.setFechaDePago(fechaPago);
+	}
+	
+	
+	/**
+	 * cambia el estado a vencido.
+	 * 
+	 */
+	public void aVencido(){
+		this.getEstadoCuota().aVencido(this);
+	}
+	
+	/**
+	 * @param fechaActual 
+	 * chequea si la fecha de vencimiento es menor que la pasada por parametro
+	 * si es asi la pasa a vencida.
+	 * 
+	 */
+	public void verificarFecha(Date fechaActual){
+		if(this.getFechaVencimiento().before(fechaActual)){
+			this.aVencido();
+		}
+		
 	}
 }

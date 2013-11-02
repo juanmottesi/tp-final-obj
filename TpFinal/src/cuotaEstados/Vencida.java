@@ -1,4 +1,6 @@
-package prestamos;
+package cuotaEstados;
+
+import prestamos.Cuota;
 
 public class Vencida extends EstadoCuota{
 
@@ -11,5 +13,12 @@ public class Vencida extends EstadoCuota{
 	public void pagar(Cuota cuota) {
 		cuota.setEstadoCuota(new Pagada());
 	}
+
+	@Override
+	public void aVencido(Cuota cuota) {
+		//Excepcion
+	}
+	
+
 
 }

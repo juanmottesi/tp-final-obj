@@ -1,4 +1,6 @@
-package prestamos;
+package cuotaEstados;
+
+import prestamos.Cuota;
 
 public class APagar extends EstadoCuota{
 
@@ -12,4 +14,8 @@ public class APagar extends EstadoCuota{
 		cuota.setEstadoCuota(new Pagada());
 	}
 
+	public void aVencido(Cuota cuota){
+		cuota.setEstadoCuota(new Vencida());
+		
+	}
 }
