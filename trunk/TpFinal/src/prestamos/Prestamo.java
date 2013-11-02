@@ -14,7 +14,7 @@ public class Prestamo {
 	private List<Cuota> cuotas; 
 	private Cliente cliente;
 	private float montoTotal;
-	private List<Gasto> gastos;
+	private ConfiguracionPrestamo configuracionPrestamo;
 	private Date fechaDeCreacion;
 	
 	public EstadoPrestamo getEstado() {
@@ -49,14 +49,6 @@ public class Prestamo {
 		this.montoTotal = montoTotal;
 	}
 	
-	public List<Gasto> getGastos() {
-		return gastos;
-	}
-	
-	public void setGastos(List<Gasto> gastos) {
-		this.gastos = gastos;
-	}
-	
 	public Integer cantidadDeCuotas(){	
 		return this.getCuotas().size();
 	}
@@ -69,23 +61,36 @@ public class Prestamo {
 		this.fechaDeCreacion = fechaDeCreacion;
 	}
 	
-	public List<Cuota> generarCuotas(Integer cantCoutas, ConfiguracionGeneral cg, float montoTotal){
-		List<Cuota> cuotas = new Vector<Cuota>();
-		Integer temCorrespondiente = cg.consultarTem(cantCoutas);
-		float valorCuota = this.getCalcularCuota().calcularCuota(temCorrespondiente,cantCoutas,montoTotal);
-		
-		return cuotas;
+	public ConfiguracionPrestamo getConfiguracionPrestamo() {
+		return configuracionPrestamo;
+	}
+
+	public void setConfiguracionPrestamo(ConfiguracionPrestamo configuracionPrestamo) {
+		this.configuracionPrestamo = configuracionPrestamo;
 	}
 	
-	
-	public Prestamo(float montoTotal, Integer cuotas, Date fechaDeCreacion,ConfiguracionGeneral cg){
-		
-		this.setEstado(new Solicitado());
-		this.setMontoTotal(montoTotal);
-		this.setFechaDeCreacion(fechaDeCreacion);
-		this.setCuotas(this.generarCuotas(cuotas,cg,montoTotal));
-		
+	/**
+	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
+	 * cualquier estado.
+	 */
+	public void pagarCuota(Date fechaDelPago){
+		for(Cuota c : this.getCuotas()){
+			if(!c.estaPagada()){
+				c.pagar(fechaDelPago);
+				break; // mirar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			}
+		}
 	}
+	
+	public float calcularCuota(){}
+	
+	public List<Cuota> cuadroDeMarcha(){}
+	
+	public float calcularSaldoDeuda(int nroCuota){}
+	
+	public void agregarCuota(){}
+	
+	public float calcularSeguroDeVida(){}
 	
 	
 	
