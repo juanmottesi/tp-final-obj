@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 public class Cuota {
+	
 	private Date fechaVencimiento;
 	private float montoCuota;
 	private Integer nroCuota;
@@ -83,8 +84,21 @@ public class Cuota {
 	public void setEstadoCuota(EstadoCuota estadoCuota) {
 		this.estadoCuota = estadoCuota;
 	}
-	
-	public void Cuota(Date fechaVencimiento, float monto, Integer nroCuota, Date fechaDePago, float interesPorMora, float amortizacion, float interes,float seguro, float gasto, float saldoDeuda){
+	/**
+	 * Orden de los parametros:
+	 * @param fechaVencimiento
+	 * @param monto
+	 * @param nroCuota
+	 * @param interesPorMora
+	 * @param amortizacion
+	 * @param interes
+	 * @param seguro
+	 * @param gasto
+	 * @param saldoDeuda
+	 * 
+	 *  
+	 */
+	public Cuota(Date fechaVencimiento, float monto, Integer nroCuota, float interesPorMora, float amortizacion, float interes,float seguro, float gasto, float saldoDeuda){
 		this.setAmortizacion(amortizacion);
 		this.setFechaVencimiento(fechaVencimiento);
 		this.setGastoTotal(gasto);
@@ -94,6 +108,7 @@ public class Cuota {
 		this.setSaldoDeuda(saldoDeuda);
 		this.setSeguro(seguro);
 		this.setNroCuota(nroCuota);
+		this.setEstadoCuota(new APagar());
 	}
 	public boolean estaPaga(){
 		return this.getEstadoCuota().estaPaga();

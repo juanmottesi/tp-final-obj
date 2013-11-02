@@ -1,29 +1,35 @@
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+//import static org.mockito.Mockito.*;
 
 import java.util.Date;
 
-import junit.framework.Assert;
+//import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 
-import prestamos.APagar;
+//import prestamos.APagar;
 import prestamos.Cuota;
-import prestamos.EstadoCuota;
-import prestamos.Pagada;
-import prestamos.Prestamo;
+//import prestamos.EstadoCuota;
+//import prestamos.Pagada;
+//import prestamos.Prestamo;
 
 public class TestCuota {
+	
+	
 	private Cuota cuota;
-	private Prestamo mockPrestamo;
+	
+//	private Prestamo mockPrestamo;
+	
+	
 	@Before
 	public void setUp(){
-		cuota= new Cuota();
-		EstadoCuota mockEstado= mock(APagar.class);
-		cuota.setEstadoCuota(mockEstado);
-		mockPrestamo = mock(Prestamo.class);
+		float f = 0;
+		cuota= new Cuota(new Date(),1500,1,f,f,f,f,f,f);
+//		EstadoCuota mockEstado= mock(APagar.class);
+//		cuota.setEstadoCuota(mockEstado);
+		//mockPrestamo = mock(Prestamo.class);
 	}
 
 	@Test
