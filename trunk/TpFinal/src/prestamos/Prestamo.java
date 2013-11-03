@@ -112,7 +112,9 @@ public class Prestamo {
 		this.agregarValorTotalACuotas();
 	}
 	
-	public float calcularCuota(){}
+	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas){
+		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);
+	}
 	
 	public List<Cuota> cuadroDeMarcha(){}
 	
@@ -127,7 +129,7 @@ public class Prestamo {
 	
 		double monto = montoTotal;
 		
-		double montoCuota = CalculoValorCuota.calcularCuota(montoTotal,configuracionGeneral.consultarTem(cantCuotas), cantCuotas);
+		double montoCuota = this.calcularCuota(montoTotal,configuracionGeneral.consultarTem(cantCuotas), cantCuotas);
 		
 		for(int i = 0 ; i < cantCuotas; i++){
 			
