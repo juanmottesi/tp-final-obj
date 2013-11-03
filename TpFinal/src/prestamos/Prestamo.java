@@ -108,19 +108,22 @@ public class Prestamo {
 	public void calcularGasto(){
 		this.getConfiguracionGeneral().calcularGasto(this);
 		this.getConfiguracionPrestamo().calcularGasto(this);
-		this.agregarACuotasInteresPorMora();
 		this.agregarValorTotalACuotas();
+		this.agregarACuotasInteresPorMora();
 	}
 	
 	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas){
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);
 	}
 	
-	public List<Cuota> cuadroDeMarcha(){}
+	public List<Cuota> cuadroDeMarcha(){
+		return this.getCuotas();
+	}
 	
-	public float calcularSaldoDeuda(int nroCuota){}
+	public double calcularSaldoDeuda(Integer nroCuota){
+		return this.getCuotas().get(nroCuota).getSaldoDeuda();	
+	}
 	
-
 	@SuppressWarnings("deprecation")
 	public List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual){
 		List<Cuota> ret = new Vector<Cuota>();
@@ -164,8 +167,7 @@ public class Prestamo {
 	public double calcularSaloDeuda(double montoTotal, double amortizacion){
 		return montoTotal - amortizacion;
 	}
-	
-	
+		
 	public double calcularSeguroDeVida(double saldoDeuda){
 		double seguro = this.getConfiguracionPrestamo().getSeguro();
 		return saldoDeuda * seguro;
@@ -194,6 +196,25 @@ public class Prestamo {
 		
 	}
 	
+	public Integer consultarTem(){
+		return this.getConfiguracionGeneral().consultarTem(this.cantidadDeCuotas());
+	}
+	
+	public void agregarACuotasInteresPorMora(){
+		Integer tem = this.consultarTem();
+		for(Cuota c : this.getCuotas()){
+			c.setInteresPorMora(c.getValorTotalCuota()* tem);
+		}
+	}
+	
+	
+	public void agregarValorTotalACuotas(){
+		for(Cuota c : this.getCuotas()){
+			c.set
+		}
+		
+		
+	}
 	
 
 
