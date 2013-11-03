@@ -25,7 +25,7 @@ public class TestCuota {
 	@Before
 	public void setUp(){
 		double f = 0;
-		cuota= new Cuota(new Date(),1500,1,f,/*f,*/f,f,f,f);
+		cuota= new Cuota(new Date(),1500,1,f,/*f,f,*/f,f,f);
 //		EstadoCuota mockEstado= mock(APagar.class);
 //		cuota.setEstadoCuota(mockEstado);
 		//mockPrestamo = mock(Prestamo.class);
