@@ -5,17 +5,17 @@ import prestamos.Prestamo;
 
 public class PorMontoMinimo extends Condicion {
 	
-	private float  minimo;
+	private double  minimo;
 	
-	public float getMinimo() {
+	public double getMinimo() {
 		return minimo;
 	}
 	
-	public void setMinimo(float minimo) {
+	public void setMinimo(double minimo) {
 		this.minimo = minimo;
 	}
 	
-	public PorMontoMinimo(float minimo){
+	public PorMontoMinimo(double minimo){
 		
 		this.setMinimo(minimo);
 		
@@ -24,7 +24,7 @@ public class PorMontoMinimo extends Condicion {
 	@Override
 	public boolean respetaCondicion(Prestamo p){	
 	
-		float montoAux = p.getMontoTotal();
+		double montoAux = p.getMontoTotal();
 		return(montoAux> this.getMinimo());
 	}
 	
