@@ -216,7 +216,18 @@ public class Prestamo {
 		
 	}
 	
-	public boolean estanTodasLasCuotasPagas(){}
+	public boolean estanTodasLasCuotasPagas(){
+		
+		boolean estanTodasPagas= true;
+		
+		for(Cuota c: this.getCuotas()){
+			if(c.getCuota().instanceOf(new Vencida())){
+				estanTodasPagas= false;
+			}
+		}
+		
+	return estanTodasPagas;	
+	}
 	
 	
 
