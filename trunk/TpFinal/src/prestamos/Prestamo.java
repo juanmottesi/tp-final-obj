@@ -103,11 +103,11 @@ public class Prestamo {
 	}
 	/**
 	 * CalcularGasto suma las gastos mensuales para pasarselos a las cuotas y decrementa el montoTotal si el gasto es Global
-	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora, el valor total de la cuota.
+	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora y el valor total de la cuota.
 	 */
 	public void calcularGasto(){
-		this.getConfiguracionGeneral().calcularGastos(this);
-		this.getConfiguracionPrestamo().calcularGastos(this);
+		this.getConfiguracionGeneral().calcularGasto(this);
+		this.getConfiguracionPrestamo().calcularGasto(this);
 		this.agregarACuotasInteresPorMora();
 		this.agregarValorTotalACuotas();
 	}
@@ -124,6 +124,7 @@ public class Prestamo {
 		List<Cuota> ret = new Vector<Cuota>();
 		
 		Date fechaVencimiento= this.calcularFecha(fechaActual);
+	
 		double monto = montoTotal;
 		
 		double montoCuota = CalculoValorCuota.calcularCuota(montoTotal,configuracionGeneral.consultarTem(cantCuotas), cantCuotas);
@@ -169,6 +170,16 @@ public class Prestamo {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
+	public Date calcularFecha(Date fechaActual){
+		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
+		
+		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
+			nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+1, 10);
+		}
+		return nuevaFecha;
+	}
+	
 	
 	/**
 	 * @param fechaActual 
@@ -182,15 +193,7 @@ public class Prestamo {
 	}
 	
 	
-	@SuppressWarnings("deprecation")
-	public Date calcularFecha(Date fechaActual){
-		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
-		
-		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
-			nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+1, 10);
-		}
-		return nuevaFecha;
-	}
+
 
 	
 	
