@@ -8,9 +8,9 @@ public abstract class EstadoPrestamo {
 	
 	public abstract void sePago(Prestamos p){}
 	
-	public abstract void noSePago(Prestamos p){}
+	public abstract void noSePago(Prestamo p){}
 	
-	public abstract void seFinalizo(Prestamos p){}
+	public abstract void seFinalizo(Prestamo p){}
 	
-	public abstract void aDeudorIncobrable(Prestamos p){}
+	public abstract void aDeudorIncobrable(Prestamo p){}
 }
