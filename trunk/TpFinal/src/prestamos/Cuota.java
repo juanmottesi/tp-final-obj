@@ -8,25 +8,32 @@ import cuotaEstados.EstadoCuota;
 
 public class Cuota {
 	
-	private Date fechaVencimiento;
+	private Date fechaVencimiento; 
 	private double montoCuota;
-	private Integer nroCuota;
-	private double interesPorMora;
+	private Integer nroCuota; 
+	private double interesPorMora; 
 	private Date fechaDePago;
 	private double amortizacion;
 	private double interes;
 	private double gastoTotal;
 	private double saldoDeuda;
 	private double seguro;
+	private double valorTotalCuota;
+	private EstadoCuota estadoCuota;
 	
+	
+	public double getValorTotalCuota() {
+		return valorTotalCuota;
+	}
+	public void setValorTotalCuota(double valorTotalCuota) {
+		this.valorTotalCuota = valorTotalCuota;
+	}
 	public double getSeguro() {
 		return seguro;
 	}
 	public void setSeguro(double seguro) {
 		this.seguro = seguro;
 	}
-
-	private EstadoCuota estadoCuota;
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
 	}
@@ -92,18 +99,14 @@ public class Cuota {
 	 * @param fechaVencimiento
 	 * @param monto
 	 * @param nroCuota
-	 * @param interesPorMora --
 	 * @param amortizacion
 	 * @param interes
 	 * @param seguro
-	 * @param gasto --
 	 * @param saldoDeuda
 	 */
-	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, /*float interesPorMora,*/ double amortizacion, double interes,double seguro,/* double gasto,*/ double saldoDeuda){
+	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, double amortizacion, double interes,double seguro,double saldoDeuda){
 		this.setAmortizacion(amortizacion);
 		this.setFechaVencimiento(fechaVencimiento);
-		//this.setGastoTotal(gasto);
-		//this.setInteresPorMora(interesPorMora);
 		this.setInteres(interes);
 		this.setMontoCuota(monto);
 		this.setSaldoDeuda(saldoDeuda);
@@ -152,4 +155,5 @@ public class Cuota {
 		}
 		
 	}
+	
 }
