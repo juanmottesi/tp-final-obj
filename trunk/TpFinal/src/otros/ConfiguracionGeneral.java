@@ -81,54 +81,6 @@ public class ConfiguracionGeneral {
 		
 	}
 
-	public float sumarGastoGlobalPorcentual(){
-		
-		float ret = 0;
-		for(Gasto g  : this.getGastos()){
-			if(g.getNombre() == "Global"){
-				ret += g.gastoPorcentual();
-			}
-		}
-		
-		return ret;
-	}
-	
-	public float sumarGastoGlobalFijo(){
-		
-		float ret = 0;
-		for(Gasto g  : this.getGastos()){
-			if(g.getNombre() == "Global"){
-				ret += g.gastoFijo();
-			}
-		}
-		
-		return ret;
-	}
-	
-	public float sumarGastoMensualPorcentul(){
-		
-		float ret = 0;
-		for(Gasto g  : this.getGastos()){
-			if(g.getNombre() == "Mensual"){
-				ret += g.gastoPorcentual();
-			}
-		}
-		
-		return ret;
-	}
-	
-	
-	public float sumarGastoMensualFijo(){
-
-		float ret = 0;
-		for(Gasto g  : this.getGastos()){
-			if(g.getNombre() == "Mensual"){
-				ret += g.gastoFijo();
-			}
-		}
-		
-		return ret;
-	}
 	
 }
 	

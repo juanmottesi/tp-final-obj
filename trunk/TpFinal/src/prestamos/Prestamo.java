@@ -118,41 +118,56 @@ public class Prestamo {
 	
 	public float calcularSaldoDeuda(int nroCuota){}
 	
-	
+
 	@SuppressWarnings("deprecation")
 	public List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual){
 		List<Cuota> ret = new Vector<Cuota>();
 		
-		Date fechaCuota = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
-		
-		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
-			fechaCuota = new Date(fechaActual.getYear(),fechaActual.getMonth()+1, 10);
-		}
-		
-		float monto = montoTotal;
+		Date fechaVencimiento= this.calcularFecha(fechaActual);
+		double monto = montoTotal;
 		
 		double montoCuota = CalculoValorCuota.calcularCuota(montoTotal,configuracionGeneral.consultarTem(cantCuotas), cantCuotas);
 		
 		for(int i = 0 ; i < cantCuotas; i++){
-			fechaCuota = new Date(fechaActual.getYear(),fechaActual.getMonth()+i, 10);
-			double interes = monto * configuracionGeneral.consultarTem(cantCuotas);
+			
+			fechaVencimiento = new Date(fechaActual.getYear(),fechaActual.getMonth()+i, 10);
+			
+			double interes = this.calcularInteres(monto, this.getConfiguracionGeneral().consultarTem(cantCuotas));
+			
 			double amortizacion = this.calcularAmortizacion(montoCuota,interes);
-			double saldoDeuda = monto - amortizacion;
-			Cuota c = new Cuota(fechaCuota, montoCuota,(Integer)i,amortizacion,interes,configuracionPrestamo.getSeguro(),saldoDeuda);
-			monto = monto - amortizacion;
+			
+			double saldoDeuda = this.calcularSaloDeuda(monto, amortizacion);
+			
+			double seguro = this.calcularSeguroDeVida(saldoDeuda);
+			
+			Cuota c = new Cuota(fechaVencimiento, montoCuota,(Integer)i,amortizacion,interes,seguro,saldoDeuda);
+			
+			monto = saldoDeuda;
+			
 			ret.add(c);
 		}
 		
 		return ret;
 	}
 	
-	public float calcularAmortizacion(double valorCuota, double interes){
-		return valorCuota - interes;
-		
+	public double calcularInteres(double montoTotal, Integer valorTemCorrespondiente){
+		return montoTotal * (valorTemCorrespondiente);		
+	}
+	
+	public double calcularAmortizacion(double valorCuota, double interes){
+		return valorCuota - interes;	
+	}
+	
+	public double calcularSaloDeuda(double montoTotal, double amortizacion){
+		return montoTotal - amortizacion;
 	}
 	
 	
-	public float calcularSeguroDeVida(){}
+	public double calcularSeguroDeVida(double saldoDeuda){
+		double seguro = this.getConfiguracionPrestamo().getSeguro();
+		return saldoDeuda * seguro;
+		
+	}
 	
 	
 	/**
@@ -164,6 +179,17 @@ public class Prestamo {
 			c.verificarFecha(fechaActual);
 		}
 		
+	}
+	
+	
+	@SuppressWarnings("deprecation")
+	public Date calcularFecha(Date fechaActual){
+		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
+		
+		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
+			nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+1, 10);
+		}
+		return nuevaFecha;
 	}
 
 	

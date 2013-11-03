@@ -92,17 +92,17 @@ public class Cuota {
 	 * @param fechaVencimiento
 	 * @param monto
 	 * @param nroCuota
-	 * @param interesPorMora
+	 * @param interesPorMora --
 	 * @param amortizacion
 	 * @param interes
 	 * @param seguro
-	 * @param gasto
+	 * @param gasto --
 	 * @param saldoDeuda
 	 */
-	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, /*float interesPorMora,*/ double amortizacion, double interes,double seguro, double gasto, double saldoDeuda){
+	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, /*float interesPorMora,*/ double amortizacion, double interes,double seguro,/* double gasto,*/ double saldoDeuda){
 		this.setAmortizacion(amortizacion);
 		this.setFechaVencimiento(fechaVencimiento);
-		this.setGastoTotal(gasto);
+		//this.setGastoTotal(gasto);
 		//this.setInteresPorMora(interesPorMora);
 		this.setInteres(interes);
 		this.setMontoCuota(monto);
