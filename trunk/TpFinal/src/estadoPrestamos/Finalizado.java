@@ -12,8 +12,11 @@ public class Finalizado extends EstadoPrestamo {
 	
 	public void seFinalizo(Prestamo p){
 		
-		p.setEstado(new Finalizado());
+		if(p.estanTodasLasCuotasPagas()){
+			
+			p.setEstado(new Finalizado());
 	}
+}
 	
 	public void aDeudorIncobrable(Prestamo p){}
 }
