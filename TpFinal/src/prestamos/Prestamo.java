@@ -210,7 +210,7 @@ public class Prestamo {
 	
 	public void agregarValorTotalACuotas(){
 		for(Cuota c : this.getCuotas()){
-			c.set
+			c.setValorTotalCuota(c.getSeguro()+c.getGastoTotal()+c.getMontoCuota());
 		}
 		
 		
