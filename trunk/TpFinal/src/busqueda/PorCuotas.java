@@ -27,7 +27,7 @@ public class PorCuotas extends Condicion {
 	
 	/**
 	 * @param desde 
-	 * @param hasta
+	 * @param hasta 
 	 */
 	public PorCuotas(Integer desde, Integer hasta){
 		this.setDesde(desde);
@@ -36,8 +36,9 @@ public class PorCuotas extends Condicion {
 	}
 
 	/**
-	 * pregunta si ese prestamo respeta la condicion de
-	 * cantidad de coutas
+	 * pregunta si ese prestamo respeta la condicion de cantidad de coutas,
+	 * estas tienen que ser mayores y menores pero no iguales a ninguno de los
+	 * dos variables.
 	 * 
 	 * @return boolean 
 	 */

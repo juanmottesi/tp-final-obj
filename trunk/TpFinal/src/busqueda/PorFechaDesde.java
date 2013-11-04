@@ -30,6 +30,7 @@ public class PorFechaDesde extends Condicion {
 	 * respetaCondicion se fija que la fecha del prestamo sea despues que la fecha
 	 * de PorFechaDesde.
 	 * 
+	 * @return boolean 
 	 */
 	public boolean respetaCondicion(Prestamo p){	
 		return(p.getFechaDeCreacion().after(this.getDesde()));

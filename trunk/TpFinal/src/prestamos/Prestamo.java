@@ -240,6 +240,9 @@ public class Prestamo {
 	}
 	
 
+	public String obtenerApellidoCliente(){
+		return this.getCliente().getApellido();
+	}
 
 	
 	

@@ -27,6 +27,7 @@ public class PorFechaHasta extends Condicion {
 	 * respetaCondicion se fija que la fecha del prestamo sea antes que la fecha
 	 * de PorFechaHasta.
 	 * 
+	 * @return boolean 
 	 */
 	public boolean respetaCondicion(Prestamo p){
 		return p.getFechaDeCreacion().before(this.getHasta());
