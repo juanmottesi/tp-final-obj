@@ -1,3 +1,4 @@
+package gastos;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import gastos.Fijo;

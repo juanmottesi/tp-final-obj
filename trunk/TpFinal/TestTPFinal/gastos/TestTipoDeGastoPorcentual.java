@@ -1,3 +1,4 @@
+package gastos;
 import static org.junit.Assert.*;
 import gastos.Porcentual;
 import gastos.TipoDeGasto;
