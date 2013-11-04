@@ -8,11 +8,12 @@ public class GastoGlobal extends Gasto {
 		this.setTipoDeGasto(tipoDeGasto);
 	}
 
-	@Override
-	public void calcularGasto(Prestamo prestamo) {
-		prestamo.setMontoTotal(prestamo.getMontoTotal() - this.getTipoDeGasto().calcularGasto(prestamo.getMontoTotal()));
-	}
 
+	@Override
+	public void calcularGasto(Prestamo prestamo){
+		double aux = prestamo.getMontoTotal();
+		prestamo.actualizarGastos(aux - (this.getTipoDeGasto().calcularGasto(aux)));
+	}
 
 
 	

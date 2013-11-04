@@ -16,6 +16,7 @@ public abstract class Gasto {
 
 	public abstract void calcularGasto(Prestamo prestamo);
 	
+
 	
 	
 }
