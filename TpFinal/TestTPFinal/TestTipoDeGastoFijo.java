@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class testTipoDeGastoFijo {
+public class TestTipoDeGastoFijo {
 
 	private TipoDeGasto fijo;
 	private double numeroAux;

@@ -13,4 +13,7 @@ public class Solicitado extends EstadoPrestamo {
 	public void seFinalizo(Prestamo p){}
 	
 	public void aDeudorIncobrable(Prestamo p){}
+
+	@Override
+	public void sePago(Prestamos p) {}
 }

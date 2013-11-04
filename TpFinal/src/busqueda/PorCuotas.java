@@ -25,13 +25,22 @@ public class PorCuotas extends Condicion {
 		this.hasta = hasta;
 	}
 	
+	/**
+	 * @param desde 
+	 * @param hasta
+	 */
 	public PorCuotas(Integer desde, Integer hasta){
-		
 		this.setDesde(desde);
 		this.setHasta(hasta);	
 		
 	}
 
+	/**
+	 * pregunta si ese prestamo respeta la condicion de
+	 * cantidad de coutas
+	 * 
+	 * @return boolean 
+	 */
 	public boolean respetaCondicion(Prestamo p){	
 			Integer n = p.cantidadDeCuotas();
 			return (n>this.getDesde() && n<this.getHasta());
