@@ -1,5 +1,7 @@
 package estadoPrestamos;
 
+import prestamos.Prestamo;
+
 
 public class DeudorIncobrable extends EstadoPrestamo {
 	
