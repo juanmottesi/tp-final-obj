@@ -156,4 +156,9 @@ public class Cuota {
 		
 	}
 	
+	public void actualizarGastoTotal(double montoActuralizado){
+		this.setGastoTotal(montoActuralizado);
+	}
+	
+	
 }

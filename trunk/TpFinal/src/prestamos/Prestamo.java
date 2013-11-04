@@ -230,6 +230,12 @@ public class Prestamo {
 	}
 	
 	
+	public void actualizarGastos(double gastos){
+		this.setMontoTotal(gastos);
+		
+	}
+	
+	
 
 
 	

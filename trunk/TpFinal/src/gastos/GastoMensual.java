@@ -13,12 +13,12 @@ public class GastoMensual extends Gasto {
 	@Override
 	public void calcularGasto(Prestamo prestamo) {
 		for(Cuota c : prestamo.getCuotas()){
-			c.setGastoTotal(c.getGastoTotal() + this.getTipoDeGasto().calcularGasto(c.getMontoCuota()));
+			double aux = c.getGastoTotal();
+			c.actualizarGastoTotal(aux + (this.getTipoDeGasto().calcularGasto(aux)));
 			
 		}
-		
 	}
 	
-	
+
 
 }
