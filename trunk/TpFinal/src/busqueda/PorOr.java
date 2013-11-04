@@ -12,10 +12,13 @@ public class PorOr extends PorOperadorLogico {
 
 	@Override
 	public boolean respetaCondicion(Prestamo p) {
-		boolean ret = true;
+		
+		boolean ret = false;
 		for(Condicion c : this.getCondiciones()){
 			ret = c.respetaCondicion(p) || ret ;
 		}	
 		return ret;
 	}
+	
+	
 }
