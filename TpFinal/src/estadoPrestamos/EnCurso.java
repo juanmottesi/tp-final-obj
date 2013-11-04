@@ -1,5 +1,7 @@
 package estadoPrestamos;
 
+import prestamos.Prestamo;
+
 public class EnCurso extends EstadoPrestamo {
 	
 	public void seAprobo(Prestamo p){}
@@ -13,4 +15,5 @@ public class EnCurso extends EstadoPrestamo {
 	public void seFinalizo(Prestamo p){}
 	
 	public void aDeudorIncobrable(Prestamo p){}
+
 }

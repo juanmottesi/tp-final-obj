@@ -1,5 +1,6 @@
 package estadoPrestamos;
 
+import prestamos.Prestamo;
 
 public class Rechazado extends EstadoPrestamo {
 	
