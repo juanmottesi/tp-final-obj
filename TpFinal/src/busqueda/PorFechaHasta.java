@@ -23,7 +23,7 @@ public class PorFechaHasta extends Condicion {
 	}
 	
 	public boolean respetaCondicion(Prestamo p){
-		return p.getFechaDeCreacion().after(this.getHasta());
+		return p.getFechaDeCreacion().before(this.getHasta());
 	}
 
 }

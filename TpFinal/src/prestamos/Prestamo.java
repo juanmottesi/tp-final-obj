@@ -235,6 +235,9 @@ public class Prestamo {
 		
 	}
 	
+	public Integer obtenerDniCliente(){
+		return this.getCliente().getDni();
+	}
 	
 
 
