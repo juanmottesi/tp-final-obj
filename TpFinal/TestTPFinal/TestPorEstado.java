@@ -42,7 +42,7 @@ public class TestPorEstado {
 		when(mockedPrestamo.getEstado()).thenReturn(estadoPrestamo);
 		assertTrue(porEstado.respetaCondicion(mockedPrestamo));
 		
-		when(mockedPrestamo.getEstado()).thenReturn(new Rechazado());
+		when(mockedPrestamo.getEstado()).thenReturn(new EnDeuda());
 		assertFalse(porEstado.respetaCondicion(mockedPrestamo));
 		
 		
