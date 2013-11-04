@@ -23,6 +23,12 @@ public class PorEstado extends Condicion {
 	}
 
 	@Override
+	/**
+	 * respetaCondicion se fija que el estado del prestamo sea igual al que se encuentra
+	 * en su variable.
+	 * 
+	 * @return boolean
+	 */
 	public boolean respetaCondicion(Prestamo p){
 		return(p.getEstado().equals(this.getEstado()));
 	}
