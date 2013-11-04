@@ -24,7 +24,7 @@ public class PorEstado extends Condicion {
 
 	@Override
 	public boolean respetaCondicion(Prestamo p){
-		return(p.getEstado() == (this.getEstado()));
+		return(p.getEstado().equals(this.getEstado()));
 	}
 	
 	
