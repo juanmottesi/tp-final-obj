@@ -37,7 +37,7 @@ public class TestPorDNI {
 	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
 		
-		when(mockedPrestamo.obtenerDniCliente()).thenReturn(dni);
+		when(mockedPrestamo.obtenerDniCliente()).thenReturn(36778000);
 		assertTrue(porDNI.respetaCondicion(mockedPrestamo));
 		
 		Integer dniAux = dni +1;
