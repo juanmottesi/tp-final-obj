@@ -13,7 +13,6 @@ import prestamos.Prestamo;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.Rechazado;
 import busqueda.Condicion;
-import busqueda.PorAnd;
 import busqueda.PorApellido;
 import busqueda.PorCuotas;
 import busqueda.PorDNI;
@@ -22,27 +21,19 @@ import busqueda.PorFechaDesde;
 import busqueda.PorFechaHasta;
 import busqueda.PorMontoMaximo;
 import busqueda.PorMontoMinimo;
+import busqueda.PorOr;
 
 
-public class TestPorAnd {
+public class TestPorOr {
 	
 	private List<Condicion>condiciones;
-	private PorAnd porAnd;
+	private PorOr porOr;
 
 	
 	@Before
 	public void setUp(){
-		
 		condiciones = new Vector<Condicion>();	
-		porAnd = new PorAnd(condiciones);
-	}
-	
-	
-	
-	@Test
-	public void testConstructor() {
-		assertNotNull(porAnd);
-		assertTrue(porAnd.getCondiciones().isEmpty());
+		porOr = new PorOr(condiciones);
 	}
 	
 	public void initialize(){
@@ -63,23 +54,30 @@ public class TestPorAnd {
 		condiciones.add(new PorMontoMaximo(40000));
 		condiciones.add(new PorMontoMinimo(10000));
 		
-		porAnd = new PorAnd(condiciones);
+		porOr = new PorOr(condiciones);
 		}
+	
+
+	@Test
+	public void testConstructor() {
+		assertNotNull(porOr);
+		assertTrue(porOr.getCondiciones().isEmpty());
+		this.initialize();
+		//Prueba de que initialize funcione.
+		assertFalse(porOr.getCondiciones().isEmpty());
+	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
-
-		//Lista vacia, siempre es verdadero.
-		assertTrue(porAnd.respetaCondicion(mockedPrestamo));
+		
+		//Lista vacia, siempre es falso.
+		assertFalse(porOr.respetaCondicion(mockedPrestamo));
 		
 		this.initialize();
-		//Prueba de que initialize funcione.
-		assertFalse(porAnd.getCondiciones().isEmpty());
 		
 		//Prestamo con condiciones todas verdaderas.
-		
 		when(mockedPrestamo.obtenerApellidoCliente()).thenReturn("Pe");
 		when(mockedPrestamo.cantidadDeCuotas()).thenReturn(12);
 		when(mockedPrestamo.obtenerDniCliente()).thenReturn((Integer)36778000);
@@ -87,7 +85,7 @@ public class TestPorAnd {
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(new Date());
 		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 25000);
 		
-		assertTrue(porAnd.respetaCondicion(mockedPrestamo));
+		assertTrue(porOr.respetaCondicion(mockedPrestamo));
 		
 		//Prestamo con una condicion falsa.
 		when(mockedPrestamo.obtenerApellidoCliente()).thenReturn("Garcia"); // condicion falsa
@@ -95,9 +93,9 @@ public class TestPorAnd {
 		when(mockedPrestamo.obtenerDniCliente()).thenReturn(36778000);
 		when(mockedPrestamo.getEstado()).thenReturn(new EnCurso());
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(new Date());
-		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 25000);
+		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 25000);				
 		
-		assertFalse(porAnd.respetaCondicion(mockedPrestamo));
+		assertTrue(porOr.respetaCondicion(mockedPrestamo));
 		
 		//Prestamo con la mayoria de las condiciones falsas condiciones falsas
 		when(mockedPrestamo.obtenerApellidoCliente()).thenReturn("Garcia");
@@ -106,12 +104,8 @@ public class TestPorAnd {
 		when(mockedPrestamo.getEstado()).thenReturn(new Rechazado());
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(new Date("2013/05/05"));
 		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 50000);
-		
-		assertFalse(porAnd.respetaCondicion(mockedPrestamo));
-		
-		
-	
-		
+		// es verdadero porque se cumple la condicion de FechaHasta y mayor al montoMinimo. 
+		assertTrue(porOr.respetaCondicion(mockedPrestamo));
 		
 	}
 
