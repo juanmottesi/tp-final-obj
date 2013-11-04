@@ -22,6 +22,11 @@ public class PorMontoMinimo extends Condicion {
 	}
 
 	@Override
+	/**
+	 * respetaCondicion se fija que el monto del prestamo sea meyor estricto al
+	 * del PorMontoMinimo.
+	 * 
+	 */
 	public boolean respetaCondicion(Prestamo p){	
 	
 		double montoAux = p.getMontoTotal();
