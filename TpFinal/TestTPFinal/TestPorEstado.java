@@ -35,11 +35,12 @@ public class TestPorEstado {
 		EstadoPrestamo estadoAux = new Rechazado();
 		assertNotEquals("Se fija si el estado no es el mismo que setea en la clase PorEstado",estadoAux, porEstado.getEstado());
 	}
-
+	
+	@Test
 	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
 		
-		when(mockedPrestamo.getEstado()).thenReturn(estadoPrestamo);
+		when(mockedPrestamo.getEstado()).thenReturn(new EnCurso());
 		assertTrue(porEstado.respetaCondicion(mockedPrestamo));
 		
 		when(mockedPrestamo.getEstado()).thenReturn(new EnDeuda());
