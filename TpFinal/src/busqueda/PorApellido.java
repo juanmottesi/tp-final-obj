@@ -21,8 +21,15 @@ public class PorApellido extends Condicion {
 	}
 
 	@Override
+	/**
+	 * respetaCondicion se fija que el apellido del cliente del prestamo contenga el string de la 
+	 * variable privada. 
+	 * 
+	 * @return boolean 
+	 */
 	public boolean respetaCondicion(Prestamo p){
-		return (p.getCliente().getApellido().contains(this.getApellido()));
+		String aux = p.obtenerApellidoCliente().toLowerCase();
+		return (aux.contains(this.getApellido().toLowerCase()));
 	}
 	
 	

@@ -22,6 +22,12 @@ public class PorDNI extends Condicion {
 	}
 	
 	@Override
+	/**
+	 * respetaCondicion se fija que el dni del prestamo sea igual al que se encuentra
+	 * en su variable.
+	 * 
+	 * @return boolean 
+	 */
 	public boolean respetaCondicion(Prestamo p){
 			return (p.obtenerDniCliente() == this.getDni());
 			

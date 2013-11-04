@@ -25,6 +25,7 @@ public class PorMontoMaximo extends Condicion{
 	 * respetaCondicion se fija que el monto del prestamo sea menor estricto al
 	 * del PorMontoMaximo.
 	 * 
+	 * @return boolean 
 	 */
 	public boolean respetaCondicion(Prestamo p){	
 			double montoAux = p.getMontoTotal();
