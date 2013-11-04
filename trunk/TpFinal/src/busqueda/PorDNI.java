@@ -23,7 +23,7 @@ public class PorDNI extends Condicion {
 	
 	@Override
 	public boolean respetaCondicion(Prestamo p){
-			return (p.getCliente().getDni() == this.getDni());
+			return (p.obtenerDniCliente() == this.getDni());
 			
 	}
 

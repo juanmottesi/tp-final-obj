@@ -27,7 +27,7 @@ public class PorFechaDesde extends Condicion {
 
 	@Override
 	public boolean respetaCondicion(Prestamo p){	
-		return(p.getFechaDeCreacion().before(this.getDesde()));
+		return(p.getFechaDeCreacion().after(this.getDesde()));
 
 	}
 	
