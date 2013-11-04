@@ -35,11 +35,14 @@ public class TestPorFechaDesde {
 	@Test
 	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
+		
+		//Creo una fecha despues de la que tiene seteado porFechaDesde
 		@SuppressWarnings("deprecation")
 		Date fechaDespues = new Date(fecha.getYear(),fecha.getMonth(),fecha.getDate()+1);
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(fechaDespues);
 		assertTrue(porFechaDesde.respetaCondicion(mockedPrestamo));
 		
+		//Creo una fecha antes de la que tiene seteado porFechaDesde
 		@SuppressWarnings("deprecation")
 		Date fechaAntes = new Date(fecha.getYear(),fecha.getMonth(),fecha.getDate()-1); 
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(fechaAntes);
