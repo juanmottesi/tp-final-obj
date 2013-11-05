@@ -62,10 +62,7 @@ public class TestPorOr {
 		condiciones = new Vector<Condicion>();
 		Date hoy = new Date();
 		@SuppressWarnings("deprecation")
-		Date desde = new Date(hoy.getYear(),hoy.getMonth(),hoy.getDay()-1);
-		@SuppressWarnings("deprecation")
-		Date hasta = new Date(hoy.getYear(),hoy.getMonth()+1,hoy.getDay());
-	
+		Date desde = new Date(hoy.getYear(),hoy.getMonth(),hoy.getDay()-1);	
 		condiciones.add(new PorDNI((Integer)36778000));
 		PorEstado estado = new PorEstado(new EnCurso());
 		condiciones.add(estado);
