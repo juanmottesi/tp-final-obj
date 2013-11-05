@@ -58,6 +58,27 @@ public class TestPorOr {
 		porOr = new PorOr(condiciones);
 		}
 	
+	public void initializeParaQueElOrSeaFalso(){
+		condiciones = new Vector<Condicion>();
+		Date hoy = new Date();
+		@SuppressWarnings("deprecation")
+		Date desde = new Date(hoy.getYear(),hoy.getMonth(),hoy.getDay()-1);
+		@SuppressWarnings("deprecation")
+		Date hasta = new Date(hoy.getYear(),hoy.getMonth()+1,hoy.getDay());
+	
+		condiciones.add(new PorDNI((Integer)36778000));
+		PorEstado estado = new PorEstado(new EnCurso());
+		condiciones.add(estado);
+		condiciones.add(new PorApellido("Pe"));
+		condiciones.add(new PorCuotas(1,15));
+		condiciones.add(new PorFechaDesde(desde));
+		
+		condiciones.add(new PorMontoMaximo(40000));
+		
+		
+		porOr = new PorOr(condiciones);
+		}
+	
 
 	@Test
 	public void testConstructor() {
@@ -73,8 +94,8 @@ public class TestPorOr {
 	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
 		
-		//Lista vacia, siempre es falso.
-		assertFalse(porOr.respetaCondicion(mockedPrestamo));
+		//Lista vacia, siempre es verdadero.
+		assertTrue(porOr.respetaCondicion(mockedPrestamo));
 		
 		this.initialize();
 		
@@ -98,15 +119,16 @@ public class TestPorOr {
 		
 		assertTrue(porOr.respetaCondicion(mockedPrestamo));
 		
-		//Prestamo con la mayoria de las condiciones falsas condiciones falsas
+		//Prestamo con todas las condiciones falsas
+		this.initializeParaQueElOrSeaFalso();
+		
 		when(mockedPrestamo.obtenerApellidoCliente()).thenReturn("Garcia");
 		when(mockedPrestamo.cantidadDeCuotas()).thenReturn(20);
 		when(mockedPrestamo.obtenerDniCliente()).thenReturn(36778010);
 		when(mockedPrestamo.getEstado()).thenReturn(new Rechazado());
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(new Date("2013/05/05"));
-		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 50000);
-		// es verdadero porque se cumple la condicion de FechaHasta y mayor al montoMinimo. 
-		assertTrue(porOr.respetaCondicion(mockedPrestamo));
+		when(mockedPrestamo.getMontoTotal()).thenReturn((double) 50000); 
+		assertFalse(porOr.respetaCondicion(mockedPrestamo));
 		
 	}
 
