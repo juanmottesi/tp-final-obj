@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import cuotaEstados.Vencida;
 import otros.*;
 import estadoPrestamos.*;
 import gastos.Gasto;
@@ -221,12 +222,11 @@ public class Prestamo {
 		boolean estanTodasPagas= true;
 		
 		for(Cuota c: this.getCuotas()){
-			if(c.getCuota().instanceOf(new Vencida())){
-				estanTodasPagas= false;
+			if(c.getEstadoCuota().equals(new Vencida())){
+				return false;
 			}
-		}
-		
-	return estanTodasPagas;	
+		}	
+		return estanTodasPagas;	
 	}
 	
 	
