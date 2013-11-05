@@ -6,7 +6,6 @@ import gastos.GastoGlobal;
 import gastos.Porcentual;
 import gastos.TipoDeGasto;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 

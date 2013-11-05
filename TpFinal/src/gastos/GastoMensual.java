@@ -5,7 +5,7 @@ import prestamos.Prestamo;
 
 public class GastoMensual extends Gasto {
 
-	public GastoMensual(float monto, TipoDeGasto tipoDeGasto){
+	public GastoMensual(TipoDeGasto tipoDeGasto){
 		this.setTipoDeGasto(tipoDeGasto);
 	
 	}
@@ -14,7 +14,7 @@ public class GastoMensual extends Gasto {
 	public void calcularGasto(Prestamo prestamo) {
 		for(Cuota c : prestamo.getCuotas()){
 			double aux = c.getGastoTotal();
-			c.actualizarGastoTotal(aux + (this.getTipoDeGasto().calcularGasto(aux)));
+			c.actualizarGastoTotal(aux + (this.getTipoDeGasto().calcularGasto(c.getMontoCuota())));
 			
 		}
 	}
