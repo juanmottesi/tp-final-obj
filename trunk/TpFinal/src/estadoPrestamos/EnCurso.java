@@ -32,8 +32,7 @@ public class EnCurso extends EstadoPrestamo {
 	@Override
 	public void finalizar(Prestamo p){
 
-		p.setEstado(new Finalizado());
-		
+		p.setEstado(new Finalizado());		
 	}
 
 }
