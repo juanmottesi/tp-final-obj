@@ -87,7 +87,7 @@ public class Prestamo {
 		this.setConfiguracionGeneral(configGeneral);
 		this.setEstado(new Solicitado());
 		this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
-		this.calcularGasto();
+		this.calcularGastoYSeguro();
 	}
 	
 	/**
@@ -107,11 +107,13 @@ public class Prestamo {
 	 * CalcularGasto suma las gastos mensuales para pasarselos a las cuotas y decrementa el montoTotal si el gasto es Global
 	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora y el valor total de la cuota.
 	 */
-	public void calcularGasto(){
+	public void calcularGastoYSeguro(){
 		this.getConfiguracionGeneral().calcularGasto(this);
 		this.getConfiguracionPrestamo().calcularGasto(this);
+		this.getConfiguracionPrestamo().calcularSeguro(this);
 		this.agregarValorTotalACuotas();
 		this.agregarACuotasInteresPorMora();
+		
 	}
 	
 	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas){
@@ -146,9 +148,9 @@ public class Prestamo {
 			
 			double saldoDeuda = this.calcularSaloDeuda(monto, amortizacion);
 			
-			double seguro = this.calcularSeguroDeVida(saldoDeuda);
+		//	double seguro = this.calcularSeguroDeVida(saldoDeuda);
 			
-			Cuota c = new Cuota(fechaVencimiento, montoCuota,(Integer)i,amortizacion,interes,seguro,saldoDeuda);
+			Cuota c = new Cuota(fechaVencimiento, montoCuota,(Integer)i,amortizacion,interes,/*seguro,*/saldoDeuda);
 			
 			monto = saldoDeuda;
 			

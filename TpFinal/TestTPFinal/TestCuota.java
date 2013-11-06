@@ -18,7 +18,7 @@ public class TestCuota {
 	@Before
 	public void setUp(){
 		double f = 0;
-		cuota= new Cuota(new Date(2013,11,02),1500,1,f,f,f,f);
+		cuota= new Cuota(new Date(2013,11,02),1500,1,f,f,f);
 	}
 	
 
