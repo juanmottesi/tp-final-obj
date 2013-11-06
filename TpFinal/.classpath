@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="TestTPFinal"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="lib" path="/home/juan/Descargas/Jar-Calcular-Valor-Cuota/AdvancedModeInstallment.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/juan/Descargas/mockito-all-1.9.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/rodrigo/Escritorio/mockito-all-1.9.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/rodrigo/Descargas/Jar-Calcular-Valor-Cuota/AdvancedModeInstallment.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
