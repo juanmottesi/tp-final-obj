@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Vector;
 
 import estadoPrestamos.DeudorIncobrable;
+import estadoPrestamos.EnCurso;
 import estadoPrestamos.EnDeuda;
 import estadoPrestamos.Solicitado;
+import exceptions.AgregarPrestamoAClienteException;
 import prestamos.Prestamo;
 
 public class Cliente {
@@ -56,7 +58,13 @@ public class Cliente {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
+	/**
+	 * 
+	 * @param apellido
+	 * @param nombre
+	 * @param direccion
+	 * @param documento
+	 */
 	public Cliente(String apellido, String nombre, String direccion, Integer documento){
 		this.setApellido(apellido);
 		this.setNombre(nombre);
@@ -68,20 +76,18 @@ public class Cliente {
 	public boolean puedoAgregarPrestamo()throws AgregarPrestamoAClienteException{
 		int contarPrestamos = 0;
 		for(Prestamo p : this.getPrestamos()){
-			if(contarPrestamos == 2){
-				if(p.getEstado().equals(new Solicitado()) || p.getEstado().equals(new EnDeuda()) ){
+			if(contarPrestamos <= 2){
+				if(p.getEstado().equals(new EnCurso())){
 					contarPrestamos+=1;
 				}
-				if(p.getEstado().equals(new DeudorIncobrable())) throw new AgregarPrestamoAClienteException{
-					return false;
-				}
+				if(p.getEstado().equals(new DeudorIncobrable()) || p.getEstado().equals(new Solicitado()) || p.getEstado().equals(new EnDeuda()) ) throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
 			}
 			else{
-				return false;
+				throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
 			}
 		
 		}
-		return true;
+		return contarPrestamos < 2;
 	}
 	
 	public void agregarPrestamo(Prestamo prestamo){
@@ -92,7 +98,7 @@ public class Cliente {
 			
 		}
 		catch(AgregarPrestamoAClienteException e){
-			System.out.println(e);
+			System.out.println(e.getMessage());
 		}
 	}
 }
