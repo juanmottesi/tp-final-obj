@@ -1,7 +1,5 @@
-package otros;
+package exceptions;
 
-import exceptions.ClienteException;
-import exceptions.TpException;
 
 public class AgregarPrestamoAClienteException extends ClienteException {
 
