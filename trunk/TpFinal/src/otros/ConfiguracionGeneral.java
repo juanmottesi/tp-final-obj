@@ -73,15 +73,19 @@ public class ConfiguracionGeneral {
 	/**
 	 * @param cuotas
 	 * @return Integer correspondiente al valor del tem segun la cantidad de cuotas
+	 * si la cantidad de cuotas supera a los valores que estan en el tem toma el valor mas grande
 	 */
 	public Integer consultarTem(Integer cuotas){
+		Integer ret = 0;
 		Set<Integer> claves = this.getTem().keySet();
 		for(Integer i : claves){
 			if(i >= cuotas){
 				return this.getTem().get(i);
-			}	
+			}
+			else{
+				ret = i;
+			}
 		}
-		Integer ret = this.getTem().size() - 1;
 		return this.getTem().get(ret); 
 	} 
 	
@@ -102,6 +106,10 @@ public class ConfiguracionGeneral {
 		for(Gasto gasto : this.getGastos()){
 			gasto.calcularGasto(prestamo);
 		}
+	}
+	
+	public void finConfiguracionGeneral(Date fechaFin){
+		this.setFechaFin(fechaFin);
 	}
 }
 	
