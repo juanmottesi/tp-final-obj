@@ -84,10 +84,6 @@ public class Cliente implements Observer {
 				}
 				if(p.getEstado().equals(new DeudorIncobrable()) || p.getEstado().equals(new Solicitado()) || p.getEstado().equals(new EnDeuda()) ) throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
 			}
-			else{
-				throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
-			}
-		
 		}
 		if(contarPrestamos >= 2){
 			throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
@@ -108,11 +104,15 @@ public class Cliente implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
 		System.out.println("Usted tiene un prestamo vencido");
-		
 	}
 	
+	public void suscribirAlSistemaDeAviso(Prestamo prestamo){
+		prestamo.addObserver(this);
+	}
 	
+	public void salirSistemaDeAviso(Prestamo prestamo){
+		prestamo.deleteObserver(this);
+	}
 	
 }
