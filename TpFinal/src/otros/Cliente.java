@@ -1,6 +1,8 @@
 package otros;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 import estadoPrestamos.DeudorIncobrable;
@@ -10,7 +12,7 @@ import estadoPrestamos.Solicitado;
 import exceptions.AgregarPrestamoAClienteException;
 import prestamos.Prestamo;
 
-public class Cliente {
+public class Cliente implements Observer {
 	
 	private String apellido;
 	private Integer dni;
@@ -87,18 +89,30 @@ public class Cliente {
 			}
 		
 		}
-		return contarPrestamos < 2;
+		if(contarPrestamos >= 2){
+			throw new AgregarPrestamoAClienteException("Usted no puede agregar prestamo");
+		}
+		return true;
 	}
 	
 	public void agregarPrestamo(Prestamo prestamo){
 		try{
 			if(this.puedoAgregarPrestamo()){
 				this.getPrestamos().add(prestamo);
-			}
-			
+			}	
 		}
 		catch(AgregarPrestamoAClienteException e){
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		System.out.println("Usted tiene un prestamo vencido");
+		
+	}
+	
+	
+	
 }
