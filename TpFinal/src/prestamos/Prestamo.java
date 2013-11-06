@@ -247,6 +247,11 @@ public class Prestamo {
 		return this.getCliente().getApellido();
 	}
 
+	public void finalizarPrestamo(){
 	
-	
+		if(this.estanTodasLasCuotasPagas()){
+			
+			this.setEstado(new Finalizado());
+		}
+	}
 }
