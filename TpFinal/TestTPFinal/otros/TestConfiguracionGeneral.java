@@ -22,24 +22,24 @@ public class TestConfiguracionGeneral {
 	
 	private ConfiguracionGeneral configuracionGeneral;
 	private ConfiguracionGeneral configuracionGeneral2;
-	
+	private Date fechaInicio;
 	@Mock
 	private Gasto mockedGasto1;
 	private Gasto mockedGasto2;
 	
 	@Before
 	public void setUp(){
-		
+		fechaInicio = new Date();
 		List<Gasto> gastos = new Vector<Gasto>();
 		mockedGasto1 = mock(GastoGlobal.class);
 		mockedGasto2 = mock(GastoMensual.class);
 		gastos.add(mockedGasto1);
 		gastos.add(mockedGasto2);
-		configuracionGeneral = new ConfiguracionGeneral(new Date(),gastos);		
+		configuracionGeneral = new ConfiguracionGeneral(fechaInicio,gastos);		
 		
 		SortedMap<Integer,Integer> tem = new TreeMap<Integer,Integer>();
 		tem.put(12, 3);
-		configuracionGeneral2 = new ConfiguracionGeneral(new Date(),tem,gastos);	
+		configuracionGeneral2 = new ConfiguracionGeneral(fechaInicio,tem,gastos);	
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class TestConfiguracionGeneral {
 		assertNotNull(configuracionGeneral);
 		assertEquals("Cantidad de elementos en la lista de gastos", 2, configuracionGeneral.getGastos().size());
 		assertTrue("Si el tem esta vacio",configuracionGeneral.getTem().isEmpty());
-		assertEquals("Chequea la fecha", new Date(), configuracionGeneral.getFechaInicio());
+		assertEquals("Chequea la fecha", fechaInicio, configuracionGeneral.getFechaInicio());
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class TestConfiguracionGeneral {
 		assertNotNull(configuracionGeneral2);
 		assertEquals("Cantidad de elementos en la lista de gastos", 2, configuracionGeneral2.getGastos().size());
 		assertEquals("Si el tem tiene un elemento",1,configuracionGeneral2.getTem().size());
-		assertEquals("Chequea la fecha", new Date(), configuracionGeneral2.getFechaInicio());
+		assertEquals("Chequea la fecha", fechaInicio, configuracionGeneral2.getFechaInicio());
 	}
 	
 	@Test
