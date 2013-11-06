@@ -1,28 +1,39 @@
 package estadoPrestamos;
 
+import exceptions.AprobadoException;
+import exceptions.DeudorIncobrableException;
+import exceptions.FinalizadoException;
+import exceptions.RechazadoException;
 import prestamos.Prestamo;
 
 
 public class DeudorIncobrable extends EstadoPrestamo {
 	
-
-	public void aDeudorIncobrable(Prestamo p){}
-
 	@Override
-	public void aprobar(Prestamo p) {
-		// TODO Auto-generated method stub
+	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
+		throw new DeudorIncobrableException
+				("Estado Deudor Incobreble: Ya esta en este estado");
 		
 	}
 
 	@Override
-	public void desaprobar(Prestamo p) {
-		// TODO Auto-generated method stub
+	public void aprobar(Prestamo p) throws AprobadoException{
+		throw new AprobadoException
+		("Estado Deudor Incobreble: Este prestamo no se puede Aprobar");
 		
 	}
 
 	@Override
-	public void finalizar(Prestamo p) {
-		// TODO Auto-generated method stub
+	public void rechazar(Prestamo p) throws RechazadoException {
+		throw new RechazadoException
+		("Estado Deudor Incobreble: Este prestamo no se puede Rechazar");
+		
+	}
+
+	@Override
+	public void finalizar(Prestamo p) throws FinalizadoException{
+		throw new FinalizadoException
+		("Estado Deudor Incobreble: Este prestamo no se puede Finalizar");
 		
 	}
 }
