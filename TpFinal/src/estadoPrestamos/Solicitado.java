@@ -1,35 +1,31 @@
 package estadoPrestamos;
 
+import exceptions.SolicitadoException;
 import prestamos.Prestamo;
 
 public class Solicitado extends EstadoPrestamo {
-	
-	
-	public void seAprobo(Prestamo p){
+
+	@Override
+	public void aprobar(Prestamo p) {
+		// TODO Auto-generated method stub
 		
-		p.setEstado ( new EnCurso());
-	}
-	
-	public void noSeAprobo(Prestamo p){
-		
-		p.setEstado(new Rechazado());
-	}
-	
-	public void sePago(Prestamo p){}
-		//Levantar una excepcion!!!
-	
-	public void noSePago(Prestamo p){}
-		//Levantar una excepcion!!!
-	
-	public void seFinalizo(Prestamo p){
-		//Excepcion no puedo finalizar algo que no tengo ni aprobado
-	}
-	
-	public void aDeudorIncobrable(Prestamo p){
-		
-		p.setEstado(new Rechazado());
 	}
 
+	@Override
+	public void desaprobar(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void finalizar(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void aDeudorIncobrable(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

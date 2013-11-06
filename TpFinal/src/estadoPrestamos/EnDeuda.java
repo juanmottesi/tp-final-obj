@@ -4,15 +4,25 @@ import prestamos.Prestamo;
 
 public class EnDeuda extends EstadoPrestamo {
 	
-	public void seAprobo(Prestamo p){}
-	
-	public void noSeAprobo(Prestamo p){}
-	
-	public void sePago(Prestamo p){}
-	
-	public void noSePago(Prestamo p){}
-	
-	public void seFinalizo(Prestamo p){}
-	
+
+	@Override
 	public void aDeudorIncobrable(Prestamo p){}
+
+	@Override
+	public void aprobar(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void desaprobar(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finalizar(Prestamo p) {
+		// TODO Auto-generated method stub
+		
+	}
 }
