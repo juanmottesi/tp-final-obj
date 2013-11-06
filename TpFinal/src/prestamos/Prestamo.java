@@ -95,6 +95,7 @@ public class Prestamo {
 	 * cualquier estado.
 	 */
 	public void pagarCuota(Date fechaDelPago){
+		// mirar estados!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		for(Cuota c : this.getCuotas()){
 			if(!c.estaPaga()){
 				c.pagar(fechaDelPago);

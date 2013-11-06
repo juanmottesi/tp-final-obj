@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import prestamos.Prestamo;
 import gastos.Gasto;
 
 public class ConfiguracionGeneral {
@@ -48,23 +49,32 @@ public class ConfiguracionGeneral {
 		this.gastos = gastos;
 	}
 	
-	
-	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Integer>tem){
-		
+	/**
+	 * @param fechaInicio
+	 * @param tem
+	 * @param gastos
+	 */
+	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Integer>tem, List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
 		this.setTem(tem);
-		
+		this.setGastos(gastos);
 	}
-	
-	public ConfiguracionGeneral(Date fechaInicio){
-		
+	/**
+	 * @param fechaInicio
+	 * @param gastos
+	 * tem vacio.
+	 */
+	public ConfiguracionGeneral(Date fechaInicio,List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
 		this.setTem(new TreeMap<Integer,Integer>());
+		this.setGastos(gastos);
 	}
 	
-	
+	/**
+	 * @param cuotas
+	 * @return Integer correspondiente al valor del tem segun la cantidad de cuotas
+	 */
 	public Integer consultarTem(Integer cuotas){
-		
 		Set<Integer> claves = this.getTem().keySet();
 		for(Integer i : claves){
 			if(i >= cuotas){
@@ -75,13 +85,24 @@ public class ConfiguracionGeneral {
 		return this.getTem().get(ret); 
 	} 
 	
-	public void agregarClaveValorATem(Integer c, Integer v){
-		
-		this.getTem().put(c, v/100);
-		
+	/**
+	 * @param Integer clave
+	 * @param Integer valor
+	 */
+	public void agregarClaveValorATem(Integer clave, Integer valor){
+		this.getTem().put(clave, valor/100);
 	}
 
 	
+	/**
+	 * @param prestamo
+	 * calcula el gasto al prestamo y se lo agrega. 
+	 */
+	public void calcularGasto(Prestamo prestamo){
+		for(Gasto gasto : this.getGastos()){
+			gasto.calcularGasto(prestamo);
+		}
+	}
 }
 	
 	
