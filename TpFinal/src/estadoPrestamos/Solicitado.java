@@ -4,7 +4,11 @@ import prestamos.Prestamo;
 
 public class Solicitado extends EstadoPrestamo {
 	
-	public void seAprobo(Prestamo p){}
+	
+	public void seAprobo(Prestamo p){
+		
+		p.setEstado ( new EnCurso());
+	}
 	
 	public void noSeAprobo(Prestamo p){}
 	
