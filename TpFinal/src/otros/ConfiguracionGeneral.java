@@ -14,7 +14,7 @@ public class ConfiguracionGeneral {
 
 	private Date fechaInicio;
 	private Date fechaFin;
-	private SortedMap<Integer,Integer> tem;
+	private SortedMap<Integer,Double> tem;
 	private List<Gasto> gastos;
 	
 	public Date getFechaInicio() {
@@ -33,11 +33,11 @@ public class ConfiguracionGeneral {
 		this.fechaFin = fechaFin;
 	}
 	
-	public SortedMap<Integer, Integer> getTem() {
+	public SortedMap<Integer, Double> getTem() {
 		return tem;
 	}
 	
-	public void setTem(SortedMap<Integer, Integer> tem) {
+	public void setTem(SortedMap<Integer, Double> tem) {
 		this.tem = tem;
 	}
 	
@@ -54,7 +54,7 @@ public class ConfiguracionGeneral {
 	 * @param tem
 	 * @param gastos
 	 */
-	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Integer>tem, List<Gasto>gastos){
+	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Double>tem, List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
 		this.setTem(tem);
 		this.setGastos(gastos);
@@ -66,7 +66,7 @@ public class ConfiguracionGeneral {
 	 */
 	public ConfiguracionGeneral(Date fechaInicio,List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
-		this.setTem(new TreeMap<Integer,Integer>());
+		this.setTem(new TreeMap<Integer,Double>());
 		this.setGastos(gastos);
 	}
 	
@@ -75,7 +75,7 @@ public class ConfiguracionGeneral {
 	 * @return Integer correspondiente al valor del tem segun la cantidad de cuotas
 	 * si la cantidad de cuotas supera a los valores que estan en el tem toma el valor mas grande
 	 */
-	public Integer consultarTem(Integer cuotas){
+	public Double consultarTem(Integer cuotas){
 		Integer ret = 0;
 		Set<Integer> claves = this.getTem().keySet();
 		for(Integer i : claves){
@@ -94,7 +94,7 @@ public class ConfiguracionGeneral {
 	 * @param Integer valor
 	 */
 	public void agregarClaveValorATem(Integer clave, Integer valor){
-		this.getTem().put(clave, valor/100);
+		this.getTem().put(clave,(double)(valor*0.01));
 	}
 
 	

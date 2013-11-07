@@ -37,8 +37,8 @@ public class TestConfiguracionGeneral {
 		gastos.add(mockedGasto2);
 		configuracionGeneral = new ConfiguracionGeneral(fechaInicio,gastos);		
 		
-		SortedMap<Integer,Integer> tem = new TreeMap<Integer,Integer>();
-		tem.put(12, 3);
+		SortedMap<Integer,Double> tem = new TreeMap<Integer,Double>();
+		tem.put(12,(double)(3/100));
 		configuracionGeneral2 = new ConfiguracionGeneral(fechaInicio,tem,gastos);	
 	}
 
@@ -65,6 +65,7 @@ public class TestConfiguracionGeneral {
 
 		configuracionGeneral.agregarClaveValorATem(12, 3);
 		assertEquals("Se fija si el tem tiene un elemento",1, configuracionGeneral.getTem().size());
+		assertNotEquals("Si guarda el 3 como 0.3",(Integer)3,configuracionGeneral.consultarTem(12));
 	}
 	
 	@Test
@@ -74,12 +75,12 @@ public class TestConfiguracionGeneral {
 		configuracionGeneral.agregarClaveValorATem(12, 3);
 		configuracionGeneral.agregarClaveValorATem(24, 6);
 		//Acordarse que el agregarClaveValorATem la clave es porcentual y la guarda haciendo el monto/100.
-		assertEquals("se fija que el valor sea el correcto",(Integer)(3/100),configuracionGeneral.consultarTem(12));
+		assertEquals("se fija que el valor sea el correcto",(double)(3*0.01),configuracionGeneral.consultarTem(12),0);
 		//Si el numero de cuotas es menor al que se encuentra como clave tiene que dar el siguiente
-		assertEquals("se fija que el valor sea el correcto",(Integer)(3/100),configuracionGeneral.consultarTem(10));
-		assertEquals("se fija que el valor sea el correcto",(Integer)(6/100),configuracionGeneral.consultarTem(13));
+		assertEquals("se fija que el valor sea el correcto",(double)(3*0.01),configuracionGeneral.consultarTem(10),1);
+		assertEquals("se fija que el valor sea el correcto",(double)(6*0.01),configuracionGeneral.consultarTem(13),1);
 		//Si se pasa de cuotas toma el valor mas alto
-		assertEquals("se fija que el valor sea el correcto",(Integer)(6/100),configuracionGeneral.consultarTem(25));
+		assertEquals("se fija que el valor sea el correcto",(double)(6*0.01),configuracionGeneral.consultarTem(25),1);
 	}
 	
 	@Test
