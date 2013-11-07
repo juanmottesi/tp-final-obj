@@ -10,7 +10,7 @@ public class CalculoValorCuota {
 		super();
 	}
 	
-	public static double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
+	public static double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		//(double amount, double interest, int installmentCount);
 		return AdvanceModeInstallment.calculateInstallmentValue(montoTotal, temCorrespondiente, cantCuotas);
 	}
