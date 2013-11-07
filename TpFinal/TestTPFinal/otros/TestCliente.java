@@ -31,8 +31,19 @@ public class TestCliente {
 		assertEquals((Integer)36778000, cliente.getDni());
 	}
 	
-	@Test (expected = AgregarPrestamoAClienteException.class)
+	@Test
 	public void testPuedoAgregarPrestamo() throws AgregarPrestamoAClienteException{
+		//El cliente en este momento no tiene prestamos
+		assertTrue(cliente.puedoAgregarPrestamo());
+		//Le agrego al cliente un prestamo en curso.
+		Prestamo mockedPrestamo = mock(Prestamo.class);
+		when(mockedPrestamo.getEstado()).thenReturn(new EnCurso());
+		//Tiene un prestamo solo, tiene que dejarme agregar otro.
+		assertTrue(cliente.puedoAgregarPrestamo());
+	}
+	
+	@Test (expected = AgregarPrestamoAClienteException.class)
+	public void testPuedoAgregarPrestamoConException() throws AgregarPrestamoAClienteException{
 		Prestamo mockedPrestamo = mock(Prestamo.class);
 		
 		when(mockedPrestamo.getEstado()).thenReturn(new Solicitado());
