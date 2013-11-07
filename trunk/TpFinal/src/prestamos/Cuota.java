@@ -94,6 +94,14 @@ public class Cuota {
 	public void setEstadoCuota(EstadoCuota estadoCuota) {
 		this.estadoCuota = estadoCuota;
 	}
+	
+	/**
+	 * Usar solo cuando se consulta el valor cuota.
+	 */
+	public Cuota(){
+		super();
+	}
+	
 	/**
 	 * Orden de los parametros:
 	 * @param fechaVencimiento
@@ -113,7 +121,7 @@ public class Cuota {
 		this.setNroCuota(nroCuota);
 		this.setEstadoCuota(new APagar());
 	}
-	
+
 	
 	/**
 	 * EstaPaga realiza una inspeccion del estado

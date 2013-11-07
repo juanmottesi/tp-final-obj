@@ -3,11 +3,11 @@ package otros;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import estadoPrestamos.DeudorIncobrable;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.Solicitado;
 import exceptions.AgregarPrestamoAClienteException;
@@ -60,4 +60,20 @@ public class TestCliente {
 		assertEquals("Chequea la longitud de la lista de gastos",2 , cliente.getPrestamos().size());
 	}
 
+	@Test 
+	public void testSuscribirAlSistemaDeAviso(){
+		Prestamo mockedPrestamo = mock(Prestamo.class);
+		cliente.suscribirAlSistemaDeAviso(mockedPrestamo);
+		verify(mockedPrestamo).addObserver(cliente);
+	}
+	
+	@Test 
+	public void testSalirSistemaDeAviso(){
+		Prestamo mockedPrestamo = mock(Prestamo.class);
+		cliente.salirSistemaDeAviso(mockedPrestamo);
+		verify(mockedPrestamo).deleteObserver(cliente);
+	}
+	
+	
+	
 }
