@@ -60,6 +60,5 @@ public class TestEnCurso {
 		
 		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
 			
-		assertSame(new Finalizado(), fin )
-	}
+		assertSame(new Finalizado(), (Finalizado)mockedPrestamo.getEstado());}
 }
