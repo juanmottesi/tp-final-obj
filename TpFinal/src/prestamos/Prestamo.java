@@ -1,7 +1,11 @@
 package prestamos;
 
+import installment.calculator.exceptions.InstallmentCountException;
+import installment.calculator.exceptions.InvalidAmountException;
+
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 import java.util.Vector;
 
 import cuotaEstados.Vencida;
@@ -9,7 +13,7 @@ import otros.*;
 import estadoPrestamos.*;
 import gastos.Gasto;
 
-public class Prestamo {
+public class Prestamo extends Observable {
 
 	private EstadoPrestamo estado;
 	private List<Cuota> cuotas; 
@@ -78,17 +82,67 @@ public class Prestamo {
 	public void setConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral) {
 		this.configuracionGeneral = configuracionGeneral;
 	}
-	
-	public Prestamo(Cliente cliente, double montoTotal, Integer cantCuotas, Date fechaDeCreacion, ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configGeneral){
+	/**
+	 * @param cliente
+	 * @param montoTotal
+	 * @param cantCuotas
+	 * @param fechaDeCreacion
+	 * @param configuracionPrestamo
+	 * @param configGeneral
+	 * @throws InstallmentCountException
+	 * @throws InvalidAmountException
+	 */
+	public Prestamo(Cliente cliente, double montoTotal, Integer cantCuotas, Date fechaDeCreacion, ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configGeneral) throws InstallmentCountException, InvalidAmountException{
 		this.setCliente(cliente);
 		this.setMontoTotal(montoTotal);
 		this.setFechaDeCreacion(fechaDeCreacion);
 		this.setConfiguracionPrestamo(configuracionPrestamo);
 		this.setConfiguracionGeneral(configGeneral);
 		this.setEstado(new Solicitado());
-		this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
-		this.calcularGastoYSeguro();
+		try{
+			this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
+			this.calcularGastoYSeguro();
+		}
+		catch(InstallmentCountException exception){
+			System.out.println(exception.getMessage());
+		}
+		catch(InvalidAmountException exception){
+			System.out.println(exception.getMessage());
+		}
 	}
+	/**
+	 * Usar este constructor solo cuando quieran saber el valor de la cuota.
+	 * @param montoTotal
+	 * @param cantCuotas
+	 * @param configGeneral
+	 */
+	public Prestamo(double montoTotal, Integer cantCuotas,ConfiguracionGeneral configGeneral){
+		this.setMontoTotal(montoTotal);
+		this.setConfiguracionGeneral(configGeneral);
+		List<Cuota> cuotas = new Vector<Cuota>();
+		for(int i = 0 ; i < cantCuotas ; i++){
+			Cuota c = new Cuota();
+			cuotas.add(c);			
+		}
+	}
+	
+	public double consultarValorCuota(){
+		Integer temCorrespondiente = this.consultarTem();
+		Integer cantCuotas = this.cantidadDeCuotas();
+		try{
+		return CalculoValorCuota.calcularCuota(this.getMontoTotal(),temCorrespondiente, cantCuotas);
+		}
+		catch(InstallmentCountException exception){
+			System.out.println(exception.getMessage());
+			return 0;
+		}
+		catch(InvalidAmountException exception){
+			System.out.println(exception.getMessage());
+			return 0;
+		}
+		
+	}
+	
 	
 	/**
 	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
@@ -116,8 +170,8 @@ public class Prestamo {
 		
 	}
 	
-	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas){
-		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);
+	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
+		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
 	}
 	
 	public List<Cuota> cuadroDeMarcha(){
@@ -129,7 +183,7 @@ public class Prestamo {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual){
+	public List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual) throws InstallmentCountException, InvalidAmountException{
 		List<Cuota> ret = new Vector<Cuota>();
 		
 		Date fechaVencimiento= this.calcularFecha(fechaActual);
@@ -148,15 +202,13 @@ public class Prestamo {
 			
 			double saldoDeuda = this.calcularSaloDeuda(monto, amortizacion);
 			
-		//	double seguro = this.calcularSeguroDeVida(saldoDeuda);
-			
-			Cuota c = new Cuota(fechaVencimiento, montoCuota,(Integer)i,amortizacion,interes,/*seguro,*/saldoDeuda);
+			Cuota c = new Cuota(fechaVencimiento, montoCuota,(Integer)i,amortizacion,interes,saldoDeuda);
 			
 			monto = saldoDeuda;
 			
 			ret.add(c);
 		}
-		
+
 		return ret;
 	}
 	
@@ -171,13 +223,12 @@ public class Prestamo {
 	public double calcularSaloDeuda(double montoTotal, double amortizacion){
 		return montoTotal - amortizacion;
 	}
-		
-	public double calcularSeguroDeVida(double saldoDeuda){
-		double seguro = this.getConfiguracionPrestamo().getSeguro();
-		return saldoDeuda * seguro;
-		
-	}
 	
+	/**
+	 * 
+	 * @param fechaActual
+	 * @return la fecha en la cual se crea la primer cuota.
+	 */
 	@SuppressWarnings("deprecation")
 	public Date calcularFecha(Date fechaActual){
 		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
