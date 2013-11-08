@@ -1,8 +1,12 @@
-package cuotaEstados;
+package estadoCuotas;
 
 import prestamos.Cuota;
 
 public class APagar extends EstadoCuota{
+	
+	public APagar(){
+		super();
+	}
 
 	@Override
 	public boolean estaPaga() {
@@ -14,6 +18,7 @@ public class APagar extends EstadoCuota{
 		cuota.setEstadoCuota(new Pagada());
 	}
 
+	@Override
 	public void aVencido(Cuota cuota){
 		cuota.setEstadoCuota(new Vencida());
 		
