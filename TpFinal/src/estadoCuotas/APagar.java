@@ -23,4 +23,5 @@ public class APagar extends EstadoCuota{
 		cuota.setEstadoCuota(new Vencida());
 		
 	}
+	
 }

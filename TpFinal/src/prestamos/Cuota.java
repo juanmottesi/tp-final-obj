@@ -153,6 +153,9 @@ public class Cuota {
 		this.getEstadoCuota().aVencido(this);
 	}
 	
+
+	
+	
 	/**
 	 * @param fechaActual 
 	 * chequea si la fecha de vencimiento es menor que la pasada por parametro
