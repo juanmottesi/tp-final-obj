@@ -21,11 +21,9 @@ public class TestCuota {
 	private double interes = 300;
 	private double saldoDeuda = 18466.40;
 	
-	@SuppressWarnings("deprecation")
+	
 	@Before
-	public void setUp(){
-	//(Date , double , Integer , double amortizacion, double interes,double saldoDeuda){
-		
+	public void setUp(){		
 		cuota= new Cuota(fechaVencimiento,montoCuota,nroCuota,amortizacion,interes,saldoDeuda);
 	}
 	
