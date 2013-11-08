@@ -16,7 +16,6 @@ public class Vencida extends EstadoCuota{
 
 	@Override
 	public void aVencido(Cuota cuota) {
-		//Excepcion
 	}
 	
 
