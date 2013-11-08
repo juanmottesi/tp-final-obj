@@ -56,9 +56,9 @@ public class TestEnCurso {
 	@Test
 	public void testFinalizar() throws FinalizadoException{
 		
-		when(mockedPrestamo.getEstado()).thenReturn(enCurso);
-		
-		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
+
+		enCurso.finalizar(mockedPrestamo);
+		verify(mockedPrestamo).setEstado(any(Finalizado.class));
 			
-		assertSame(new Finalizado(), (Finalizado)mockedPrestamo.getEstado());}
+	}
 }
