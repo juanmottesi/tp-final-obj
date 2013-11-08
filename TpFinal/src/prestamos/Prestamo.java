@@ -11,7 +11,6 @@ import java.util.Vector;
 import cuotaEstados.Vencida;
 import otros.*;
 import estadoPrestamos.*;
-import gastos.Gasto;
 
 public class Prestamo extends Observable {
 
@@ -82,6 +81,8 @@ public class Prestamo extends Observable {
 	public void setConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral) {
 		this.configuracionGeneral = configuracionGeneral;
 	}
+	
+	
 	/**
 	 * @param cliente
 	 * @param montoTotal
@@ -110,6 +111,7 @@ public class Prestamo extends Observable {
 			System.out.println(exception.getMessage());
 		}
 	}
+	
 	/**
 	 * Usar este constructor solo cuando quieran saber el valor de la cuota.
 	 * @param montoTotal
@@ -142,8 +144,7 @@ public class Prestamo extends Observable {
 		}
 		
 	}
-	
-	
+		
 	/**
 	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
 	 * cualquier estado.
@@ -157,6 +158,8 @@ public class Prestamo extends Observable {
 			}
 		}
 	}
+	
+	
 	/**
 	 * CalcularGasto suma las gastos mensuales para pasarselos a las cuotas y decrementa el montoTotal si el gasto es Global
 	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora y el valor total de la cuota.
@@ -239,7 +242,6 @@ public class Prestamo extends Observable {
 		return nuevaFecha;
 	}
 	
-	
 	/**
 	 * @param fechaActual 
 	 * chequea todas sus cuotas si estas se encuentran vencidas.
@@ -261,8 +263,7 @@ public class Prestamo extends Observable {
 			c.setInteresPorMora(c.getValorTotalCuota()* tem);
 		}
 	}
-	
-	
+		
 	public void agregarValorTotalACuotas(){
 		for(Cuota c : this.getCuotas()){
 			c.setValorTotalCuota(c.getSeguro()+ c.getGastoTotal()+ c.getMontoCuota());
@@ -283,7 +284,6 @@ public class Prestamo extends Observable {
 		return estanTodasPagas;	
 	}
 	
-	
 	public void actualizarGastos(double gastos){
 		this.setMontoTotal(gastos);
 		
@@ -293,7 +293,6 @@ public class Prestamo extends Observable {
 		return this.getCliente().getDni();
 	}
 	
-
 	public String obtenerApellidoCliente(){
 		return this.getCliente().getApellido();
 	}
