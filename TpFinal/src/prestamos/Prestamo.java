@@ -127,7 +127,7 @@ public class Prestamo extends Observable {
 	}
 	
 	public double consultarValorCuota(){
-		Integer temCorrespondiente = this.consultarTem();
+		Double temCorrespondiente = this.consultarTem();
 		Integer cantCuotas = this.cantidadDeCuotas();
 		try{
 		return CalculoValorCuota.calcularCuota(this.getMontoTotal(),temCorrespondiente, cantCuotas);
@@ -170,7 +170,7 @@ public class Prestamo extends Observable {
 		
 	}
 	
-	public double calcularCuota(double montoTotal, Integer temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
+	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
 	}
 	
@@ -212,7 +212,7 @@ public class Prestamo extends Observable {
 		return ret;
 	}
 	
-	public double calcularInteres(double montoTotal, Integer valorTemCorrespondiente){
+	public double calcularInteres(double montoTotal, Double valorTemCorrespondiente){
 		return montoTotal * (valorTemCorrespondiente);		
 	}
 	
@@ -251,12 +251,12 @@ public class Prestamo extends Observable {
 		
 	}
 	
-	public Integer consultarTem(){
+	public Double consultarTem(){
 		return this.getConfiguracionGeneral().consultarTem(this.cantidadDeCuotas());
 	}
 	
 	public void agregarACuotasInteresPorMora(){
-		Integer tem = this.consultarTem();
+		Double tem = this.consultarTem();
 		for(Cuota c : this.getCuotas()){
 			c.setInteresPorMora(c.getValorTotalCuota()* tem);
 		}
