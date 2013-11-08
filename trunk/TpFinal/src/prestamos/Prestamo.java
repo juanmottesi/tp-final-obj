@@ -113,6 +113,10 @@ public class Prestamo extends Observable {
 		}
 	}
 	
+	public Prestamo() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Usar este constructor solo cuando quieran saber el valor de la cuota.
 	 * @param montoTotal
