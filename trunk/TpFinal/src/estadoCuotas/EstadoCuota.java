@@ -8,6 +8,7 @@ public abstract class EstadoCuota {
 	public abstract void pagar(Cuota cuota) throws EstadoCuotaException;
 	public abstract void aVencido(Cuota cuota)throws EstadoCuotaException;
 	
+
 	public boolean equals(EstadoCuota estadoCuota){
 		if(estadoCuota == null){
 			return false;

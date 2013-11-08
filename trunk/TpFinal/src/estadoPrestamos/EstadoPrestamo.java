@@ -31,3 +31,8 @@ public abstract class EstadoPrestamo {
 		return true;
 	}
 }
+	
+	
+	
+
+    

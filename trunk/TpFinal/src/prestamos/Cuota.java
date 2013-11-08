@@ -121,6 +121,7 @@ public class Cuota {
 		
 		this.setNroCuota(nroCuota);
 		this.setEstadoCuota(new APagar());
+		this.setFechaDePago(null);
 	}
 
 	
