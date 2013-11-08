@@ -4,6 +4,7 @@ import java.util.Date;
 
 import cuotaEstados.APagar;
 import cuotaEstados.EstadoCuota;
+import exceptions.EstadoCuotaException;
 
 
 public class Cuota {
@@ -135,8 +136,9 @@ public class Cuota {
 	/**
 	 * @param fechaPago
 	 * Pagar recibe la fecha en la que se efectua el pago
+	 * @throws EstadoCuotaException 
 	 */
-	public void pagar(Date fechaPago){
+	public void pagar(Date fechaPago) throws EstadoCuotaException{
 		this.getEstadoCuota().pagar(this);
 		this.setFechaDePago(fechaPago);
 	}
@@ -144,9 +146,10 @@ public class Cuota {
 	
 	/**
 	 * cambia el estado a vencido.
+	 * @throws EstadoCuotaException 
 	 * 
 	 */
-	public void aVencido(){
+	public void aVencido() throws EstadoCuotaException{
 		this.getEstadoCuota().aVencido(this);
 	}
 	
@@ -154,9 +157,10 @@ public class Cuota {
 	 * @param fechaActual 
 	 * chequea si la fecha de vencimiento es menor que la pasada por parametro
 	 * si es asi la pasa a vencida.
+	 * @throws EstadoCuotaException 
 	 * 
 	 */
-	public void verificarFecha(Date fechaActual){
+	public void verificarFecha(Date fechaActual) throws EstadoCuotaException{
 		if(this.getFechaVencimiento().before(fechaActual)){
 			this.aVencido();
 		}

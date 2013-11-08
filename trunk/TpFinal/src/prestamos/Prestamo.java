@@ -11,6 +11,7 @@ import java.util.Vector;
 import cuotaEstados.Vencida;
 import otros.*;
 import estadoPrestamos.*;
+import exceptions.EstadoCuotaException;
 
 public class Prestamo extends Observable {
 
@@ -81,7 +82,7 @@ public class Prestamo extends Observable {
 	public void setConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral) {
 		this.configuracionGeneral = configuracionGeneral;
 	}
-	
+	// Metodos de creacion
 	
 	/**
 	 * @param cliente
@@ -127,44 +128,14 @@ public class Prestamo extends Observable {
 			cuotas.add(c);			
 		}
 	}
+
 	
-	public double consultarValorCuota(){
-		Double temCorrespondiente = this.consultarTem();
-		Integer cantCuotas = this.cantidadDeCuotas();
-		try{
-		return CalculoValorCuota.calcularCuota(this.getMontoTotal(),temCorrespondiente, cantCuotas);
-		}
-		catch(InstallmentCountException exception){
-			System.out.println(exception.getMessage());
-			return 0;
-		}
-		catch(InvalidAmountException exception){
-			System.out.println(exception.getMessage());
-			return 0;
-		}
-		
-	}
-		
+	//Metodos que complementan la creacion
 	/**
-	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
-	 * cualquier estado.
+	 * CalcularGastoYSeguro suma las gastos mensuales para pasarselos a las cuotas y decrementa el montoTotal si el gasto es Global
+	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora, el valor total de la cuota y el seguro.
 	 */
-	public void pagarCuota(Date fechaDelPago){
-		// mirar estados!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		for(Cuota c : this.getCuotas()){
-			if(!c.estaPaga()){
-				c.pagar(fechaDelPago);
-				break; // mirar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			}
-		}
-	}
-	
-	
-	/**
-	 * CalcularGasto suma las gastos mensuales para pasarselos a las cuotas y decrementa el montoTotal si el gasto es Global
-	 * ademas como ya las cuotas conocen sus gastos este agrega a la cuota el interes por mora y el valor total de la cuota.
-	 */
-	public void calcularGastoYSeguro(){
+	private void calcularGastoYSeguro(){
 		this.getConfiguracionGeneral().calcularGasto(this);
 		this.getConfiguracionPrestamo().calcularGasto(this);
 		this.getConfiguracionPrestamo().calcularSeguro(this);
@@ -173,20 +144,8 @@ public class Prestamo extends Observable {
 		
 	}
 	
-	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
-		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
-	}
-	
-	public List<Cuota> cuadroDeMarcha(){
-		return this.getCuotas();
-	}
-	
-	public double calcularSaldoDeuda(Integer nroCuota){
-		return this.getCuotas().get(nroCuota).getSaldoDeuda();	
-	}
-	
 	@SuppressWarnings("deprecation")
-	public List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual) throws InstallmentCountException, InvalidAmountException{
+	private List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual) throws InstallmentCountException, InvalidAmountException{
 		List<Cuota> ret = new Vector<Cuota>();
 		
 		Date fechaVencimiento= this.calcularFecha(fechaActual);
@@ -214,26 +173,14 @@ public class Prestamo extends Observable {
 
 		return ret;
 	}
-	
-	public double calcularInteres(double montoTotal, Double valorTemCorrespondiente){
-		return montoTotal * (valorTemCorrespondiente);		
-	}
-	
-	public double calcularAmortizacion(double valorCuota, double interes){
-		return valorCuota - interes;	
-	}
-	
-	public double calcularSaloDeuda(double montoTotal, double amortizacion){
-		return montoTotal - amortizacion;
-	}
-	
+
 	/**
 	 * 
 	 * @param fechaActual
 	 * @return la fecha en la cual se crea la primer cuota.
 	 */
 	@SuppressWarnings("deprecation")
-	public Date calcularFecha(Date fechaActual){
+	private Date calcularFecha(Date fechaActual){
 		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
 		
 		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
@@ -242,34 +189,78 @@ public class Prestamo extends Observable {
 		return nuevaFecha;
 	}
 	
-	/**
-	 * @param fechaActual 
-	 * chequea todas sus cuotas si estas se encuentran vencidas.
-	 */
-	public void verificarFechaDeCuotas(Date fechaActual){
-		for(Cuota c : this.getCuotas()){
-			c.verificarFecha(fechaActual);
-		}
-		
+	private double calcularInteres(double montoTotal, Double valorTemCorrespondiente){
+		return montoTotal * (valorTemCorrespondiente);		
 	}
 	
-	public Double consultarTem(){
-		return this.getConfiguracionGeneral().consultarTem(this.cantidadDeCuotas());
+	private double calcularAmortizacion(double valorCuota, double interes){
+		return valorCuota - interes;	
 	}
 	
-	public void agregarACuotasInteresPorMora(){
+	private double calcularSaloDeuda(double montoTotal, double amortizacion){
+		return montoTotal - amortizacion;
+	}
+	
+	private void agregarACuotasInteresPorMora(){
 		Double tem = this.consultarTem();
 		for(Cuota c : this.getCuotas()){
 			c.setInteresPorMora(c.getValorTotalCuota()* tem);
 		}
 	}
 		
-	public void agregarValorTotalACuotas(){
+	private void agregarValorTotalACuotas(){
 		for(Cuota c : this.getCuotas()){
 			c.setValorTotalCuota(c.getSeguro()+ c.getGastoTotal()+ c.getMontoCuota());
+		}		
+	}
+	
+	public void actualizarGastos(double gastos){
+	this.setMontoTotal(gastos);
+}
+	
+	//Metodos de consulta
+	
+	public double consultarValorCuota(){
+		Double temCorrespondiente = this.consultarTem();
+		Integer cantCuotas = this.cantidadDeCuotas();
+		try{
+			return CalculoValorCuota.calcularCuota(this.getMontoTotal(),temCorrespondiente, cantCuotas);
+		}
+		catch(InstallmentCountException exception){
+			System.out.println(exception.getMessage());
+			return 0;
+		}
+		catch(InvalidAmountException exception){
+			System.out.println(exception.getMessage());
+			return 0;
 		}
 		
+	}
 		
+	public Double consultarTem(){
+		return this.getConfiguracionGeneral().consultarTem(this.cantidadDeCuotas());
+	}
+	
+	public Integer obtenerDniCliente(){
+		return this.getCliente().getDni();
+	}
+	
+	public String obtenerApellidoCliente(){
+		return this.getCliente().getApellido();
+	}
+
+	/**
+	 * @param fechaActual 
+	 * chequea todas sus cuotas si estas se encuentran vencidas.
+	 */
+	public void verificarFechaDeCuotas(Date fechaActual){
+		for(Cuota c : this.getCuotas()){
+			try {
+				c.verificarFecha(fechaActual);
+			} catch (EstadoCuotaException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	public boolean estanTodasLasCuotasPagas(){
@@ -284,24 +275,49 @@ public class Prestamo extends Observable {
 		return estanTodasPagas;	
 	}
 	
-	public void actualizarGastos(double gastos){
-		this.setMontoTotal(gastos);
-		
-	}
-	
-	public Integer obtenerDniCliente(){
-		return this.getCliente().getDni();
-	}
-	
-	public String obtenerApellidoCliente(){
-		return this.getCliente().getApellido();
-	}
-
 	public void finalizarPrestamo(){
-	
+		
 		if(this.estanTodasLasCuotasPagas()){
 			
 			this.setEstado(new Finalizado());
 		}
 	}
+	
+	// Metodos usados por el banco
+	
+	/**
+	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
+	 * cualquier estado.
+	 */
+	@SuppressWarnings("finally")
+	public void pagarCuota(Date fechaDelPago){
+		// mirar estados!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		for(Cuota c : this.getCuotas()){
+			if(!c.estaPaga()){
+				try {
+					c.pagar(fechaDelPago);
+				} catch (EstadoCuotaException e) {
+					System.out.println(e.getMessage());
+					
+				}
+				finally{
+					break;
+				}
+			}
+		}
+	}
+	
+	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
+		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
+	}
+	
+	public List<Cuota> cuadroDeMarcha(){
+		return this.getCuotas();
+	}
+	
+//	public double calcularSaldoDeuda(Integer nroCuota){
+//	return this.getCuotas().get(nroCuota).getSaldoDeuda();	
+//}
+
+
 }
