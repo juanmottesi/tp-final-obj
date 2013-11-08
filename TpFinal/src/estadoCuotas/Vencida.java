@@ -1,8 +1,12 @@
-package cuotaEstados;
+package estadoCuotas;
 
 import prestamos.Cuota;
 
 public class Vencida extends EstadoCuota{
+	
+	public Vencida(){
+		super();
+	}
 
 	@Override
 	public boolean estaPaga() {

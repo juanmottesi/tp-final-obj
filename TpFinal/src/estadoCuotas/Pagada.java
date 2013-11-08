@@ -1,9 +1,13 @@
-package cuotaEstados;
+package estadoCuotas;
 
 import exceptions.PagadaException;
 import prestamos.Cuota;
 
 public class Pagada extends EstadoCuota{
+	
+	public Pagada(){
+		super();
+	}
 
 	@Override
 	public boolean estaPaga() {

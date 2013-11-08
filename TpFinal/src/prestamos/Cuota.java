@@ -2,8 +2,8 @@ package prestamos;
 
 import java.util.Date;
 
-import cuotaEstados.APagar;
-import cuotaEstados.EstadoCuota;
+import estadoCuotas.APagar;
+import estadoCuotas.EstadoCuota;
 import exceptions.EstadoCuotaException;
 
 
@@ -171,5 +171,6 @@ public class Cuota {
 		this.setGastoTotal(montoActuralizado);
 	}
 	
+
 	
 }
