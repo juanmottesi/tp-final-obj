@@ -1,8 +1,8 @@
 package estadoPrestamos;
 
 import exceptions.DeudorIncobrableException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
-import exceptions.SolicitadoException;
 import prestamos.Prestamo;
 
 public class Solicitado extends EstadoPrestamo {
@@ -30,5 +30,12 @@ public class Solicitado extends EstadoPrestamo {
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException {
 		
 		throw new DeudorIncobrableException("Estado Solicitado: No se puede pasar a Deudor incobrable");
+	}
+	
+	@Override
+	public void aEnDeuda(Prestamo p) throws EnDeudaException {
+
+		throw  new EnDeudaException
+			("Estado olicitado: Un prestamo Solicitadono no puede comenzar o  ser rechazado  En Deuda ");
 	}
 }

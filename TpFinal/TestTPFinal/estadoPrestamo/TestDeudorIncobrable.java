@@ -11,6 +11,7 @@ import estadoPrestamos.DeudorIncobrable;
 import estadoPrestamos.EstadoPrestamo;
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import static org.mockito.Mock.*;
@@ -23,7 +24,7 @@ public class TestDeudorIncobrable {
 	private Prestamo mockedPrestamo;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		enDeudorIncobrable= new DeudorIncobrable();
 		mockedPrestamo= mock(Prestamo.class);
 		
@@ -65,6 +66,16 @@ public class TestDeudorIncobrable {
 		when(mockedPrestamo.getEstado()).thenReturn(enDeudorIncobrable);
 		
 		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
+	}
+
+	@Test (expected = EnDeudaException.class)
+	public void testAEnDeuda() throws EnDeudaException{
+		
+		when(mockedPrestamo.getEstado()).thenReturn(enDeudorIncobrable);
+		
+		mockedPrestamo.getEstado().aEnDeuda(mockedPrestamo);
+		
+		assertSame(enDeudorIncobrable, mockedPrestamo.getEstado());
 	}
 }
 

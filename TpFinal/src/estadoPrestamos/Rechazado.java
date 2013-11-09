@@ -2,14 +2,13 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
 
 public class Rechazado extends EstadoPrestamo {
 	
-	
-
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
 		
@@ -38,6 +37,13 @@ public class Rechazado extends EstadoPrestamo {
 		
 		throw new FinalizadoException 
 		("Estado Rechazado: el prestamo no esta");
+	}
+	
+	@Override
+	public void aEnDeuda(Prestamo p) throws EnDeudaException {
+
+		throw  new EnDeudaException
+			("Estado Rechazado: Un prestamo Rechazado no puede caer En Deuda ");
 	}
 }
 

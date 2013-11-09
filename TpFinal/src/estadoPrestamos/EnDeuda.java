@@ -1,6 +1,7 @@
 package estadoPrestamos;
 
 import exceptions.AprobadoException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
@@ -35,5 +36,12 @@ public class EnDeuda extends EstadoPrestamo {
 		throw new FinalizadoException
 		("Estado En Deuda: No se lo puedo finalizar ");
 		
+	}
+	
+	@Override
+	public void aEnDeuda(Prestamo p) throws EnDeudaException {
+
+		throw  new EnDeudaException
+			("Estado En Deuda: Ya a está En Deuda ");
 	}
 }
