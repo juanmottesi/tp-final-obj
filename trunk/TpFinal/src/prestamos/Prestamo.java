@@ -254,6 +254,29 @@ public class Prestamo extends Observable {
 	}
 
 	/**
+	 * tengoAlgunaCuotaVencida retorna un booleano si tene alguna cuota vencida.
+	 * @return
+	 */
+	public boolean tengoAlgunaCuotaVencida(){
+		for(Cuota c : this.getCuotas()){
+			if(c.getEstadoCuota().equals(new Vencida())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void verificarEstado(){
+		if(this.estanTodasLasCuotasPagas()){
+			this.getEstado().finalizar(this);
+		}
+		if(this.tengoAlgunaCuotaVencida()){
+			this.getEstado().aEnDeuda(this);
+		}
+		this.getEstado().aEnCurso();
+	}
+	
+	/**
 	 * @param fechaActual 
 	 * chequea todas sus cuotas si estas se encuentran vencidas.
 	 */
@@ -314,28 +337,8 @@ public class Prestamo extends Observable {
 	/**
 	 * verifica el estado si es necesario despues de realizar un pago
 	 */
-	private void verificarEstado(){
-		if(this.estanTodasLasCuotasPagas()){
-			this.getEstado().finalizar(this);
-		}
-		if(this.tengoAlgunaCuotaVencida()){
-			this.getEstado().aEnDeuda(this);
-		}
-		this.getEstado().aEnCurso();
-	}
-	/**
-	 * tengoAlgunaCuotaVencida retorna un booleano si tene alguna cuota vencida.
-	 * @return
-	 */
-	public boolean tengoAlgunaCuotaVencida(){
-		for(Cuota c : this.getCuotas()){
-			if(c.getEstadoCuota().equals(new Vencida())){
-				return true;
-			}
-		}
-		return false;
-	}
-	
+
+
 	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
 	}
