@@ -45,7 +45,7 @@ public class TestEnCurso {
 		
 		assertSame(enCurso, mockedPrestamo.getEstado());
 	}  
-
+	
 	@Test(expected= RechazadoException.class)
 	public void testRechazar() throws RechazadoException {
 		
