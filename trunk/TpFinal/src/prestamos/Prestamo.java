@@ -295,20 +295,45 @@ public class Prestamo extends Observable {
 	 */
 	@SuppressWarnings("finally")
 	public void pagarCuota(Date fechaDelPago){
-		// mirar estados!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		for(Cuota c : this.getCuotas()){
-			if(!c.estaPaga()){
-				try {
-					c.pagar(fechaDelPago);
-				} catch (EstadoCuotaException e) {
-					System.out.println(e.getMessage());
-					
-				}
-				finally{
-					break;
+		if(this.getEstado().puedoPagar()){
+			for(Cuota c : this.getCuotas()){
+				if(!c.estaPaga()){
+					try {
+						c.pagar(fechaDelPago);
+					} catch (EstadoCuotaException e) {
+						System.out.println(e.getMessage());
+					}
+					finally{
+						break;
+					}
 				}
 			}
 		}
+		this.verificarEstado();
+	}
+	/**
+	 * verifica el estado si es necesario despues de realizar un pago
+	 */
+	private void verificarEstado(){
+		if(this.estanTodasLasCuotasPagas()){
+			this.getEstado().finalizar(this);
+		}
+		if(this.tengoAlgunaCuotaVencida()){
+			this.getEstado().aEnDeuda(this);
+		}
+		this.getEstado().aEnCurso();
+	}
+	/**
+	 * tengoAlgunaCuotaVencida retorna un booleano si tene alguna cuota vencida.
+	 * @return
+	 */
+	public boolean tengoAlgunaCuotaVencida(){
+		for(Cuota c : this.getCuotas()){
+			if(c.getEstadoCuota().equals(new Vencida())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
