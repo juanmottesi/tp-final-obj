@@ -2,6 +2,7 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
@@ -16,6 +17,7 @@ public abstract class EstadoPrestamo {
 	
 	public abstract void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException;
 	
+	public abstract void aEnDeuda(Prestamo p) throws EnDeudaException; 
 	
 	public boolean equals(EstadoPrestamo estadoPrestamo){
 		if(estadoPrestamo == null){

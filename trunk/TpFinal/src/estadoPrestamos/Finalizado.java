@@ -2,6 +2,7 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
@@ -13,14 +14,14 @@ public class Finalizado extends EstadoPrestamo {
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
 		
 		throw new DeudorIncobrableException
-		("Estado Finalizado:  El prestamo ya esta Finalizado");
+		("Estado Finalizado:  El préstamo ya esta Finalizado");
 	}
 
 	@Override
 	public void aprobar(Prestamo p) throws AprobadoException  {
 
 		throw new AprobadoException
-		("Estado Rechazado: el prestamo no esta");
+		("Estado Finalizado: el prestamo ya está finalizado");
 		
 	}
 
@@ -28,7 +29,7 @@ public class Finalizado extends EstadoPrestamo {
 	public void rechazar(Prestamo p) throws RechazadoException {
 
 		throw new RechazadoException
-		("Estado Rechazado: el prestamo no esta");
+		("Estado Finalizado: el prestamo ya está finalizado");
 		
 	}
 
@@ -36,6 +37,13 @@ public class Finalizado extends EstadoPrestamo {
 	public void finalizar(Prestamo p) throws FinalizadoException  {
 		
 		throw new FinalizadoException 
-			("Estado Rechazado: el prestamo no esta");
+			("Estado Finalizado: el prestamo ya está finalizado");
+	}
+	
+	@Override
+	public void aEnDeuda(Prestamo p) throws EnDeudaException {
+
+		throw  new EnDeudaException
+			("Estado Finalizado: Un prestamo finalizado no puede volver a En Deuda ");
 	}
 }
