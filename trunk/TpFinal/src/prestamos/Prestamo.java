@@ -101,17 +101,8 @@ public class Prestamo extends Observable {
 		this.setConfiguracionPrestamo(configuracionPrestamo);
 		this.setConfiguracionGeneral(configGeneral);
 		this.setEstado(new Solicitado());
-
-		try{
-			this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
-			this.calcularGastoYSeguro();
-		}
-		catch(InstallmentCountException exception){
-			System.out.println(exception.getMessage());
-		}
-		catch(InvalidAmountException exception){
-			System.out.println(exception.getMessage());
-		}
+		this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
+		this.calcularGastoYSeguro();
 	}
 	
 	public Prestamo() {
@@ -181,7 +172,6 @@ public class Prestamo extends Observable {
 	}
 
 	/**
-	 * 
 	 * @param fechaActual
 	 * @return la fecha en la cual se crea la primer cuota.
 	 */

@@ -52,13 +52,13 @@ public class TestPrestamo {
 	}
 
 	@Test (expected = InvalidAmountException.class)
-	public void testConstructorCompletoConExepcionesMontoCero() throws InstallmentCountException, InvalidAmountException {
+	public void testConstructorCompletoConExepcionesMontoCero() throws InstallmentCountException, InvalidAmountException{
 		when(mockedConfiguracionGeneral.consultarTem(12)).thenReturn(3*0.01);
 		prestamo = new Prestamo(mockedCliente,0,12,fechaDeCreacion,mockedConfiguracionPrestamo,mockedConfiguracionGeneral);
 	}
 
 	@Test (expected = InstallmentCountException.class)
-	public void testConstructorCompletoConExepcionesCeroCuotas() throws InstallmentCountException, InvalidAmountException {
+	public void testConstructorCompletoConExepcionesCeroCuotas() throws InstallmentCountException, InvalidAmountException{
 		when(mockedConfiguracionGeneral.consultarTem(12)).thenReturn(3*0.01);
 		prestamo = new Prestamo(mockedCliente,20000,0,fechaDeCreacion,mockedConfiguracionPrestamo,mockedConfiguracionGeneral);
 	}
