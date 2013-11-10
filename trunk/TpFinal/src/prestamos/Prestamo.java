@@ -101,6 +101,7 @@ public class Prestamo extends Observable {
 		this.setConfiguracionPrestamo(configuracionPrestamo);
 		this.setConfiguracionGeneral(configGeneral);
 		this.setEstado(new Solicitado());
+
 		try{
 			this.setCuotas(this.crearCuotas(montoTotal,cantCuotas,configuracionPrestamo, configGeneral,fechaDeCreacion));
 			this.calcularGastoYSeguro();
@@ -131,6 +132,7 @@ public class Prestamo extends Observable {
 			Cuota c = new Cuota();
 			cuotas.add(c);			
 		}
+		this.setCuotas(cuotas);
 	}
 
 	

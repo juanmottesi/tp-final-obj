@@ -43,13 +43,11 @@ public class TestCalculoValorCuota {
 	@Test (expected = InvalidAmountException.class)
 	public void testCalcularCuotaCasoConMontoTotalIncorrecto() throws InstallmentCountException, InvalidAmountException{
 		CalculoValorCuota.calcularCuota(0, temCorrespondiente, cantCuotas);	
-		AdvanceModeInstallment.calculateInstallmentValue(0, temCorrespondiente , cantCuotas);
 	}
 	
 	@Test (expected = InstallmentCountException.class)
 	public void testCalcularCuotaCasoConCantCuotasIncorrecto() throws InstallmentCountException, InvalidAmountException{
 		CalculoValorCuota.calcularCuota(montoTotal, temCorrespondiente, 0);	
-		AdvanceModeInstallment.calculateInstallmentValue(montoTotal, temCorrespondiente , 0);
 	}
 	
 }
