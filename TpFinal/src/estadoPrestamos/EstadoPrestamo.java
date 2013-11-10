@@ -19,19 +19,18 @@ public abstract class EstadoPrestamo {
 	
 	public abstract void aEnDeuda(Prestamo p) throws EnDeudaException; 
 	
-	public boolean equals(EstadoPrestamo estadoPrestamo){
-		if(estadoPrestamo == null){
-			return false;
-		}
-		if(this == estadoPrestamo){
-			return true;
-		}	
-		if(this.getClass() != estadoPrestamo.getClass()){
-			return false;
-		}
-		
-		return true;
-	}
+
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+       return true;
+	}	
+	
 }
 	
 	

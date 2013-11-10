@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Vector;
 
 import otros.*;
+import estadoCuotas.APagar;
 import estadoCuotas.Vencida;
 import estadoPrestamos.*;
 import exceptions.EstadoCuotaException;
@@ -106,7 +107,7 @@ public class Prestamo extends Observable {
 	}
 	
 	public Prestamo() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**
@@ -210,8 +211,8 @@ public class Prestamo extends Observable {
 		}		
 	}
 	
-	public void actualizarGastos(double gastos){
-	this.setMontoTotal(gastos);
+	public void actualizarGastos(double montoMasgastos){
+	this.setMontoTotal(montoMasgastos);
 }
 	
 	//Metodos de consulta
@@ -280,18 +281,16 @@ public class Prestamo extends Observable {
 				System.out.println(e.getMessage());
 			}
 		}
+		this.verificarEstado();
 	}
 	
-	public boolean estanTodasLasCuotasPagas(){
-		
-		boolean estanTodasPagas= true;
-		
+	public boolean estanTodasLasCuotasPagas(){		
 		for(Cuota c: this.getCuotas()){
-			if(c.getEstadoCuota().equals(new Vencida())){
+			if(c.getEstadoCuota().equals(new Vencida()) || c.getEstadoCuota().equals(new APagar())){
 				return false;
 			}
 		}	
-		return estanTodasPagas;	
+		return true;	
 	}
 	
 	public void finalizarPrestamo(){
