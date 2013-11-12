@@ -37,7 +37,7 @@ public class Solicitado extends EstadoPrestamo {
 	public void aEnDeuda(Prestamo p) throws EnDeudaException {
 
 		throw  new EnDeudaException
-			("Estado olicitado: Un prestamo Solicitadono no puede comenzar o  ser rechazado  En Deuda ");
+			("Estado solicitado: Un prestamo Solicitado no puede comenzar o  ser rechazado  En Deuda ");
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class Solicitado extends EstadoPrestamo {
 	@Override
 	public void aEnCurso(Prestamo p) throws EnCursoException {
 		throw  new EnCursoException
-		("Estado Solicitado: Un prestamo Soicitado no se puede poner todabia en Cuerso ");
+		("Estado Solicitado: Un prestamo Soicitado no se puede poner todavia en Curso ");
 		
 	}
 }

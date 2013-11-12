@@ -19,7 +19,7 @@ public class EnDeuda extends EstadoPrestamo {
 	public void aprobar(Prestamo p) throws AprobadoException {
 
 		throw new AprobadoException
-		("Estado En Deuda: no se lo puede volcer a Aprobar ");
+		("Estado En Deuda: no se lo puede volver a Aprobar ");
 		
 	}
 
