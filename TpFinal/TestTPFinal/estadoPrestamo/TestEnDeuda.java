@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import prestamos.Prestamo;
+import estadoPrestamos.DeudorIncobrable;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.EnDeuda;
 import estadoPrestamos.EstadoPrestamo;
@@ -68,7 +69,7 @@ public class TestEnDeuda {
 	public void testADeudorIncobrable(){
 		
 		enDeuda.aDeudorIncobrable(mockedPrestamo);
-		verify(mockedPrestamo).setEstado(any(EnDeuda.class));
+		verify(mockedPrestamo).setEstado(any(DeudorIncobrable.class));
 		//VER ESTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 	
