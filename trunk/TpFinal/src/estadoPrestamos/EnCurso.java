@@ -2,6 +2,7 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
@@ -40,6 +41,20 @@ public class EnCurso extends EstadoPrestamo {
 	public void aEnDeuda(Prestamo p) throws EnDeudaException {
 
 		p.setEstado(new EnDeuda());
+	}
+
+	@Override
+	public boolean puedoPagar(Prestamo p) {
+		
+		return true;
+	}
+
+	@Override
+	public void aEnCurso(Prestamo p) throws EnCursoException {
+		
+		throw new EnCursoException
+				("Estado en Curso: Ya esta en curso");
+		
 	}
 
 }

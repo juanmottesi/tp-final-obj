@@ -2,12 +2,13 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
 
-public class Finalizado extends EstadoPrestamo {
+public  class Finalizado extends EstadoPrestamo {
 	
 
 	@Override
@@ -45,5 +46,19 @@ public class Finalizado extends EstadoPrestamo {
 
 		throw  new EnDeudaException
 			("Estado Finalizado: Un prestamo finalizado no puede volver a En Deuda ");
+	}
+
+	@Override
+	public boolean puedoPagar(Prestamo p) {
+		
+		return false;
+	}
+
+	@Override
+	public void aEnCurso(Prestamo p) throws EnCursoException {
+		
+		throw  new EnCursoException
+		("Estado Finalizado: Un prestamo finalizado ya no puede estar en Curso ");
+
 	}
 }

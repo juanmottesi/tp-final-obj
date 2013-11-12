@@ -2,6 +2,7 @@ package estadoPrestamos;
 
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
@@ -19,6 +20,9 @@ public abstract class EstadoPrestamo {
 	
 	public abstract void aEnDeuda(Prestamo p) throws EnDeudaException; 
 	
+	public abstract boolean puedoPagar(Prestamo p);
+	
+	public abstract void aEnCurso(Prestamo p) throws EnCursoException;
 
 	@Override
     public boolean equals(Object obj) {
