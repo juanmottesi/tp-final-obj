@@ -69,6 +69,7 @@ public class TestEnDeuda {
 		
 		enDeuda.aDeudorIncobrable(mockedPrestamo);
 		verify(mockedPrestamo).setEstado(any(EnDeuda.class));
+		//VER ESTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 	
 	@Test (expected = EnDeudaException.class)

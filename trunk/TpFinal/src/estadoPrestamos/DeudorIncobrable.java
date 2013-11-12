@@ -42,8 +42,9 @@ public class DeudorIncobrable extends EstadoPrestamo {
 	@Override
 	public void aEnDeuda(Prestamo p) throws EnDeudaException {
 
-		throw  new EnDeudaException
-			("Estado Deudor Incobrable: Ya a pasado del estafo En Deuda ");
+		throw  new EnDeudaException  
+			("Estado Deudor Incobrable: Ya a pasado del estado En Deuda "
+					+ "alestado Deudor incobrable");
 		
 	}
 
