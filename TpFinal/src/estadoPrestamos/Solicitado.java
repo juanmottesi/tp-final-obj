@@ -1,6 +1,7 @@
 package estadoPrestamos;
 
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import prestamos.Prestamo;
@@ -37,5 +38,18 @@ public class Solicitado extends EstadoPrestamo {
 
 		throw  new EnDeudaException
 			("Estado olicitado: Un prestamo Solicitadono no puede comenzar o  ser rechazado  En Deuda ");
+	}
+
+	@Override
+	public boolean puedoPagar(Prestamo p) {
+		
+		return false;
+	}
+
+	@Override
+	public void aEnCurso(Prestamo p) throws EnCursoException {
+		throw  new EnCursoException
+		("Estado Solicitado: Un prestamo Soicitado no se puede poner todabia en Cuerso ");
+		
 	}
 }

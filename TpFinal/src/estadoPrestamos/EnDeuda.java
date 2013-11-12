@@ -1,6 +1,7 @@
 package estadoPrestamos;
 
 import exceptions.AprobadoException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
@@ -43,5 +44,18 @@ public class EnDeuda extends EstadoPrestamo {
 
 		throw  new EnDeudaException
 			("Estado En Deuda: Ya a está En Deuda ");
+	}
+
+	@Override
+	public boolean puedoPagar(Prestamo p) {
+		
+		return true;
+	}
+
+	@Override
+	public void aEnCurso(Prestamo p) throws EnCursoException{
+		
+		p.setEstado(new EnCurso());
+		
 	}
 }
