@@ -18,6 +18,7 @@ import static org.mockito.Mock.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
 public class TestDeudorIncobrable {
 	
 	private DeudorIncobrable enDeudorIncobrable;
