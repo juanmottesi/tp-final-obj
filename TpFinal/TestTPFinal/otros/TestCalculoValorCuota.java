@@ -34,10 +34,12 @@ public class TestCalculoValorCuota {
 	@SuppressWarnings("static-access")
 	@Test
 	public void testCalcularCuotaCasoCorrecto() throws InstallmentCountException, InvalidAmountException{
-		AdvanceModeInstallment mockedAdvanceModeInstallment = mock(AdvanceModeInstallment.class);
-		calculoValorCuota.calcularCuota(montoTotal, temCorrespondiente, cantCuotas);
-		verify(mockedAdvanceModeInstallment).calculateInstallmentValue(montoTotal, temCorrespondiente , cantCuotas);
 		
+		assertEquals("Chequea que los dos montos den lo mismo",AdvanceModeInstallment.calculateInstallmentValue(montoTotal, temCorrespondiente, cantCuotas),calculoValorCuota.calcularCuota(montoTotal, temCorrespondiente, cantCuotas),0);
+		//retorna un numero que es 2009.2417094592588
+		
+		//verify(mockedAdvanceModeInstallment).calculateInstallmentValue(montoTotal, temCorrespondiente , cantCuotas);
+	
 	}
 	
 	@Test (expected = InvalidAmountException.class)

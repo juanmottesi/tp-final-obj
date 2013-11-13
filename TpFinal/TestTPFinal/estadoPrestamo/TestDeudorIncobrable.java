@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import prestamos.Prestamo;
 import estadoPrestamos.DeudorIncobrable;
+import estadoPrestamos.EnCurso;
 import estadoPrestamos.EstadoPrestamo;
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
@@ -15,9 +16,10 @@ import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
-import static org.mockito.Mock.*;
+//import static org.mockito.Mock.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 
 public class TestDeudorIncobrable {
@@ -80,11 +82,10 @@ public class TestDeudorIncobrable {
 		assertSame(enDeudorIncobrable, mockedPrestamo.getEstado());
 	}
 
-	@Test 
+	@Test (expected = EnCursoException.class)
 	public void testAEnCurso() throws EnCursoException{
-		
-		enDeudorIncobrable.aEnCurso(mockedPrestamo);
-		verify(mockedPrestamo).setEstado(any(EnCurso.class));
+		when(mockedPrestamo.getEstado()).thenReturn(enDeudorIncobrable);
+		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
 		
 	}
 

@@ -12,7 +12,11 @@ import otros.*;
 import estadoCuotas.APagar;
 import estadoCuotas.Vencida;
 import estadoPrestamos.*;
+import exceptions.AprobadoException;
+import exceptions.EnCursoException;
+import exceptions.EnDeudaException;
 import exceptions.EstadoCuotaException;
+import exceptions.FinalizadoException;
 
 public class Prestamo extends Observable {
 
@@ -261,12 +265,28 @@ public class Prestamo extends Observable {
 	
 	private void verificarEstado(){
 		if(this.estanTodasLasCuotasPagas()){
-			this.getEstado().finalizar(this);
+			try {
+				this.getEstado().finalizar(this);
+			} catch (FinalizadoException e) {
+				System.out.println(e.getMessage());
+			}
 		}
-		if(this.tengoAlgunaCuotaVencida()){
-			this.getEstado().aEnDeuda(this);
+		else{
+			if(this.tengoAlgunaCuotaVencida()){
+				try {
+					this.getEstado().aEnDeuda(this);
+				} catch (EnDeudaException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			else{
+				try {
+					this.getEstado().aEnCurso(this);
+				} catch (EnCursoException e) {
+					System.out.println(e.getMessage());
+				}
+			}
 		}
-		this.getEstado().aEnCurso();
 	}
 	
 	/**
@@ -294,10 +314,12 @@ public class Prestamo extends Observable {
 	}
 	
 	public void finalizarPrestamo(){
-		
 		if(this.estanTodasLasCuotasPagas()){
-			
-			this.setEstado(new Finalizado());
+			try {
+				this.getEstado().finalizar(this);
+			} catch (FinalizadoException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 	
@@ -318,12 +340,13 @@ public class Prestamo extends Observable {
 						System.out.println(e.getMessage());
 					}
 					finally{
+						this.verificarEstado();
 						break;
 					}
 				}
 			}
 		}
-		this.verificarEstado();
+	
 	}
 	/**
 	 * verifica el estado si es necesario despues de realizar un pago
@@ -336,6 +359,10 @@ public class Prestamo extends Observable {
 	
 	public List<Cuota> cuadroDeMarcha(){
 		return this.getCuotas();
+	}
+	
+	public void aceptarPrestamo() throws AprobadoException{
+		this.getEstado().aprobar(this);
 	}
 	
 //	public double calcularSaldoDeuda(Integer nroCuota){

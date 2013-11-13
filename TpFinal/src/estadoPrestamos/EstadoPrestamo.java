@@ -20,7 +20,7 @@ public abstract class EstadoPrestamo {
 	
 	public abstract void aEnDeuda(Prestamo p) throws EnDeudaException; 
 	
-	public abstract boolean puedoPagar(Prestamo p);
+	public abstract boolean puedoPagar();
 	
 	public abstract void aEnCurso(Prestamo p) throws EnCursoException;
 
