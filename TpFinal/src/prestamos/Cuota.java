@@ -1,19 +1,26 @@
 package prestamos;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import estadoCuotas.APagar;
 import estadoCuotas.EstadoCuota;
 import exceptions.EstadoCuotaException;
 
 
+/**
+  *  
+  * 
+  * @author juan
+  *
+  */
+
 public class Cuota {
 	
-	private Date fechaVencimiento; 
+	private GregorianCalendar fechaVencimiento; 
 	private double montoCuota;
 	private Integer nroCuota; 
 	private double interesPorMora; 
-	private Date fechaDePago;
+	private GregorianCalendar fechaDePago;
 	private double amortizacion;
 	private double interes;
 	private double gastoTotal;
@@ -35,10 +42,10 @@ public class Cuota {
 	public void setSeguro(double seguro) {
 		this.seguro = seguro;
 	}
-	public Date getFechaVencimiento() {
+	public GregorianCalendar getFechaVencimiento() {
 		return fechaVencimiento;
 	}
-	public void setFechaVencimiento(Date fechaVencimiento) {
+	public void setFechaVencimiento(GregorianCalendar fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 	public double getMontoCuota() {
@@ -59,10 +66,10 @@ public class Cuota {
 	public void setInteresPorMora(double interesPorMora) {
 		this.interesPorMora = interesPorMora;
 	}
-	public Date getFechaDePago() {
+	public GregorianCalendar getFechaDePago() {
 		return fechaDePago;
 	}
-	public void setFechaDePago(Date fechaDePago) {
+	public void setFechaDePago(GregorianCalendar fechaDePago) {
 		this.fechaDePago = fechaDePago;
 	}
 	public double getAmortizacion() {
@@ -112,7 +119,7 @@ public class Cuota {
 	 * @param interes
 	 * @param saldoDeuda
 	 */
-	public Cuota(Date fechaVencimiento, double monto, Integer nroCuota, double amortizacion, double interes,double saldoDeuda){
+	public Cuota(GregorianCalendar fechaVencimiento, double monto, Integer nroCuota, double amortizacion, double interes,double saldoDeuda){
 		this.setAmortizacion(amortizacion);
 		this.setFechaVencimiento(fechaVencimiento);
 		this.setInteres(interes);
@@ -139,7 +146,7 @@ public class Cuota {
 	 * Pagar recibe la fecha en la que se efectua el pago
 	 * @throws EstadoCuotaException 
 	 */
-	public void pagar(Date fechaPago) throws EstadoCuotaException{
+	public void pagar(GregorianCalendar fechaPago) throws EstadoCuotaException{
 		this.getEstadoCuota().pagar(this);
 		this.setFechaDePago(fechaPago);
 	}
@@ -164,7 +171,7 @@ public class Cuota {
 	 * @throws EstadoCuotaException 
 	 * 
 	 */
-	public void verificarFecha(Date fechaActual) throws EstadoCuotaException{
+	public void verificarFecha(GregorianCalendar fechaActual) throws EstadoCuotaException{
 		if(this.getFechaVencimiento().before(fechaActual)){
 			this.aVencido();
 		}

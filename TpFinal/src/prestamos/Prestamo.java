@@ -3,7 +3,9 @@ package prestamos;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 
-import java.util.Date;
+
+
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Observable;
 import java.util.Vector;
@@ -19,6 +21,14 @@ import exceptions.EstadoCuotaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 
+/**
+ * Al crear un prestamo genera automaticamente las cuotas necesarias segun lo pedido. Esto tambien genera 
+ * los gastos automaticamente
+ * 
+ * @author juan
+ *
+ */
+
 public class Prestamo extends Observable {
 
 	private EstadoPrestamo estado;
@@ -26,7 +36,7 @@ public class Prestamo extends Observable {
 	private Cliente cliente;
 	private double montoTotal;
 	private ConfiguracionPrestamo configuracionPrestamo;
-	private Date fechaDeCreacion;
+	private GregorianCalendar fechaDeCreacion;
 	private ConfiguracionGeneral configuracionGeneral;
 	
 	public EstadoPrestamo getEstado() {
@@ -65,11 +75,11 @@ public class Prestamo extends Observable {
 		return this.getCuotas().size();
 	}
 
-	public Date getFechaDeCreacion() {
+	public GregorianCalendar getFechaDeCreacion() {
 		return fechaDeCreacion;
 	}
 
-	public void setFechaDeCreacion(Date fechaDeCreacion) {
+	public void setFechaDeCreacion(GregorianCalendar fechaDeCreacion) {
 		this.fechaDeCreacion = fechaDeCreacion;
 	}
 	
@@ -100,7 +110,7 @@ public class Prestamo extends Observable {
 	 * @throws InstallmentCountException
 	 * @throws InvalidAmountException
 	 */
-	public Prestamo(Cliente cliente, double montoTotal, Integer cantCuotas, Date fechaDeCreacion, ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configGeneral) throws InstallmentCountException, InvalidAmountException{
+	public Prestamo(Cliente cliente, double montoTotal, Integer cantCuotas, GregorianCalendar fechaDeCreacion, ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configGeneral) throws InstallmentCountException, InvalidAmountException{
 		this.setCliente(cliente);
 		this.setMontoTotal(montoTotal);
 		this.setFechaDeCreacion(fechaDeCreacion);
@@ -147,11 +157,11 @@ public class Prestamo extends Observable {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
-	private List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, Date fechaActual) throws InstallmentCountException, InvalidAmountException{
+	
+	private List<Cuota> crearCuotas(double montoTotal,Integer cantCuotas,ConfiguracionPrestamo configuracionPrestamo, ConfiguracionGeneral configuracionGeneral, GregorianCalendar fechaActual) throws InstallmentCountException, InvalidAmountException{
 		List<Cuota> ret = new Vector<Cuota>();
 		
-		Date fechaVencimiento= this.calcularFecha(fechaActual);
+		GregorianCalendar fechaVencimiento= this.calcularFecha(fechaActual);
 	
 		double monto = montoTotal;
 		
@@ -159,7 +169,7 @@ public class Prestamo extends Observable {
 		
 		for(int i = 0 ; i < cantCuotas; i++){
 			
-			fechaVencimiento = new Date(fechaActual.getYear(),fechaActual.getMonth()+i, 10);
+			fechaVencimiento = new GregorianCalendar(fechaActual.get(1),fechaActual.get(2)+i, 10);
 			
 			double interes = this.calcularInteres(monto, this.getConfiguracionGeneral().consultarTem(cantCuotas));
 			
@@ -181,12 +191,12 @@ public class Prestamo extends Observable {
 	 * @param fechaActual
 	 * @return la fecha en la cual se crea la primer cuota.
 	 */
-	@SuppressWarnings("deprecation")
-	private Date calcularFecha(Date fechaActual){
-		Date nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+2, 10);
+	
+	private GregorianCalendar calcularFecha(GregorianCalendar fechaActual){
+		GregorianCalendar nuevaFecha = new GregorianCalendar(fechaActual.get(1),fechaActual.get(2)+2, 10);
 		
-		if(fechaActual.before(new Date(fechaActual.getYear(),fechaActual.getMonth(), 15))){
-			nuevaFecha = new Date(fechaActual.getYear(),fechaActual.getMonth()+1, 10);
+		if(fechaActual.before(new GregorianCalendar(fechaActual.get(1),fechaActual.get(2), 15))){
+			nuevaFecha = new GregorianCalendar(fechaActual.get(1),fechaActual.get(2)+1, 10);
 		}
 		return nuevaFecha;
 	}
@@ -243,7 +253,7 @@ public class Prestamo extends Observable {
 		return this.getConfiguracionGeneral().consultarTem(this.cantidadDeCuotas());
 	}
 	
-	public Integer obtenerDniCliente(){
+	public String obtenerDniCliente(){
 		return this.getCliente().getDni();
 	}
 	
@@ -294,7 +304,7 @@ public class Prestamo extends Observable {
 	 * @param fechaActual 
 	 * chequea todas sus cuotas si estas se encuentran vencidas.
 	 */
-	public void verificarFechaDeCuotas(Date fechaActual){
+	public void verificarFechaDeCuotas(GregorianCalendar fechaActual){
 		for(Cuota c : this.getCuotas()){
 			try {
 				c.verificarFecha(fechaActual);
@@ -331,7 +341,7 @@ public class Prestamo extends Observable {
 	 * cualquier estado.
 	 */
 	@SuppressWarnings("finally")
-	public void pagarCuota(Date fechaDelPago){
+	public void pagarCuota(GregorianCalendar fechaDelPago){
 		if(this.getEstado().puedoPagar()){
 			for(Cuota c : this.getCuotas()){
 				if(!c.estaPaga()){
@@ -349,11 +359,11 @@ public class Prestamo extends Observable {
 		}
 	
 	}
+	
+	
 	/**
 	 * verifica el estado si es necesario despues de realizar un pago
 	 */
-
-
 	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
 	}
@@ -369,9 +379,5 @@ public class Prestamo extends Observable {
 	public void rechazarPrestamo() throws RechazadoException{
 		this.getEstado().rechazar(this);
 	}
-//	public double calcularSaldoDeuda(Integer nroCuota){
-//	return this.getCuotas().get(nroCuota).getSaldoDeuda();	
-//}
-
 
 }

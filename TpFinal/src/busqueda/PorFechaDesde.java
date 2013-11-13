@@ -1,25 +1,26 @@
 package busqueda;
 
-import java.util.Date;
 
 
+
+import java.util.GregorianCalendar;
 
 import prestamos.Prestamo;
 
 public class PorFechaDesde extends Condicion {
 	
-	private Date desde;
+	private GregorianCalendar desde;
 	
-	private Date getDesde() {
+	private GregorianCalendar getDesde() {
 		return desde;
 	}
 	
-	private void setDesde(Date desde) {
+	private void setDesde(GregorianCalendar desde) {
 		this.desde = desde;
 	}
 
 
-	public PorFechaDesde(Date desde){
+	public PorFechaDesde(GregorianCalendar desde){
 		
 		this.setDesde(desde);
 		
