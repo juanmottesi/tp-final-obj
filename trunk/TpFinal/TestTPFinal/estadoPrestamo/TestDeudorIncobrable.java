@@ -80,11 +80,11 @@ public class TestDeudorIncobrable {
 		assertSame(enDeudorIncobrable, mockedPrestamo.getEstado());
 	}
 
-	@Test (expected = EnCursoException.class)
+	@Test 
 	public void testAEnCurso() throws EnCursoException{
 		
 		enDeudorIncobrable.aEnCurso(mockedPrestamo);
-		verify(mockedPrestamo).setEstado(any(DeudorIncobrable.class));
+		verify(mockedPrestamo).setEstado(any(EnCurso.class));
 		
 	}
 

@@ -14,6 +14,7 @@ import estadoPrestamos.EstadoPrestamo;
 import estadoPrestamos.Finalizado;
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
@@ -69,5 +70,12 @@ public class TestEnCurso {
 		enCurso.aEnDeuda(mockedPrestamo);
 		
 		verify(mockedPrestamo).setEstado(any(EnDeuda.class));
+	}
+	
+	@Test(expected= EnCursoException.class)
+	public void testAEnCurso() throws EnCursoException {
+		
+		when(mockedPrestamo.getEstado()).thenReturn(enCurso);
+		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
 	}
 }
