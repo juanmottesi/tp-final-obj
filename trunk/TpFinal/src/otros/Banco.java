@@ -1,10 +1,17 @@
 package otros;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import estadoPrestamos.EnDeuda;
+import estadoPrestamos.Solicitado;
+import exceptions.AprobadoException;
+import exceptions.RechazadoException;
 import busqueda.BusquedaDePrestamo;
+import busqueda.Condicion;
+import busqueda.PorEstado;
 import prestamos.Prestamo;
 
 public class Banco {
@@ -36,7 +43,8 @@ public void setClientes(List<Cliente> clientes) {
 	}
 
 	public void setConfigGeneral(List<ConfiguracionGeneral> configGeneral) {
-		this.configGeneral = configGeneral;
+		this.configGene
+		ral = configGeneral;
 	}
 
 	public BusquedaDePrestamo getBusqueda() {
@@ -51,6 +59,27 @@ public void setClientes(List<Cliente> clientes) {
 		prestamo.pagarCuota(fechaDelPago);
 	}
 		
-
+	public void aceptarPrestamo(Prestamo p){
+		try {
+			p.aceptarPrestamo();
+		} catch (AprobadoException e) {
+			e.getMessage();
+		}
+	}
 	
+	public void rechazarPrestamo(Prestamo p){
+		try {
+			p.rechazarPrestamo();
+		} catch (RechazadoException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+	}
+	
+	public List<Prestamo> filtradosPorCondiciones(Condicion condicion){
+		
+		this.setBusqueda(new BusquedaDePrestamo(condicion));
+		
+		return this.getBusqueda().buscar(this.getPrestamos());
+	}
 }
