@@ -34,61 +34,36 @@ public class TestRechazado {
 	@Test (expected = AprobadoException.class)
 	public void testAprobar() throws AprobadoException{
 			
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().aprobar(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+		enRechazado.aprobar(mockedPrestamo);
 	}
 	
 	@Test (expected = RechazadoException.class)
 	public void testRechazar() throws RechazadoException{
-			
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().rechazar(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+				
+		enRechazado.rechazar(mockedPrestamo);
 	}
 	
 	@Test (expected = FinalizadoException.class)
 	public void testFinalizar() throws FinalizadoException{
 			
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+		enRechazado.finalizar(mockedPrestamo);
 	}
 	
 	@Test (expected = DeudorIncobrableException.class)
 	public void testADeudorIncobrable() throws DeudorIncobrableException{
-			
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().aDeudorIncobrable(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+					
+		enRechazado.aDeudorIncobrable(mockedPrestamo);
 	}
 	
 	@Test (expected = EnDeudaException.class)
 	public void testAEnDeuda() throws EnDeudaException{
-		
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().aEnDeuda(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+			
+		enRechazado.aEnDeuda(mockedPrestamo);
 	}
 	
 	@Test (expected = EnCursoException.class)
 	public void testAEnCurso() throws EnCursoException{
-		
-		when(mockedPrestamo.getEstado()).thenReturn(enRechazado);
-		
-		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
-		
-		assertSame(enRechazado, mockedPrestamo.getEstado());
+				
+		enRechazado.aEnCurso(mockedPrestamo);
 	}
-
 }

@@ -38,32 +38,20 @@ public class TestEnDeuda {
 	
 	@Test (expected = AprobadoException.class)
 	public void testAprobar() throws AprobadoException{
-			
-		when(mockedPrestamo.getEstado()).thenReturn(enDeuda);
-		
-		mockedPrestamo.getEstado().aprobar(mockedPrestamo);
-		
-		assertSame(enDeuda, mockedPrestamo.getEstado());
+					
+		enDeuda.aprobar(mockedPrestamo);
 	}
 	
 	@Test (expected = RechazadoException.class)
 	public void testRechazar() throws RechazadoException{
-			
-		when(mockedPrestamo.getEstado()).thenReturn(enDeuda);
-		
-		mockedPrestamo.getEstado().rechazar(mockedPrestamo);
-		
-		assertSame(enDeuda, mockedPrestamo.getEstado());
+					
+		enDeuda.rechazar(mockedPrestamo);
 	}
 	
 	@Test (expected = FinalizadoException.class)
 	public void testFinalizar() throws FinalizadoException{
-			
-		when(mockedPrestamo.getEstado()).thenReturn(enDeuda);
-		
-		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
-		
-		assertSame(enDeuda, mockedPrestamo.getEstado());
+				
+		enDeuda.finalizar(mockedPrestamo);
 	}
 	
 	@Test 
@@ -75,12 +63,8 @@ public class TestEnDeuda {
 	
 	@Test (expected = EnDeudaException.class)
 	public void testAEnDeuda() throws EnDeudaException{
-		
-		when(mockedPrestamo.getEstado()).thenReturn(enDeuda);
-		
-		mockedPrestamo.getEstado().aEnDeuda(mockedPrestamo);
-		
-		assertSame(enDeuda, mockedPrestamo.getEstado());
+				
+		enDeuda.aEnDeuda(mockedPrestamo);
 	}
 	
 	@Test 
@@ -88,6 +72,5 @@ public class TestEnDeuda {
 		
 		enDeuda.aEnCurso(mockedPrestamo);
 		verify(mockedPrestamo).setEstado(any(EnCurso.class));
-		
 	}
 }

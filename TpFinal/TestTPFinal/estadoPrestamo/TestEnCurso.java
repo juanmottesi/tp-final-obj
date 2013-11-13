@@ -31,29 +31,21 @@ public class TestEnCurso {
 	
 	@Test(expected= DeudorIncobrableException.class)
 	public void testADeudorIncobrable() throws DeudorIncobrableException {
-	
-	when(mockedPrestamo.getEstado()).thenReturn(enCurso);
-	
-	mockedPrestamo.getEstado().aDeudorIncobrable(mockedPrestamo);
-	
-	assertSame(enCurso, mockedPrestamo.getEstado());
+		
+	enCurso.aDeudorIncobrable(mockedPrestamo);
 	}
 
 
 	@Test(expected= AprobadoException.class)
 	public void testAprobar() throws AprobadoException {
 		
-		when(mockedPrestamo.getEstado()).thenReturn(enCurso);
-		mockedPrestamo.getEstado().aprobar(mockedPrestamo);
-		
-		assertSame(enCurso, mockedPrestamo.getEstado());
-	}  
+		enCurso.aprobar(mockedPrestamo);
+		}  
 	
 	@Test(expected= RechazadoException.class)
 	public void testRechazar() throws RechazadoException {
 		
-		when(mockedPrestamo.getEstado()).thenReturn(enCurso);
-		mockedPrestamo.getEstado().rechazar(mockedPrestamo);
+		enCurso.rechazar(mockedPrestamo);
 	}
 	
 	@Test
@@ -61,7 +53,6 @@ public class TestEnCurso {
 		
 		enCurso.finalizar(mockedPrestamo);
 		verify(mockedPrestamo).setEstado(any(Finalizado.class));
-			
 	}
 
 	@Test
@@ -75,7 +66,6 @@ public class TestEnCurso {
 	@Test(expected= EnCursoException.class)
 	public void testAEnCurso() throws EnCursoException {
 		
-		when(mockedPrestamo.getEstado()).thenReturn(enCurso);
-		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
+		enCurso.aEnCurso(mockedPrestamo);
 	}
 }
