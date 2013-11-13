@@ -17,6 +17,7 @@ import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.EstadoCuotaException;
 import exceptions.FinalizadoException;
+import exceptions.RechazadoException;
 
 public class Prestamo extends Observable {
 
@@ -365,6 +366,9 @@ public class Prestamo extends Observable {
 		this.getEstado().aprobar(this);
 	}
 	
+	public void rechazarPrestamo() throws RechazadoException{
+		this.getEstado().rechazar(this);
+	}
 //	public double calcularSaldoDeuda(Integer nroCuota){
 //	return this.getCuotas().get(nroCuota).getSaldoDeuda();	
 //}
