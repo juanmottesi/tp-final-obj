@@ -6,7 +6,9 @@ import gastos.Gasto;
 import gastos.GastoGlobal;
 import gastos.GastoMensual;
 
-import java.util.Date;
+
+
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -22,14 +24,14 @@ public class TestConfiguracionGeneral {
 	
 	private ConfiguracionGeneral configuracionGeneral;
 	private ConfiguracionGeneral configuracionGeneral2;
-	private Date fechaInicio;
+	private GregorianCalendar fechaInicio;
 	@Mock
 	private Gasto mockedGasto1;
 	private Gasto mockedGasto2;
 	
 	@Before
 	public void setUp(){
-		fechaInicio = new Date();
+		fechaInicio = new GregorianCalendar();
 		List<Gasto> gastos = new Vector<Gasto>();
 		mockedGasto1 = mock(GastoGlobal.class);
 		mockedGasto2 = mock(GastoMensual.class);
@@ -95,9 +97,8 @@ public class TestConfiguracionGeneral {
 	
 	@Test
 	public void TestFinConfiguracionGeneral(){
-		Date hoy = new Date();
-		@SuppressWarnings("deprecation")
-		Date fechaFin = new Date(hoy.getYear(),hoy.getMonth()+1,hoy.getDay()); 
+		GregorianCalendar hoy = new GregorianCalendar();
+		GregorianCalendar fechaFin = new GregorianCalendar(hoy.get(1),hoy.get(2)+1,hoy.get(5)); 
 		
 		configuracionGeneral.finConfiguracionGeneral(fechaFin);
 		assertEquals("Se fija si la fecha corresponde",fechaFin, configuracionGeneral.getFechaFin());

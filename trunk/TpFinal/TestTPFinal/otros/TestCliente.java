@@ -19,7 +19,7 @@ public class TestCliente {
 
 	@Before
 	public void setUp() throws Exception {
-		cliente = new Cliente("apellido","nombre","direccion",36778000);
+		cliente = new Cliente("apellido","nombre","direccion","36778000");
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class TestCliente {
 		assertEquals("apellido", cliente.getApellido());
 		assertEquals("nombre", cliente.getNombre());
 		assertEquals("direccion", cliente.getDireccion());
-		assertEquals((Integer)36778000, cliente.getDni());
+		assertEquals("36778000", cliente.getDni());
 	}
 	
 	@Test

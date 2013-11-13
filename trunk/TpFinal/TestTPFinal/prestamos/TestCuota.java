@@ -1,7 +1,7 @@
 package prestamos;
 import static org.junit.Assert.*;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import prestamos.Cuota;
 public class TestCuota {
 	
 	private Cuota cuota;
-	private Date fechaVencimiento = new Date();
+	private GregorianCalendar fechaVencimiento = new GregorianCalendar();
 	private Integer nroCuota = 1;
 	private double montoCuota = 1833.60;
 	private double amortizacion = 1533.60;
@@ -63,22 +63,24 @@ public class TestCuota {
 	@Test 
 	public void testPagarConCuotaVencida() throws EstadoCuotaException{
 		cuota.aVencido();
-		cuota.pagar(new Date());
-		assertEquals("Chequea que fecha de pago sea seteada", new Date(), cuota.getFechaDePago());
+		GregorianCalendar fecha = new GregorianCalendar();
+		cuota.pagar(fecha);
+		assertEquals("Chequea que fecha de pago sea seteada", fecha, cuota.getFechaDePago());
 		assertEquals("Chequea que se cambie el estado", new Pagada(), cuota.getEstadoCuota());
 	}
 
 	@Test 
 	public void testPagarConCuotaAPagar() throws EstadoCuotaException{
-		cuota.pagar(new Date());
-		assertEquals("Chequea que fecha de pago sea seteada", new Date(), cuota.getFechaDePago());
+		GregorianCalendar fecha = new GregorianCalendar();
+		cuota.pagar(fecha);
+		assertEquals("Chequea que fecha de pago sea seteada", fecha, cuota.getFechaDePago());
 		assertEquals("Chequea que se cambie el estado", new Pagada(), cuota.getEstadoCuota());
 	}
 	
 	@Test (expected = PagadaException.class)
 	public void testPagarConCuotaPagada() throws EstadoCuotaException{
 		cuota.setEstadoCuota(new Pagada());
-		cuota.pagar(new Date());
+		cuota.pagar(new GregorianCalendar());
 	}
 	
 

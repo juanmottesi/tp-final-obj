@@ -5,7 +5,9 @@ import static org.mockito.Mockito.*;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 
-import java.util.Date;
+
+
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -19,7 +21,6 @@ import estadoCuotas.Vencida;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.Finalizado;
 import exceptions.AprobadoException;
-import exceptions.EnCursoException;
 import exceptions.EstadoCuotaException;
 import otros.Cliente;
 import otros.ConfiguracionGeneral;
@@ -27,7 +28,7 @@ import otros.ConfiguracionGeneral;
 public class TestPrestamo {
 	
 	private Prestamo prestamo;
-	private Date fechaDeCreacion = new Date();
+	private GregorianCalendar fechaDeCreacion = new GregorianCalendar();
 
 	@Mock
 	private ConfiguracionPrestamo mockedConfiguracionPrestamo = mock(ConfiguracionPrestamo.class);
@@ -86,7 +87,7 @@ public class TestPrestamo {
 	
 	@Test 
 	public void testObtenerDniCliente(){
-		when(mockedCliente.getDni()).thenReturn(36778000);
+		when(mockedCliente.getDni()).thenReturn("36778000");
 		assertEquals((Integer)36778000, prestamo.obtenerDniCliente());
 	}
 	
@@ -137,7 +138,7 @@ public class TestPrestamo {
 		when(mockedCuota.getEstadoCuota()).thenReturn(new APagar());
 		prestamo.aceptarPrestamo();
 		prestamo.setCuotas(cuotas);
-		prestamo.pagarCuota(new Date());
+		prestamo.pagarCuota(new GregorianCalendar());
 		// modifica la cuota y la pasa a pagada pero al ser mock sigue valiendo lo que esta en el when
 		when(mockedCuota.getEstadoCuota()).thenReturn(new Pagada());
 		prestamo.finalizarPrestamo();
@@ -177,7 +178,7 @@ public class TestPrestamo {
 	
 	@Test
 	public void testVerificarFechaCuotas() throws EstadoCuotaException{
-		Date fechaHoy = new Date();
+		GregorianCalendar fechaHoy = new GregorianCalendar();
 		List<Cuota>cuotas = new Vector<Cuota>();
 		Cuota mockedCuota = mock(Cuota.class);
 		cuotas.add(mockedCuota);
@@ -196,7 +197,7 @@ public class TestPrestamo {
 	@Test
 	public void testPagarCuota() throws AprobadoException{
 		prestamo.aceptarPrestamo();
-		prestamo.pagarCuota(new Date());
+		prestamo.pagarCuota(new GregorianCalendar());
 		assertEquals(new Pagada(), prestamo.getCuotas().get(0).getEstadoCuota());
 	}
 	
