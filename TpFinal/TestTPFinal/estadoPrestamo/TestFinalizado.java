@@ -9,6 +9,7 @@ import prestamos.Prestamo;
 import estadoPrestamos.Finalizado;
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
+import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
@@ -73,5 +74,16 @@ public class TestFinalizado {
 		
 		assertSame(enFinalizado, mockedPrestamo.getEstado());
 	}
+	
+	@Test (expected = EnCursoException.class)
+	public void testAEnCurso() throws EnCursoException{
+		
+		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
+		
+		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
+		
+		assertSame(enFinalizado, mockedPrestamo.getEstado());
+	}
+	
 
 }
