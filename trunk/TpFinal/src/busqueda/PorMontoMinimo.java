@@ -7,11 +7,11 @@ public class PorMontoMinimo extends Condicion {
 	
 	private double  minimo;
 	
-	public double getMinimo() {
+	private double getMinimo() {
 		return minimo;
 	}
 	
-	public void setMinimo(double minimo) {
+	private void setMinimo(double minimo) {
 		this.minimo = minimo;
 	}
 	

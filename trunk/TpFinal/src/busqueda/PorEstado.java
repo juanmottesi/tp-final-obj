@@ -12,7 +12,7 @@ public class PorEstado extends Condicion {
 		return estado;
 	}
 
-	public void setEstado(EstadoPrestamo estado) {
+	private void setEstado(EstadoPrestamo estado) {
 		this.estado = estado;
 	}
 	

@@ -7,11 +7,11 @@ public class PorMontoMaximo extends Condicion{
 	
 	private double maximo;
 
-	public double getMaximo() {
+	private double getMaximo() {
 		return maximo;
 	}
 
-	public void setMaximo(double maximo) {
+	private void setMaximo(double maximo) {
 		this.maximo = maximo;
 	}
 	

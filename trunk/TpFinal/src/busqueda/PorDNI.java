@@ -5,17 +5,17 @@ import prestamos.Prestamo;
 
 public class PorDNI extends Condicion {
 	
-	private Integer dni;
+	private String dni;
 
-	public Integer getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Integer dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	
-	public PorDNI(Integer dni){
+	public PorDNI(String dni){
 		
 		this.setDni(dni);
 		

@@ -14,7 +14,7 @@ public class BusquedaDePrestamo {
 		return condicion;
 	}
 
-	public void setCondicion(Condicion condicion) {
+	private void setCondicion(Condicion condicion) {
 		this.condicion = condicion;
 	}
 	
