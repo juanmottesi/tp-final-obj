@@ -33,51 +33,31 @@ public class TestFinalizado {
 	
 	@Test(expected= RechazadoException.class)
 	public void testRechazar() throws RechazadoException {
-	
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
-		
-		mockedPrestamo.getEstado().rechazar(mockedPrestamo);
-		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
+			
+		enFinalizado.rechazar(mockedPrestamo);
 	}
 	
 	@Test(expected= FinalizadoException.class)
 	public void testFinalizar() throws FinalizadoException {
-	
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
 		
-		mockedPrestamo.getEstado().finalizar(mockedPrestamo);
-		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
+		enFinalizado.finalizar(mockedPrestamo);
 	}
 	
 	@Test(expected= DeudorIncobrableException.class)
 	public void testADeudorIncobrable() throws DeudorIncobrableException {
 	
-		
-		enFinalizado.aDeudorIncobrable(mockedPrestamo);
-		
-	}
+			enFinalizado.aDeudorIncobrable(mockedPrestamo);
+		}
 	
 	@Test (expected = EnDeudaException.class)
 	public void testAEnDeuda() throws EnDeudaException{
-		
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
-		
-		mockedPrestamo.getEstado().aEnDeuda(mockedPrestamo);
-		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
+			
+		enFinalizado.aEnDeuda(mockedPrestamo);
 	}
 	
 	@Test (expected = EnCursoException.class)
 	public void testAEnCurso() throws EnCursoException{
-		
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
-		
-		mockedPrestamo.getEstado().aEnCurso(mockedPrestamo);
-		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
+				
+		enFinalizado.aEnCurso(mockedPrestamo);
 	}
-	
-
 }
