@@ -15,7 +15,7 @@ import prestamos.Prestamo;
 public class Cliente implements Observer {
 	
 	private String apellido;
-	private Integer dni;
+	private String dni;
 	private String direccion;
 	private String nombre;
 	private List<Prestamo> prestamos;
@@ -45,11 +45,11 @@ public class Cliente implements Observer {
 		this.apellido = apellido;
 	}
 	
-	public Integer getDni() {
+	public String getDni() {
 		return dni;
 	}
 	
-	public void setDni(Integer dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	
@@ -67,7 +67,7 @@ public class Cliente implements Observer {
 	 * @param direccion
 	 * @param documento
 	 */
-	public Cliente(String apellido, String nombre, String direccion, Integer documento){
+	public Cliente(String apellido, String nombre, String direccion, String documento){
 		this.setApellido(apellido);
 		this.setNombre(nombre);
 		this.setDireccion(direccion);

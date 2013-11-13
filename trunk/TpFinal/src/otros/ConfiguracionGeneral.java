@@ -1,7 +1,8 @@
 
 package otros;
 
-import java.util.Date;
+
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
@@ -12,24 +13,24 @@ import gastos.Gasto;
 
 public class ConfiguracionGeneral {
 
-	private Date fechaInicio;
-	private Date fechaFin;
+	private GregorianCalendar fechaInicio;
+	private GregorianCalendar fechaFin;
 	private SortedMap<Integer,Double> tem;
 	private List<Gasto> gastos;
 	
-	public Date getFechaInicio() {
+	public GregorianCalendar getFechaInicio() {
 		return fechaInicio;
 	}
 	
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(GregorianCalendar fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 	
-	public Date getFechaFin() {
+	public GregorianCalendar getFechaFin() {
 		return fechaFin;
 	}
 	
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(GregorianCalendar fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	
@@ -54,7 +55,7 @@ public class ConfiguracionGeneral {
 	 * @param tem
 	 * @param gastos
 	 */
-	public ConfiguracionGeneral(Date fechaInicio, SortedMap<Integer,Double>tem, List<Gasto>gastos){
+	public ConfiguracionGeneral(GregorianCalendar fechaInicio, SortedMap<Integer,Double>tem, List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
 		this.setTem(tem);
 		this.setGastos(gastos);
@@ -64,7 +65,7 @@ public class ConfiguracionGeneral {
 	 * @param gastos
 	 * tem vacio.
 	 */
-	public ConfiguracionGeneral(Date fechaInicio,List<Gasto>gastos){
+	public ConfiguracionGeneral(GregorianCalendar fechaInicio,List<Gasto>gastos){
 		this.setFechaInicio(fechaInicio);
 		this.setTem(new TreeMap<Integer,Double>());
 		this.setGastos(gastos);
@@ -108,7 +109,7 @@ public class ConfiguracionGeneral {
 		}
 	}
 	
-	public void finConfiguracionGeneral(Date fechaFin){
+	public void finConfiguracionGeneral(GregorianCalendar fechaFin){
 		this.setFechaFin(fechaFin);
 	}
 }

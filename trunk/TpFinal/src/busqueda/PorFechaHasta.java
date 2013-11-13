@@ -1,22 +1,22 @@
 package busqueda;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import prestamos.Prestamo;
 
 public class PorFechaHasta extends Condicion {
 	
-	private Date hasta;
+	private GregorianCalendar hasta;
 
-	private Date getHasta() {
+	private GregorianCalendar getHasta() {
 		return hasta;
 	}
 
-	private void setHasta(Date hasta) {
+	private void setHasta(GregorianCalendar hasta) {
 		this.hasta = hasta;
 	}
 	
-	private PorFechaHasta(Date hasta){
+	private PorFechaHasta(GregorianCalendar hasta){
 		
 		this.setHasta(hasta);
 		
