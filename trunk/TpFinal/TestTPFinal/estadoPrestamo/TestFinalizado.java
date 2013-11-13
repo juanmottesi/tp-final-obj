@@ -28,11 +28,7 @@ public class TestFinalizado {
 	@Test(expected= AprobadoException.class)
 	public void testAprobar() throws AprobadoException {
 	
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
-		
-		mockedPrestamo.getEstado().aprobar(mockedPrestamo);
-		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
+		enFinalizado.aprobar(mockedPrestamo);
 	}
 	
 	@Test(expected= RechazadoException.class)
@@ -58,11 +54,9 @@ public class TestFinalizado {
 	@Test(expected= DeudorIncobrableException.class)
 	public void testADeudorIncobrable() throws DeudorIncobrableException {
 	
-		when(mockedPrestamo.getEstado()).thenReturn(enFinalizado);
 		
-		mockedPrestamo.getEstado().aDeudorIncobrable(mockedPrestamo);
+		enFinalizado.aDeudorIncobrable(mockedPrestamo);
 		
-		assertSame(enFinalizado, mockedPrestamo.getEstado());
 	}
 	
 	@Test (expected = EnDeudaException.class)

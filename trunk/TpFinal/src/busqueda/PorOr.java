@@ -6,7 +6,12 @@ import prestamos.Prestamo;
 
 public class PorOr extends PorOperadorLogico {
 
+	
+	
 	public PorOr(List<Condicion> condiciones){
+		if(condiciones.isEmpty()){
+			throw EmptyConditionException();
+		}
 		this.setCondiciones(condiciones);		
 	}
 
