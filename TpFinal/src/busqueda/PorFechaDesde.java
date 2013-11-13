@@ -10,11 +10,11 @@ public class PorFechaDesde extends Condicion {
 	
 	private Date desde;
 	
-	public Date getDesde() {
+	private Date getDesde() {
 		return desde;
 	}
 	
-	public void setDesde(Date desde) {
+	private void setDesde(Date desde) {
 		this.desde = desde;
 	}
 

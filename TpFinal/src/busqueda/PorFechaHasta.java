@@ -8,15 +8,15 @@ public class PorFechaHasta extends Condicion {
 	
 	private Date hasta;
 
-	public Date getHasta() {
+	private Date getHasta() {
 		return hasta;
 	}
 
-	public void setHasta(Date hasta) {
+	private void setHasta(Date hasta) {
 		this.hasta = hasta;
 	}
 	
-	public PorFechaHasta(Date hasta){
+	private PorFechaHasta(Date hasta){
 		
 		this.setHasta(hasta);
 		

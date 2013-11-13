@@ -9,19 +9,19 @@ public class PorCuotas extends Condicion {
 	private Integer desde;
 	private Integer hasta;
 	
-	public Integer getDesde() {
+	private Integer getDesde() {
 		return desde;
 	}
 	
-	public void setDesde(Integer desde) {
+	private void setDesde(Integer desde) {
 		this.desde = desde;
 	}
 	
-	public Integer getHasta() {
+	private Integer getHasta() {
 		return hasta;
 	}
 	
-	public void setHasta(Integer hasta) {
+	private void setHasta(Integer hasta) {
 		this.hasta = hasta;
 	}
 	

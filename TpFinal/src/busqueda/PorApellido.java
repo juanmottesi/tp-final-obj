@@ -12,11 +12,11 @@ public class PorApellido extends Condicion {
 
 	private String apellido;
 	
-	public String getApellido() {
+	private String getApellido() {
 		return apellido;
 	}
 
-	public void setApellido(String apellido) {
+	private void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 	
