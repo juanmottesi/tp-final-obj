@@ -16,7 +16,10 @@ import org.mockito.Mock;
 import estadoCuotas.APagar;
 import estadoCuotas.Pagada;
 import estadoCuotas.Vencida;
+import estadoPrestamos.EnCurso;
 import estadoPrestamos.Finalizado;
+import exceptions.AprobadoException;
+import exceptions.EnCursoException;
 import exceptions.EstadoCuotaException;
 import otros.Cliente;
 import otros.ConfiguracionGeneral;
@@ -127,12 +130,16 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testFinalizarPrestamoConCuotasPagas(){
+	public void testFinalizarPrestamoConCuotasPagas() throws AprobadoException {
 		List<Cuota>cuotas = new Vector<Cuota>();
 		Cuota mockedCuota = mock(Cuota.class);
 		cuotas.add(mockedCuota);
-		when(mockedCuota.getEstadoCuota()).thenReturn(new Pagada());
+		when(mockedCuota.getEstadoCuota()).thenReturn(new APagar());
+		prestamo.aceptarPrestamo();
 		prestamo.setCuotas(cuotas);
+		prestamo.pagarCuota(new Date());
+		// modifica la cuota y la pasa a pagada pero al ser mock sigue valiendo lo que esta en el when
+		when(mockedCuota.getEstadoCuota()).thenReturn(new Pagada());
 		prestamo.finalizarPrestamo();
 		assertEquals(new Finalizado(), prestamo.getEstado());
 	}
@@ -178,8 +185,19 @@ public class TestPrestamo {
 		when(mockedCuota.getEstadoCuota()).thenReturn(new APagar());
 		prestamo.verificarFechaDeCuotas(fechaHoy);
 		verify(mockedCuota).verificarFecha(fechaHoy);
-		
 	}
 	
+	@Test
+	public void testAceptarPrestamo() throws AprobadoException{
+		prestamo.aceptarPrestamo();
+		assertEquals(new EnCurso(), prestamo.getEstado());
+	}
+	
+	@Test
+	public void testPagarCuota() throws AprobadoException{
+		prestamo.aceptarPrestamo();
+		prestamo.pagarCuota(new Date());
+		assertEquals(new Pagada(), prestamo.getCuotas().get(0).getEstadoCuota());
+	}
 	
 }

@@ -49,15 +49,14 @@ public class DeudorIncobrable extends EstadoPrestamo {
 	}
 
 	@Override
-	public boolean puedoPagar(Prestamo p) {
-		
-		return true;
+	public boolean puedoPagar() {
+		return false;
 	}
 
 	@Override
 	public void aEnCurso(Prestamo p) throws EnCursoException {
-		
-		p.setEstado(new EnCurso());
+		throw new EnCursoException("Estado Deudor Incobrable");
+		//p.setEstado(new EnCurso());
 		
 	}
 }

@@ -48,7 +48,7 @@ public class Rechazado extends EstadoPrestamo {
 	}
 
 	@Override
-	public boolean puedoPagar(Prestamo p) {
+	public boolean puedoPagar() {
 		
 		return false;
 	}

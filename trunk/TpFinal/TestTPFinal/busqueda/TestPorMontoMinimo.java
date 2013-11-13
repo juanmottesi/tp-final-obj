@@ -32,7 +32,7 @@ public class TestPorMontoMinimo {
 	}
 
 	@Test
-	public void testResetaCondicion(){
+	public void testRespetaCondicion(){
 		Prestamo mockedPrestamo = mock(Prestamo.class);
 		
 		when(mockedPrestamo.getMontoTotal()).thenReturn(monto+monto);

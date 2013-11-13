@@ -44,7 +44,7 @@ public class EnCurso extends EstadoPrestamo {
 	}
 
 	@Override
-	public boolean puedoPagar(Prestamo p) {
+	public boolean puedoPagar() {
 		
 		return true;
 	}
