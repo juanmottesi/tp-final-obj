@@ -8,8 +8,6 @@ import prestamos.Prestamo;
 
 public class PorOr extends PorOperadorLogico {
 
-	
-	
 	public PorOr(List<Condicion> condiciones) throws EmptyConditionException{
 		if(condiciones.isEmpty()){
 			throw new EmptyConditionException();
@@ -19,9 +17,6 @@ public class PorOr extends PorOperadorLogico {
 
 	@Override
 	public boolean respetaCondicion(Prestamo p) {
-		if(this.getCondiciones().isEmpty()){
-			return true;
-		}
 		boolean ret = false;
 		for(Condicion c : this.getCondiciones()){
 			ret = c.respetaCondicion(p) || ret ;

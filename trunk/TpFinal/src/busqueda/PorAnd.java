@@ -2,11 +2,15 @@ package busqueda;
 
 import java.util.List;
 
+import exceptions.EmptyConditionException;
 import prestamos.Prestamo;
 
 public class PorAnd extends PorOperadorLogico {
 
-	public PorAnd(List<Condicion> condiciones){
+	public PorAnd(List<Condicion> condiciones) throws EmptyConditionException{
+		if(condiciones.isEmpty()){
+			throw new EmptyConditionException();
+		}
 		this.setCondiciones(condiciones);
 	}
 	

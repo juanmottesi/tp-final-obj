@@ -10,7 +10,7 @@ public class BusquedaDePrestamo {
 	
 	private Condicion condicion;
 	
-	public Condicion getCondicion() {
+	private Condicion getCondicion() {
 		return condicion;
 	}
 

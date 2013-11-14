@@ -88,7 +88,7 @@ public class TestPrestamo {
 	@Test 
 	public void testObtenerDniCliente(){
 		when(mockedCliente.getDni()).thenReturn("36778000");
-		assertEquals((Integer)36778000, prestamo.obtenerDniCliente());
+		assertEquals("36778000", prestamo.obtenerDniCliente());
 	}
 	
 	@Test
