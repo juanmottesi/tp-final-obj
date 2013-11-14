@@ -7,18 +7,16 @@ public class PorDNI extends Condicion {
 	
 	private String dni;
 
-	public String getDni() {
+	private String getDni() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	private void setDni(String dni) {
 		this.dni = dni;
 	}
 	
 	public PorDNI(String dni){
-		
 		this.setDni(dni);
-		
 	}
 	
 	@Override

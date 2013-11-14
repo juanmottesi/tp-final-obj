@@ -16,10 +16,8 @@ public class PorFechaHasta extends Condicion {
 		this.hasta = hasta;
 	}
 	
-	private PorFechaHasta(GregorianCalendar hasta){
-		
+	public PorFechaHasta(GregorianCalendar hasta){
 		this.setHasta(hasta);
-		
 	}
 	
 	@Override

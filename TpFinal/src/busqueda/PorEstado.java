@@ -8,7 +8,7 @@ public class PorEstado extends Condicion {
 	
 	private EstadoPrestamo estado;
 
-	public EstadoPrestamo getEstado() {
+	private EstadoPrestamo getEstado() {
 		return estado;
 	}
 

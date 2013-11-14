@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import prestamos.Prestamo;
 import busqueda.PorMontoMaximo;
@@ -15,34 +16,30 @@ public class TestPorMontoMaximo {
 	private double monto;
 	private PorMontoMaximo porMontoMaximo;
 	
+	@Mock
+	Prestamo mockedPrestamo = mock(Prestamo.class);
+	
 	@Before
 	public void setUp(){
 		monto = 35000;
 		porMontoMaximo = new PorMontoMaximo(monto);
 	}
 	
-	
 	@Test
 	public void testConstructor() {
 		assertNotNull(porMontoMaximo);
-		assertEquals("Chequea si el seter funciona bien",monto, porMontoMaximo.getMaximo(),0);
-		double montoAux = monto + monto;
-		assertNotEquals("Chequea si el seter funciona bien",montoAux, porMontoMaximo.getMaximo(),0);
 	}
 
 	@Test
-	public void testResetaCondicion(){
-		Prestamo mockedPrestamo = mock(Prestamo.class);
-		
+	public void testRespetaCondicionConCondicionVerdadera(){
 		when(mockedPrestamo.getMontoTotal()).thenReturn(monto-1);
 		assertTrue(porMontoMaximo.respetaCondicion(mockedPrestamo));
-		
+	}
+	
+	@Test
+	public void testRespetaCondicionConCondicionFalsa(){
 		when(mockedPrestamo.getMontoTotal()).thenReturn(monto);
-		assertFalse(porMontoMaximo.respetaCondicion(mockedPrestamo));
-		
-		when(mockedPrestamo.getMontoTotal()).thenReturn(monto+monto);
-		assertFalse(porMontoMaximo.respetaCondicion(mockedPrestamo));
-		
+		assertFalse(porMontoMaximo.respetaCondicion(mockedPrestamo));		
 	}
 	
 }

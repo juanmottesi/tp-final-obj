@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import busqueda.PorMontoMinimo;
 import prestamos.Prestamo;
@@ -15,6 +16,9 @@ public class TestPorMontoMinimo {
 
 	private double monto;
 	private PorMontoMinimo porMontoMinimo;
+
+	@Mock
+	Prestamo mockedPrestamo = mock(Prestamo.class);
 	
 	@Before
 	public void setUp(){
@@ -26,24 +30,17 @@ public class TestPorMontoMinimo {
 	@Test
 	public void testConstructor() {
 		assertNotNull(porMontoMinimo);
-		assertEquals("Chequea si el seter funciona bien",monto, porMontoMinimo.getMinimo(),0);
-		double montoAux = monto + monto;
-		assertNotEquals("Chequea si el seter funciona bien",montoAux, porMontoMinimo.getMinimo(),0);
 	}
 
 	@Test
-	public void testRespetaCondicion(){
-		Prestamo mockedPrestamo = mock(Prestamo.class);
-		
+	public void testRespetaCondicionConCondicionVerdadera(){		
 		when(mockedPrestamo.getMontoTotal()).thenReturn(monto+monto);
 		assertTrue(porMontoMinimo.respetaCondicion(mockedPrestamo));
-		
+	}
+	@Test
+	public void testRespetaCondicionConCondicionFalsa(){	
 		when(mockedPrestamo.getMontoTotal()).thenReturn(monto);
 		assertFalse(porMontoMinimo.respetaCondicion(mockedPrestamo));
-		
-		when(mockedPrestamo.getMontoTotal()).thenReturn(monto-1);
-		assertFalse(porMontoMinimo.respetaCondicion(mockedPrestamo));
-		
 	}
 
 }

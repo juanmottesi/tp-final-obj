@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import prestamos.Prestamo;
 import busqueda.PorCuotas;
@@ -17,31 +18,29 @@ public class TestPorCuotas {
 	private static final Integer hasta = 15;
 	public Integer retorno = 12;
 
+	@Mock
+	Prestamo mockedPrestamo = mock(Prestamo.class);
+	
 	@Before
 	public void setUp(){
 		porCuotas = new PorCuotas(desde,hasta);
-
 	}
 	
-
 	@Test
 	public void testConstructor() {
 		assertNotNull(porCuotas);
-		assertEquals("Se fija si el desde es igual",desde, porCuotas.getDesde());
-		assertEquals("Se fija si el hasta es igual",hasta, porCuotas.getHasta());
 	}
 
 	@Test
-	public void testRespetaCondicion(){
-		Prestamo mockedPrestamo = mock(Prestamo.class);
-		
+	public void testRespetaCondicionConCondicionVerdadera(){
 		when(mockedPrestamo.cantidadDeCuotas()).thenReturn(retorno);
 		assertTrue(porCuotas.respetaCondicion(mockedPrestamo));
-		
+	}
+	
+	@Test
+	public void testRespetaCondicionConCondicionFalsa(){
 		when(mockedPrestamo.cantidadDeCuotas()).thenReturn(retorno+4);
 		assertFalse(porCuotas.respetaCondicion(mockedPrestamo));
-		
-		
 	}
 
 }

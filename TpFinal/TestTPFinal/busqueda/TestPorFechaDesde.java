@@ -3,10 +3,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import prestamos.Prestamo;
 import busqueda.PorFechaDesde;
@@ -14,38 +15,32 @@ import busqueda.PorFechaDesde;
 
 public class TestPorFechaDesde {
 	
-	private Date fecha;
+	private GregorianCalendar fecha = new GregorianCalendar();
 	private PorFechaDesde porFechaDesde;
+	
+	@Mock
+	Prestamo mockedPrestamo = mock(Prestamo.class);
 	
 	@Before
 	public void setUp(){
-		//Seteo la fecha de hoy.
-		fecha = new Date();
 		porFechaDesde = new PorFechaDesde(fecha);
 	}
 
 	@Test
 	public void testConstructor() {
 		assertNotNull(porFechaDesde);
-		assertEquals("Se fija si la fehca es la mismo que setea en la clase PorFechaDesde", fecha, porFechaDesde.getDesde());
-		@SuppressWarnings("deprecation")
-		Date fechaAux = new Date(2013,11,03); 
-		assertNotEquals("Se fija si la fehca no es la mismo que setea en la clase PorFechaDesde", fechaAux, porFechaDesde.getDesde());
 	}
 
 	@Test
-	public void testRespetaCondicion(){
-		Prestamo mockedPrestamo = mock(Prestamo.class);
-		
-		//Creo una fecha despues de la que tiene seteado porFechaDesde
-		@SuppressWarnings("deprecation")
-		Date fechaDespues = new Date(fecha.getYear(),fecha.getMonth(),fecha.getDate()+1);
+	public void testRespetaCondicionConCondicionVerdadera(){
+		GregorianCalendar fechaDespues = new GregorianCalendar(fecha.get(1),fecha.get(2),fecha.get(5)+1);
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(fechaDespues);
 		assertTrue(porFechaDesde.respetaCondicion(mockedPrestamo));
-		
-		//Creo una fecha antes de la que tiene seteado porFechaDesde
-		@SuppressWarnings("deprecation")
-		Date fechaAntes = new Date(fecha.getYear(),fecha.getMonth(),fecha.getDate()-1); 
+	}
+	
+	@Test
+	public void testRespetaCondicionConCondicionFalsa(){
+		GregorianCalendar fechaAntes = new GregorianCalendar(fecha.get(1),fecha.get(2),fecha.get(5)-1);
 		when(mockedPrestamo.getFechaDeCreacion()).thenReturn(fechaAntes);
 		assertFalse(porFechaDesde.respetaCondicion(mockedPrestamo));
 	}

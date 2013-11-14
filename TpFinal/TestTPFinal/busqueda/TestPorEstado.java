@@ -6,16 +6,12 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
-
-
+import org.mockito.Mock;
 
 import prestamos.Prestamo;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.EnDeuda;
 import estadoPrestamos.EstadoPrestamo;
-import estadoPrestamos.Rechazado;
 import busqueda.PorEstado;
 
 
@@ -23,6 +19,9 @@ public class TestPorEstado {
 	private EstadoPrestamo estadoPrestamo;
 	private PorEstado porEstado;
 
+	@Mock
+	Prestamo mockedPrestamo = mock(Prestamo.class);
+	
 	@Before
 	public void setUp(){
 		estadoPrestamo = new EnCurso();
@@ -32,22 +31,18 @@ public class TestPorEstado {
 	@Test
 	public void testConstructor() {
 		assertNotNull(porEstado);
-		assertEquals("Se fija si el estado es el mismo que setea en la clase PorEstado",estadoPrestamo, porEstado.getEstado());
-		EstadoPrestamo estadoAux = new Rechazado();
-		assertNotEquals("Se fija si el estado no es el mismo que setea en la clase PorEstado",estadoAux, porEstado.getEstado());
 	}
 	
 	@Test
-	public void testRespetaCondicion(){
-		Prestamo mockedPrestamo = mock(Prestamo.class);
-		
+	public void testRespetaCondicionConCondicionVerdadera(){
 		when(mockedPrestamo.getEstado()).thenReturn(new EnCurso());
 		assertTrue(porEstado.respetaCondicion(mockedPrestamo));
+	}
 		
+	@Test
+	public void testRespetaCondicionConCondicionFalsa(){
 		when(mockedPrestamo.getEstado()).thenReturn(new EnDeuda());
 		assertFalse(porEstado.respetaCondicion(mockedPrestamo));
-		
-		
 	}
 	
 }

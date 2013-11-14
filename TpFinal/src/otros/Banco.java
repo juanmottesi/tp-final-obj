@@ -43,8 +43,7 @@ public void setClientes(List<Cliente> clientes) {
 	}
 
 	public void setConfigGeneral(List<ConfiguracionGeneral> configGeneral) {
-		this.configGene
-		ral = configGeneral;
+		this.configGeneral = configGeneral;
 	}
 
 	public BusquedaDePrestamo getBusqueda() {
