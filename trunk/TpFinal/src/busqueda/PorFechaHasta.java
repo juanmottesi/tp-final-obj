@@ -4,6 +4,13 @@ import java.util.GregorianCalendar;
 
 import prestamos.Prestamo;
 
+/**
+ * La condicion por fecha hasta recibe una fecha y devuelve el prestamo sea antes que la fecha
+ * pasada.
+ * 
+ * @author Juan
+ *
+ */
 public class PorFechaHasta extends Condicion {
 	
 	private GregorianCalendar hasta;

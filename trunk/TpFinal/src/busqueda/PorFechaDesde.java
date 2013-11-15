@@ -1,12 +1,16 @@
 package busqueda;
 
-
-
-
 import java.util.GregorianCalendar;
 
 import prestamos.Prestamo;
 
+/**
+ * La condicion por fecha desde recibe una fecha y devuelve los prestamos con la fecha despues
+ * a la pasada.
+ * 
+ * @author Juan
+ *
+ */
 public class PorFechaDesde extends Condicion {
 	
 	private GregorianCalendar desde;

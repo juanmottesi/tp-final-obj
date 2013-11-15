@@ -6,6 +6,13 @@ import exceptions.EmptyConditionException;
 
 import prestamos.Prestamo;
 
+/**
+ * La condicion de or chequea que alguna de las condiciones de la 
+ * lista sean verdaderas.
+ * 
+ * @author Juan
+ *
+ */
 public class PorOr extends PorOperadorLogico {
 
 	public PorOr(List<Condicion> condiciones) throws EmptyConditionException{

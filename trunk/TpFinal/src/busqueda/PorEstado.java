@@ -4,6 +4,13 @@ package busqueda;
 import prestamos.Prestamo;
 import estadoPrestamos.EstadoPrestamo;
 
+
+/**
+ * La condicion por Estado recibe un Estado y solo devuelve los prestamos con el mismo.
+ * 
+ * @author Juan
+ *
+ */
 public class PorEstado extends Condicion {
 	
 	private EstadoPrestamo estado;

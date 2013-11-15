@@ -2,7 +2,13 @@ package busqueda;
 
 
 import prestamos.Prestamo;
-
+/**
+ * Se fija que el monto del prestamo sea menor estricto al
+ * del PorMontoMaximo.
+ * 
+ * @author Juan
+ *
+ */
 public class PorMontoMaximo extends Condicion{
 	
 	private double maximo;
