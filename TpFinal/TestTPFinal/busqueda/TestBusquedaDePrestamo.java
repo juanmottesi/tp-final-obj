@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,7 +12,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import prestamos.Prestamo;
-import estadoPrestamos.EnCurso;
 
 public class TestBusquedaDePrestamo {
 	
