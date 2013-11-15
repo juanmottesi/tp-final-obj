@@ -1,17 +1,13 @@
 package otros;
 
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import estadoPrestamos.EnDeuda;
-import estadoPrestamos.Solicitado;
 import exceptions.AprobadoException;
 import exceptions.RechazadoException;
 import busqueda.BusquedaDePrestamo;
 import busqueda.Condicion;
-import busqueda.PorEstado;
 import prestamos.Prestamo;
 
 public class Banco {
@@ -54,7 +50,7 @@ public void setClientes(List<Cliente> clientes) {
 		this.busqueda = busqueda;
 	}
 	
-	public void pagarCuota(Prestamo prestamo, Date fechaDelPago){
+	public void pagarCuota(Prestamo prestamo, GregorianCalendar fechaDelPago){
 		prestamo.pagarCuota(fechaDelPago);
 	}
 		
