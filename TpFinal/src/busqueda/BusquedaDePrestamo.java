@@ -1,11 +1,17 @@
 package busqueda;
 
-
 import java.util.List;
 import java.util.Vector;
 
 import prestamos.Prestamo;
 
+/**
+ * 
+ * Filtra los prestamos que no cumplen con la condicion pasada.
+ * 
+ * @author Juan
+ *
+ */
 public class BusquedaDePrestamo {
 	
 	private Condicion condicion;
