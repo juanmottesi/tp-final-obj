@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import prestamos.Cuota;
 
@@ -12,6 +13,9 @@ import prestamos.Cuota;
 public class TestVendida {
 	
 	private Vencida vencida;
+	
+	@Mock
+	Cuota mockedCuota = mock(Cuota.class);
 	
 	@Before 
 	public void setUp(){
@@ -30,14 +34,14 @@ public class TestVendida {
 	
 	@Test
 	public void testPagar(){
-		Cuota mockedCuota = mock(Cuota.class);
 		vencida.pagar(mockedCuota);
 		verify(mockedCuota).setEstadoCuota(new Pagada());
 	}
 	
 	@Test
 	public void testAVencido(){
-		
+		vencida.aVencido(mockedCuota);
+		verify(mockedCuota).setEstadoCuota(vencida);
 	}
 
 }
