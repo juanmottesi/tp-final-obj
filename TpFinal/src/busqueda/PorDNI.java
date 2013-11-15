@@ -2,7 +2,12 @@ package busqueda;
 
 import prestamos.Prestamo;
 
-
+/**
+ * La condicion por dni recibe un dni y solo devuelve los prestamos con el mismo dni
+ * 
+ * @author Juan
+ *
+ */
 public class PorDNI extends Condicion {
 	
 	private String dni;

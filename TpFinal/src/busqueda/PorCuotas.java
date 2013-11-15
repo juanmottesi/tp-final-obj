@@ -1,9 +1,15 @@
 package busqueda;
 
-
-
 import prestamos.Prestamo;
 
+/**
+ * La condicion de cantidad de coutas, recibe dos Intege.
+ * Estas tienen que ser mayores y menores pero no iguales a ninguno de los
+ * dos variables.
+ * 
+ * @author Juan
+ *
+ */
 public class PorCuotas extends Condicion {
 	
 	private Integer desde;

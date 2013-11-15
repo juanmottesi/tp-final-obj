@@ -4,7 +4,13 @@ import java.util.List;
 
 import exceptions.EmptyConditionException;
 import prestamos.Prestamo;
-
+/**
+ * La condicion de and chequea que todas las condiciones de la 
+ * lista sean verdaderas
+ * 
+ * @author Juan
+ *
+ */
 public class PorAnd extends PorOperadorLogico {
 
 	public PorAnd(List<Condicion> condiciones) throws EmptyConditionException{

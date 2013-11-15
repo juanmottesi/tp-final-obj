@@ -4,6 +4,7 @@ import prestamos.Prestamo;
 
 /**
  * se fija que el apellido del cliente del prestamo contenga el string de la variable privada.
+ * 
  * @author juan
  *
  */

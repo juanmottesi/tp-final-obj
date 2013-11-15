@@ -1,8 +1,15 @@
 package busqueda;
 
-
 import prestamos.Prestamo;
 
+/**
+ * 
+ * se fija que el monto del prestamo sea meyor estricto al
+ * del PorMontoMinimo.
+ * 
+ * @author Juan
+ *
+ */
 public class PorMontoMinimo extends Condicion {
 	
 	private double  minimo;
