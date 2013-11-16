@@ -11,6 +11,11 @@ import prestamos.Prestamo;
 
 public class DeudorIncobrable extends EstadoPrestamo {
 	
+	/**
+	 * Esta clase representa el Estado del prestamo cuando pasa de Deudor a
+	 * Deudor incobrable
+	 */
+	
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
 		throw new DeudorIncobrableException

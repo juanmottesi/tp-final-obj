@@ -10,6 +10,12 @@ import prestamos.Prestamo;
 
 public abstract class EstadoPrestamo {
 	
+	/**
+	 * 
+	 * ESta es la Clase Abstracta de los Estados de los Prestamos.
+	 * 
+	 */
+	
 	public abstract void aprobar(Prestamo p) throws AprobadoException;
 	
 	public abstract void rechazar(Prestamo p) throws RechazadoException;

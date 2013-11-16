@@ -10,6 +10,11 @@ import prestamos.Prestamo;
 
 public class Rechazado extends EstadoPrestamo {
 	
+	/**
+	 * Este estado representa lo que le pasa a un Prestamo cuando no es 
+	 * Aprobado.
+	 */
+	
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
 		

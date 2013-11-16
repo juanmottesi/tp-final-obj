@@ -7,6 +7,11 @@ import exceptions.FinalizadoException;
 import prestamos.Prestamo;
 
 public class Solicitado extends EstadoPrestamo {
+	
+	/**
+	 * Este estado es el primero que toma un Prestamo apenas es creado,
+	 * luego este prestamo puedepasar al estado enCurso o rechazado.
+	 */
 
 	@Override
 	public void aprobar(Prestamo p) {

@@ -9,6 +9,11 @@ import prestamos.Prestamo;
 
 public class EnDeuda extends EstadoPrestamo {
 	
+	/**
+	 * Este estado es el que toma el prestamo una ves que alguna cuota
+	 * no es pagada a tiempo. 
+	 */
+	
 
 	@Override
 	public void aDeudorIncobrable(Prestamo p){
