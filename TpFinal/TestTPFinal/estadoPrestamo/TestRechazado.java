@@ -35,6 +35,7 @@ public class TestRechazado {
 	public void testAprobar() throws AprobadoException{
 			
 		enRechazado.aprobar(mockedPrestamo);
+	
 	}
 	
 	@Test (expected = RechazadoException.class)

@@ -10,6 +10,11 @@ import prestamos.Prestamo;
 
 public  class Finalizado extends EstadoPrestamo {
 	
+	/**
+	 * Esta clase mustra el comporamiento de un Prestamo que se Finalizon en buenos 
+	 * terminos
+	 */
+	
 
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{

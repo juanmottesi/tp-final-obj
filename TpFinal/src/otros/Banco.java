@@ -77,4 +77,7 @@ public void setClientes(List<Cliente> clientes) {
 		
 		return this.getBusqueda().buscar(this.getPrestamos());
 	}
+	
+	
+	
 }
