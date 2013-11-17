@@ -1,8 +1,8 @@
 package cliente;
 
 import java.util.List;
-import java.util.Observable;
 
+import estadoCliente.SinPrestamo;
 import prestamos.Prestamo;
 
 public class Grupo extends Cliente {
@@ -26,12 +26,13 @@ public class Grupo extends Cliente {
 		this.personaResponsable = personaResponsable;
 	}
 	
-	@Override
-	public boolean puedoAgregarPrestamo() {
-		// TODO Auto-generated method stub
-		return false;
+	public Grupo(Persona personaResponsable, List<Cliente>clientes){
+		this.setClientes(clientes);
+		this.setPersonaResponsable(personaResponsable);
+		this.setEstadoCliente(new SinPrestamo());
 	}
-
+	
+	
 	@Override
 	public void agregarPrestamo(Prestamo prestamo) {
 		if(this.puedoAgregarPrestamo()){
@@ -42,19 +43,13 @@ public class Grupo extends Cliente {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void suscribirAlSistemaDeAviso() {
+		this.getPersonaResponsable().suscribirAlSistemaDeAviso();		
 	}
 
 	@Override
-	public void suscribirAlSistemaDeAviso(Prestamo prestamo) {
-		this.getPersonaResponsable().suscribirAlSistemaDeAviso(prestamo);		
-	}
-
-	@Override
-	public void salirSistemaDeAviso(Prestamo prestamo) {
-		this.getPersonaResponsable().salirSistemaDeAviso(prestamo);		
+	public void salirSistemaDeAviso() {
+		this.getPersonaResponsable().salirSistemaDeAviso();		
 	}
 
 	@Override

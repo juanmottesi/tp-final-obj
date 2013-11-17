@@ -1,8 +1,12 @@
 package cliente;
 
 import java.util.List;
-import java.util.Observable;
 
+
+import java.util.Vector;
+
+
+import estadoCliente.SinPrestamo;
 import prestamos.Prestamo;
 
 public class Persona extends Cliente {
@@ -54,34 +58,32 @@ public class Persona extends Cliente {
 		this.direccion = direccion;
 	}
 
-	@Override
-	public boolean puedoAgregarPrestamo() {
-		// TODO Auto-generated method stub
-		return false;
+	public Persona(String nombre, String apellido, String dni, String direccion){
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setDni(dni);
+		this.setDireccion(direccion);
+		this.setEstadoCliente(new SinPrestamo());
+		this.setPrestamos(new Vector<Prestamo>());
 	}
+	
 
 	@Override
 	public void agregarPrestamo(Prestamo prestamo) {
-		// TODO Auto-generated method stub
+		if(this.puedoAgregarPrestamo()){
+			this.getPrestamos().add(prestamo);
+		}
+	}
+
+	@Override
+	public void suscribirAlSistemaDeAviso() {
+		this.getEstadoCliente().addObserver(this);
 		
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void suscribirAlSistemaDeAviso(Prestamo prestamo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void salirSistemaDeAviso(Prestamo prestamo) {
-		// TODO Auto-generated method stub
-		
+	public void salirSistemaDeAviso() {
+		this.getEstadoCliente().deleteObserver(this);		
 	}
 
 	@Override
@@ -94,6 +96,6 @@ public class Persona extends Cliente {
 		return this.getApellido();
 	}
 
-	
+
 	
 }
