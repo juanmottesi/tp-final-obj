@@ -20,4 +20,14 @@ public abstract class Estado {
 	
 	public abstract void aSinPrestamo(EstadoCliente estadoCliente)throws EstadoClienteException;
 
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+       return true;
+	}	
 }

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 
 
+
 import estadoCliente.EstadoCliente;
+import exceptions.EstadoClienteException;
 import prestamos.Prestamo;
 
 public class Persona extends Cliente {
@@ -71,11 +73,20 @@ public class Persona extends Cliente {
 	@Override
 	public void agregarPrestamo(Prestamo prestamo) {
 		if(this.puedoAgregarPrestamo()){
-			this.getPrestamos().add(prestamo);
-			prestamo.addObserver(this.getEstadoCliente());
+			try {
+				this.agregarPrestamoEstadoCliente();
+				this.getPrestamos().add(prestamo);
+				prestamo.addObserver(this.getEstadoCliente());
+			} catch (EstadoClienteException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 
+	private void agregarPrestamoEstadoCliente() throws EstadoClienteException{
+		this.getEstadoCliente().solicitar();
+	}
+	
 	@Override
 	public void suscribirAlSistemaDeAviso() {
 		this.getEstadoCliente().addObserver(this);

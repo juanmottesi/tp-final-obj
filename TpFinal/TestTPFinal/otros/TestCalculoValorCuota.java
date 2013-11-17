@@ -1,7 +1,6 @@
 package otros;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 import installment.calculator.model.AdvanceModeInstallment;
