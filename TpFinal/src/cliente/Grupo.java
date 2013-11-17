@@ -2,6 +2,7 @@ package cliente;
 
 import java.util.List;
 
+
 import estadoCliente.EstadoCliente;
 import prestamos.Prestamo;
 
@@ -30,6 +31,15 @@ public class Grupo extends Cliente {
 		this.setClientes(clientes);
 		this.setPersonaResponsable(personaResponsable);
 		this.setEstadoCliente(new EstadoCliente());
+		this.agregarObservadores(this.getEstadoCliente());
+		
+	}
+	
+	public void agregarObservadores(EstadoCliente ec){
+		ec.addObserver(this.getPersonaResponsable());
+		for(Cliente c : this.getClientes()){
+			c.agregarObservadores(ec);
+		}
 	}
 	
 	
@@ -67,5 +77,6 @@ public class Grupo extends Cliente {
 	public String obtenerDireccion() {
 		return this.getPersonaResponsable().obtenerDireccion();
 	}
+
 
 }

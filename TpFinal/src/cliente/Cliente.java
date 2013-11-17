@@ -27,7 +27,7 @@ public abstract class Cliente implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg){
-		System.out.println("Su esteado cambio a deudor");
+		System.out.println("Usted se encuentr en dueda");
 	}
 	
 	public abstract void suscribirAlSistemaDeAviso();
@@ -40,4 +40,5 @@ public abstract class Cliente implements Observer {
 	
 	public abstract String obtenerDireccion();
 
+	public abstract void agregarObservadores(EstadoCliente ec);
 }

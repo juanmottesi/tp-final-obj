@@ -97,21 +97,41 @@ public class TestEstadoCliente {
 	}
 	
 	@Test
-	public void testSeFinalizoUnPrestamoConUnPrestamo(){
+	public void testSeFinalizoUnPrestamoConUnPrestamo() throws EstadoClienteException{
+		estadoCliente.agregarPrestamo();
+		estadoCliente.seFinalizoUnPrestamo(mockedEstado);
+		verify(mockedEstado).aSinPrestamo(estadoCliente);		
+	}
+	
+	@Test
+	public void testSeFinalizoUnPrestamoConDosPrestamos() throws EstadoClienteException{
+		estadoCliente.agregarPrestamo();
+		estadoCliente.agregarPrestamo();
+		estadoCliente.seFinalizoUnPrestamo(mockedEstado);
+		assertEquals(mockedEstado, estadoCliente.getEstados());		
+	}
+	
+	@Test
+	public void testSeRechazoUnPrestamoConUnPrestamo() throws EstadoClienteException{
+		estadoCliente.agregarPrestamo();
+		estadoCliente.seRechazoUnPrestamo(mockedEstado);
+		verify(mockedEstado).aSinPrestamo(estadoCliente);
 		
 		
 	}
 	
 	@Test
-	public void testSeFinalizoUnPrestamoConDosPrestamos(){
-		
-		
-	}
-	@Test
-	public void testSeRechazoUnPrestamo(){
-		
-		
+	public void testSeRechazoUnPrestamoConDosPrestamos() throws EstadoClienteException{
+		estadoCliente.agregarPrestamo();
+		estadoCliente.agregarPrestamo();
+		estadoCliente.seRechazoUnPrestamo(mockedEstado);
+		assertEquals(new EnCurso(), estadoCliente.getEstados());
 	}
 	
+	@Test
+	public void testUpdate() throws EstadoClienteException{
+		estadoCliente.update(estadoCliente, estadoCliente);
+		verify(mockedEstado).aEnDeuda(estadoCliente);	
+	}
 }
 
