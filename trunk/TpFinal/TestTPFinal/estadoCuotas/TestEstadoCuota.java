@@ -38,4 +38,14 @@ public class TestEstadoCuota {
 		assertFalse(estadoCuota2.equals(estadoCuota1));
 	}
 	
+	@Test
+	public void testEqualsConElMismoEstado(){
+		assertTrue(estadoCuota1.equals(estadoCuota1));
+	}
+	
+	@Test
+	public void testEqualsConUnEstadoNull(){
+		assertFalse(estadoCuota1.equals(null));
+	}
+	
 }
