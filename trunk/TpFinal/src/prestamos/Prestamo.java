@@ -274,36 +274,36 @@ public class Prestamo extends Observable {
 		}
 		return false;
 	}
-	
-	private void verificarEstado(){
-		if(this.estanTodasLasCuotasPagas()){
-			try {
-				this.getEstado().finalizar(this);
-				this.getCliente().finalizar();
-			} catch (FinalizadoException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		else{
-			if(this.tengoAlgunaCuotaVencida()){
-				try {
-					this.getEstado().aEnDeuda(this);
-					this.getCliente().aEnDeuda();
-				} catch (EnDeudaException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			else{
-				try {
-					this.getEstado().aEnCurso(this);
-					this.getCliente().aEnCurso();
-				} catch (EnCursoException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-		}
-	}
-	
+	//-***************************************************************************************
+//	private void verificarEstado(){
+//		if(this.estanTodasLasCuotasPagas()){
+//			try {
+//				this.getEstado().finalizar(this);
+//				this.getCliente().finalizar();
+//			} catch (FinalizadoException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
+//		else{
+//			if(this.tengoAlgunaCuotaVencida()){
+//				try {
+//					this.getEstado().aEnDeuda(this);
+//					this.getCliente().aEnDeuda();
+//				} catch (EnDeudaException e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//			else{
+//				try {
+//					this.getEstado().aEnCurso(this);
+//					this.getCliente().aEnCurso();
+//				} catch (EnCursoException e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//		}
+//	}
+//	
 	/**
 	 * @param fechaActual 
 	 * chequea todas sus cuotas si estas se encuentran vencidas.
