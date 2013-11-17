@@ -4,6 +4,7 @@ package otros;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import cliente.Cliente;
 import exceptions.AprobadoException;
 import exceptions.RechazadoException;
 import busqueda.BusquedaDePrestamo;

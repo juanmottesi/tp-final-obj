@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
+import cliente.Cliente;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.Solicitado;
 import exceptions.AgregarPrestamoAClienteException;

@@ -5,11 +5,13 @@ import installment.calculator.exceptions.InvalidAmountException;
 
 
 
+
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Observable;
 import java.util.Vector;
 
+import cliente.Cliente;
 import otros.*;
 import estadoCuotas.APagar;
 import estadoCuotas.Vencida;
