@@ -256,16 +256,15 @@ public class Prestamo extends Observable {
 	}
 	
 	public String obtenerDniCliente(){
-		return this.getCliente().getDni();
+		return this.getCliente().obtenerDNI();
 	}
 	
 	public String obtenerApellidoCliente(){
-		return this.getCliente().getApellido();
+		return this.getCliente().obtenerApellido();
 	}
 
 	/**
 	 * tengoAlgunaCuotaVencida retorna un booleano si tene alguna cuota vencida.
-	 * @return
 	 */
 	public boolean tengoAlgunaCuotaVencida(){
 		for(Cuota c : this.getCuotas()){
@@ -341,27 +340,18 @@ public class Prestamo extends Observable {
 	/**
 	 * PagarCuota: realiza el pago de la primer cuota no paga que puede estar en 
 	 * cualquier estado.
+	 * @throws EstadoCuotaException 
 	 */
-	@SuppressWarnings("finally")
-	public void pagarCuota(GregorianCalendar fechaDelPago){
+	public void pagarCuota(GregorianCalendar fechaDelPago) throws EstadoCuotaException{
 		if(this.getEstado().puedoPagar()){
 			for(Cuota c : this.getCuotas()){
 				if(!c.estaPaga()){
-					try {
-						c.pagar(fechaDelPago);
-					} catch (EstadoCuotaException e) {
-						System.out.println(e.getMessage());
-					}
-					finally{
-						this.verificarEstado();
-						break;
-					}
+					c.pagar(fechaDelPago);
+					break;
 				}
 			}
 		}
-	
 	}
-	
 	
 	/**
 	 * verifica el estado si es necesario despues de realizar un pago
