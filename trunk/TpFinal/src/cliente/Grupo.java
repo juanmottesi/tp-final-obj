@@ -2,7 +2,7 @@ package cliente;
 
 import java.util.List;
 
-import estadoCliente.SinPrestamo;
+import estadoCliente.EstadoCliente;
 import prestamos.Prestamo;
 
 public class Grupo extends Cliente {
@@ -29,13 +29,14 @@ public class Grupo extends Cliente {
 	public Grupo(Persona personaResponsable, List<Cliente>clientes){
 		this.setClientes(clientes);
 		this.setPersonaResponsable(personaResponsable);
-		this.setEstadoCliente(new SinPrestamo());
+		this.setEstadoCliente(new EstadoCliente());
 	}
 	
 	
 	@Override
 	public void agregarPrestamo(Prestamo prestamo) {
 		if(this.puedoAgregarPrestamo()){
+			this.getPersonaResponsable().agregarPrestamo(prestamo);
 			for(Cliente c : this.getClientes()){
 				c.agregarPrestamo(prestamo);
 			}
@@ -62,8 +63,9 @@ public class Grupo extends Cliente {
 		return this.getPersonaResponsable().obtenerApellido();
 	}
 
+	@Override
+	public String obtenerDireccion() {
+		return this.getPersonaResponsable().obtenerDireccion();
+	}
 
-	
-	
-	
 }

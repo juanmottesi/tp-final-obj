@@ -1,13 +1,11 @@
 package estadoCliente;
 
-import java.util.List;
+import exceptions.EstadoClienteException;
 
-import cliente.Cliente;
+public class EnCurso extends Estado{
 
-public class EnCurso extends EstadoCliente {
-
-	public EnCurso(int cantidadPrestamos){
-		this.setCantidadPrestamos(cantidadPrestamos+1);
+	public EnCurso(){
+		super();
 	}
 	
 	@Override
@@ -16,54 +14,39 @@ public class EnCurso extends EstadoCliente {
 	}
 
 	@Override
-	public void aEnDeuda(Cliente cliente) {
-		cliente.cambiarEstadoA(new EnDeuda(this.getCantidadPrestamos()));
+	public void aEnDeuda(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnDeuda());
 	}
 
 	@Override
-	public void aEnDeudorIncobrable(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Curso");		
+	public void aEnDeudorIncobrable(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Curso");		
 	}
 
 	@Override
-	public void aEnCurso(Cliente cliente) {
-		cliente.cambiarEstadoA(new EnCurso(this.getCantidadPrestamos()-1));
+	public void aEnCurso(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnCurso());
 		
 	}
 
 	@Override
-	public void finalizar(Cliente cliente) {
-		if(this.getCantidadPrestamos() == 1){
-			this.aSinPrestamo(cliente);
-		}
-		else{
-			cliente.cambiarEstadoA(this.verificarEstadoCliente(cliente));
-		}
+	public void finalizar(EstadoCliente estadoCliente) {
+		estadoCliente.seFinalizoUnPrestamo(this);
 	}
 
 	@Override
-	public void solicitar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Curso");
+	public void solicitar(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Curso");		
 	}
 
 	@Override
-	public void rechazar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Curso");
+	public void rechazar(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Curso");		
 	}
-
+	
 	@Override
-	public void aSinPrestamo(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Solicitado");
-	}
-
-	@Override
-	public EstadoCliente verificarEstadoCliente(Cliente cliente) {
-		List<EstadoCliente> estados = cliente.obtenerEstadoCliente();
-		for(EstadoCliente estadoCliente : estados){
-			
-		}
-		
-		
+	public void aSinPrestamo(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Curso");		
 	}
 
 }

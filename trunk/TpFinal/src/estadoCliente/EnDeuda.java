@@ -1,11 +1,11 @@
 package estadoCliente;
 
-import cliente.Cliente;
+import exceptions.EstadoClienteException;
 
-public class EnDeuda extends EstadoCliente {
+public class EnDeuda extends Estado{
 
-	public EnDeuda(int cantidadPrestamos){
-		this.setCantidadPrestamos(cantidadPrestamos);
+	public EnDeuda(){
+		super();
 	}
 	
 	@Override
@@ -14,51 +14,38 @@ public class EnDeuda extends EstadoCliente {
 	}
 
 	@Override
-	public void aEnDeuda(Cliente cliente) {
-		cliente.cambiarEstadoA(new EnDeuda(this.getCantidadPrestamos()));		
+	public void aEnDeuda(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnDeuda());		
 	}
 
 	@Override
-	public void aEnDeudorIncobrable(Cliente cliente) {
-		cliente.cambiarEstadoA(new DeudorIncobrable(this.getCantidadPrestamos()));
-		
+	public void aEnDeudorIncobrable(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new DeudorIncobrable());
 	}
 
 	@Override
-	public void aEnCurso(Cliente cliente) {
-		cliente.cambiarEstadoA(new EnCurso(this.getCantidadPrestamos()-1));
-		
+	public void aEnCurso(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnCurso());
 	}
 
 	@Override
-	public void finalizar(Cliente cliente) {
-		if(this.getCantidadPrestamos() == 1){
-			this.aSinPrestamo(cliente);
-		}
-		else{
-			cliente.cambiarEstadoA(this.verificarEstadoCliente(cliente));
-		}
+	public void finalizar(EstadoCliente estadoCliente) {
+		estadoCliente.seFinalizoUnPrestamo(this);
 	}
 
 	@Override
-	public void solicitar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Deuda");		
+	public void solicitar(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Deuda");		
 	}
 
 	@Override
-	public void rechazar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Deuda");		
+	public void rechazar(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Deuda");		
 	}
 
 	@Override
-	public void aSinPrestamo(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Deuda");
-	}
-
-	@Override
-	public EstadoCliente verificarEstadoCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public void aSinPrestamo(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Deuda");		
 	}
 
 }
