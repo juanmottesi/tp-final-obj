@@ -2,10 +2,7 @@ package cliente;
 
 import java.util.List;
 
-
 import java.util.Vector;
-
-
 
 
 import estadoCliente.EstadoCliente;
@@ -76,7 +73,7 @@ public class Persona extends Cliente {
 			try {
 				this.agregarPrestamoEstadoCliente();
 				this.getPrestamos().add(prestamo);
-				prestamo.addObserver(this.getEstadoCliente());
+				
 			} catch (EstadoClienteException e) {
 				System.out.println(e.getMessage());
 			}
@@ -84,7 +81,7 @@ public class Persona extends Cliente {
 	}
 
 	private void agregarPrestamoEstadoCliente() throws EstadoClienteException{
-		this.getEstadoCliente().solicitar();
+		this.getEstadoCliente().agregarPrestamo();
 	}
 	
 	@Override
@@ -111,6 +108,11 @@ public class Persona extends Cliente {
 	@Override
 	public String obtenerDireccion() {
 		return this.getDireccion();
+	}
+
+	@Override
+	public void agregarObservadores(EstadoCliente ec) {
+		ec.addObserver(this.getEstadoCliente());
 	}
 
 	

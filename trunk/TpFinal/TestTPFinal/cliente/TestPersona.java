@@ -72,4 +72,10 @@ public class TestPersona {
 	public void testObtenerDireccion(){
 		assertEquals("direccion",persona.obtenerDireccion());
 	}
+	
+	@Test
+	public void testAgregarObservadores(){
+		persona.agregarObservadores(mockedEstadoCliente);
+		verify(mockedEstadoCliente).addObserver(mockedEstadoCliente);
+	}
 }

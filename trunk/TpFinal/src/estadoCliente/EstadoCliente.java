@@ -7,7 +7,7 @@ import java.util.Observer;
 
 import exceptions.EstadoClienteException;
 
-public class EstadoCliente extends Observable implements Observer {
+public class EstadoCliente extends Observable implements Observer{
 
 	private int cantidadPrestamos;
 	private Estado estados;
@@ -69,17 +69,6 @@ public class EstadoCliente extends Observable implements Observer {
 		this.setEstados(estado);
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		try {
-			this.aEnDeuda();
-			this.setChanged();
-			this.notifyObservers();
-		} catch (EstadoClienteException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
 	public void seFinalizoUnPrestamo(Estado estado){
 		this.setCantidadPrestamos(this.getCantidadPrestamos() -1);
 		if(this.getCantidadPrestamos() == 0){
@@ -90,7 +79,7 @@ public class EstadoCliente extends Observable implements Observer {
 			}
 		}
 		else{
-			this.setEstados(estado);
+			this.cambiarEstadoA(estado);
 		}
 	}
 	
@@ -104,9 +93,29 @@ public class EstadoCliente extends Observable implements Observer {
 			}
 		}
 		else{
-			this.setEstados(new EnCurso());
+			this.cambiarEstadoA(new EnCurso());
 		}
 	}
+
+	public void agregarPrestamo() throws EstadoClienteException{
+		this.setCantidadPrestamos(this.getCantidadPrestamos() +1);
+		this.solicitar();
+		this.setChanged();
+		this.notifyObservers();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		try {
+			this.aEnDeuda();
+			this.setChanged();
+			this.notifyObservers();
+		} catch (EstadoClienteException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+
 
 	
 }
