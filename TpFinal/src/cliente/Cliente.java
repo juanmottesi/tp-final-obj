@@ -1,4 +1,4 @@
-package otros;
+package cliente;
 
 import java.util.List;
 import java.util.Observable;

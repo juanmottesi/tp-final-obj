@@ -7,6 +7,7 @@ import installment.calculator.exceptions.InvalidAmountException;
 
 
 
+
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
@@ -15,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import cliente.Cliente;
 import estadoCuotas.APagar;
 import estadoCuotas.Pagada;
 import estadoCuotas.Vencida;
@@ -22,7 +24,6 @@ import estadoPrestamos.EnCurso;
 import estadoPrestamos.Finalizado;
 import exceptions.AprobadoException;
 import exceptions.EstadoCuotaException;
-import otros.Cliente;
 import otros.ConfiguracionGeneral;
 
 public class TestPrestamo {
