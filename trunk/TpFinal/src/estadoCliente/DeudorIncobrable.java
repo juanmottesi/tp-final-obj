@@ -20,7 +20,7 @@ public class DeudorIncobrable extends Estado{
 
 	@Override
 	public void aEnDeudorIncobrable(EstadoCliente estadoCliente) {
-		estadoCliente.cambiarEstadoA(new DeudorIncobrable());
+		estadoCliente.cambiarEstadoA(this);
 	}
 
 	@Override

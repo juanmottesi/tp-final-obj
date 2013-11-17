@@ -78,9 +78,6 @@ public class EstadoCliente extends Observable implements Observer {
 		} catch (EstadoClienteException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
 	}
 
 	public void seFinalizoUnPrestamo(Estado estado){
@@ -97,6 +94,19 @@ public class EstadoCliente extends Observable implements Observer {
 		}
 	}
 	
-	
+	public void seRechazoUnPrestamo(Estado estado){
+		this.setCantidadPrestamos(this.getCantidadPrestamos() -1);
+		if(this.getCantidadPrestamos() == 0){
+			try {
+				this.aSinPrestamo();
+			} catch (EstadoClienteException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		else{
+			this.setEstados(new EnCurso());
+		}
+	}
+
 	
 }

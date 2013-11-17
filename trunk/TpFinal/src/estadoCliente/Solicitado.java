@@ -40,12 +40,12 @@ public class Solicitado extends Estado{
 
 	@Override
 	public void rechazar(EstadoCliente estadoCliente) {
-		estadoCliente.cambiarEstadoA(new EnCurso());
+		estadoCliente.seRechazoUnPrestamo(this);
 	}
 
 	@Override
-	public void aSinPrestamo(EstadoCliente estadoCliente) {
-		estadoCliente.cambiarEstadoA(new SinPrestamo());	
+	public void aSinPrestamo(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Solicitado");
 	}
 
 }
