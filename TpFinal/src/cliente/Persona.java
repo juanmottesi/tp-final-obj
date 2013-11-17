@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Vector;
 
 
-import estadoCliente.SinPrestamo;
+
+import estadoCliente.EstadoCliente;
 import prestamos.Prestamo;
 
 public class Persona extends Cliente {
@@ -63,15 +64,15 @@ public class Persona extends Cliente {
 		this.setApellido(apellido);
 		this.setDni(dni);
 		this.setDireccion(direccion);
-		this.setEstadoCliente(new SinPrestamo());
+		this.setEstadoCliente(new EstadoCliente());
 		this.setPrestamos(new Vector<Prestamo>());
 	}
 	
-
 	@Override
 	public void agregarPrestamo(Prestamo prestamo) {
 		if(this.puedoAgregarPrestamo()){
 			this.getPrestamos().add(prestamo);
+			prestamo.addObserver(this.getEstadoCliente());
 		}
 	}
 
@@ -96,6 +97,10 @@ public class Persona extends Cliente {
 		return this.getApellido();
 	}
 
+	@Override
+	public String obtenerDireccion() {
+		return this.getDireccion();
+	}
 
 	
 }

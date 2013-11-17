@@ -1,11 +1,11 @@
 package estadoCliente;
 
-import cliente.Cliente;
+import exceptions.EstadoClienteException;
 
-public class Solicitado extends EstadoCliente {
+public class Solicitado extends Estado{
 	
-	public Solicitado(int cantidadPrestamo){
-		this.setCantidadPrestamos(cantidadPrestamo+1);
+	public Solicitado(){
+		super();
 	}
 
 	@Override
@@ -14,49 +14,38 @@ public class Solicitado extends EstadoCliente {
 	}
 
 	@Override
-	public void aEnDeuda(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Solicitado");
+	public void aEnDeuda(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Solicitado");
 	}
 
 	@Override
-	public void aEnDeudorIncobrable(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Solicitado");
+	public void aEnDeudorIncobrable(EstadoCliente estadoCliente)throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Solicitado");
 	}
 
 	@Override
-	public void aEnCurso(Cliente cliente) {
-		cliente.cambiarEstadoA(new EnCurso());
+	public void aEnCurso(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnCurso());
 	}
 
 	@Override
-	public void finalizar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en Solicitado");
+	public void finalizar(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en Solicitado");
 	}
 
 	@Override
-	public void solicitar(Cliente cliente) {
-		cliente.cambiarEstadoA(new Solicitado(this.getCantidadPrestamos()-1));
+	public void solicitar(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new Solicitado());
 	}
 
 	@Override
-	public void rechazar(Cliente cliente) {
-		if(this.getCantidadPrestamos() == 1){
-			this.aSinPrestamo(cliente);
-		}
-		else{
-			cliente.cambiarEstadoA(this.verificarEstadoCliente(cliente));
-		}
+	public void rechazar(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new EnCurso());
 	}
 
 	@Override
-	public void aSinPrestamo(Cliente cliente) {
-		cliente.cambiarEstadoA(new SinPrestamo());	
-	}
-
-	@Override
-	public EstadoCliente verificarEstadoCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public void aSinPrestamo(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new SinPrestamo());	
 	}
 
 }

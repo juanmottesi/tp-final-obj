@@ -1,11 +1,11 @@
 package estadoCliente;
 
-import cliente.Cliente;
+import exceptions.EstadoClienteException;
 
-public class DeudorIncobrable extends EstadoCliente {
+public class DeudorIncobrable extends Estado{
 	
-	public DeudorIncobrable(int cantidadPrestamos){
-		this.setCantidadPrestamos(cantidadPrestamos);
+	public DeudorIncobrable(){
+		super();
 	}
 	
 	@Override
@@ -14,43 +14,38 @@ public class DeudorIncobrable extends EstadoCliente {
 	}
 
 	@Override
-	public void aEnDeuda(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void aEnDeuda(EstadoCliente estadoCliente) throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
 
 	@Override
-	public void aEnDeudorIncobrable(Cliente cliente) {
-		cliente.cambiarEstadoA(new DeudorIncobrable(this.getCantidadPrestamos()));
+	public void aEnDeudorIncobrable(EstadoCliente estadoCliente) {
+		estadoCliente.cambiarEstadoA(new DeudorIncobrable());
 	}
 
 	@Override
-	public void aEnCurso(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void aEnCurso(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
 
 	@Override
-	public void finalizar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void finalizar(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
-
+	
 	@Override
-	public void solicitar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void solicitar(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
-
+	
 	@Override
-	public void rechazar(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void rechazar(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
-
+	
 	@Override
-	public void aSinPrestamo(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
-	}
-
-	@Override
-	public EstadoCliente verificarEstadoCliente(Cliente cliente) {
-		throw new EstadoClienteExeption("Usted esta en DeudorIncobrable");
+	public void aSinPrestamo(EstadoCliente estadoCliente)  throws EstadoClienteException {
+		throw new EstadoClienteException("Usted esta en DeudorIncobrable");
 	}
 
 }

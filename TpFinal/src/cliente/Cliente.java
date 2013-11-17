@@ -27,7 +27,7 @@ public abstract class Cliente implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg){
-		this.getEstadoCliente().aEnDeuda(this);
+		System.out.println("Su esteado cambio a deudor");
 	}
 	
 	public abstract void suscribirAlSistemaDeAviso();
@@ -37,21 +37,7 @@ public abstract class Cliente implements Observer {
 	public abstract String obtenerDNI();
 	
 	public abstract String obtenerApellido();
+	
+	public abstract String obtenerDireccion();
 
-	public void aEnCurso(){
-		this.getEstadoCliente().aEnCurso(this);
-	}
-	
-	public void finalizar(){
-		this.getEstadoCliente().finalizar(this);
-	}
-	
-	public void aEnDeuda(){
-		this.getEstadoCliente().aEnDeuda(this);
-	}
-	
-	public void cambiarEstadoA(EstadoCliente estado){
-		this.setEstadoCliente(estado);		
-	}
-	
 }
