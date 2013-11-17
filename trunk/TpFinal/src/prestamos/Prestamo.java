@@ -279,6 +279,7 @@ public class Prestamo extends Observable {
 		if(this.estanTodasLasCuotasPagas()){
 			try {
 				this.getEstado().finalizar(this);
+				this.getCliente().finalizar();
 			} catch (FinalizadoException e) {
 				System.out.println(e.getMessage());
 			}
@@ -287,6 +288,7 @@ public class Prestamo extends Observable {
 			if(this.tengoAlgunaCuotaVencida()){
 				try {
 					this.getEstado().aEnDeuda(this);
+					this.getCliente().aEnDeuda();
 				} catch (EnDeudaException e) {
 					System.out.println(e.getMessage());
 				}
@@ -294,6 +296,7 @@ public class Prestamo extends Observable {
 			else{
 				try {
 					this.getEstado().aEnCurso(this);
+					this.getCliente().aEnCurso();
 				} catch (EnCursoException e) {
 					System.out.println(e.getMessage());
 				}
