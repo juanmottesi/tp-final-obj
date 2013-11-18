@@ -59,6 +59,7 @@ public class ConfiguracionGeneral {
 		this.setFechaInicio(fechaInicio);
 		this.setTem(tem);
 		this.setGastos(gastos);
+		this.setFechaFin(new GregorianCalendar(fechaInicio.get(1)+100,fechaInicio.get(2),fechaInicio.get(5)));
 	}
 	/**
 	 * @param fechaInicio
