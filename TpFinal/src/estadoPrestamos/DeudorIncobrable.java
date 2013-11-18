@@ -1,7 +1,6 @@
 package estadoPrestamos;
 
 import exceptions.AprobadoException;
-import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
@@ -17,9 +16,8 @@ public class DeudorIncobrable extends EstadoPrestamo {
 	 */
 	
 	@Override
-	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
-		throw new DeudorIncobrableException
-				("Estado Deudor Incobreble: Ya esta en este estado");
+	public void aDeudorIncobrable(Prestamo p){
+		p.setEstado(this);
 		
 	}
 
@@ -61,7 +59,5 @@ public class DeudorIncobrable extends EstadoPrestamo {
 	@Override
 	public void aEnCurso(Prestamo p) throws EnCursoException {
 		throw new EnCursoException("Estado Deudor Incobrable");
-		//p.setEstado(new EnCurso());
-		
 	}
 }

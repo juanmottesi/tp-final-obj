@@ -11,7 +11,6 @@ import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
-import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import static org.mockito.Mockito.*;
 
@@ -37,10 +36,10 @@ public class TestFinalizado {
 		enFinalizado.rechazar(mockedPrestamo);
 	}
 	
-	@Test(expected= FinalizadoException.class)
-	public void testFinalizar() throws FinalizadoException {
-		
+	@Test
+	public void testFinalizar(){
 		enFinalizado.finalizar(mockedPrestamo);
+		verify(mockedPrestamo).setEstado(enFinalizado);
 	}
 	
 	@Test(expected= DeudorIncobrableException.class)
@@ -59,5 +58,10 @@ public class TestFinalizado {
 	public void testAEnCurso() throws EnCursoException{
 				
 		enFinalizado.aEnCurso(mockedPrestamo);
+	}
+	
+	@Test
+	public void testPuedoPagar(){
+		assertFalse(enFinalizado.puedoPagar());
 	}
 }

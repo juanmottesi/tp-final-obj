@@ -5,7 +5,6 @@ import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
-import exceptions.RechazadoException;
 import prestamos.Prestamo;
 
 public class Rechazado extends EstadoPrestamo {
@@ -31,11 +30,8 @@ public class Rechazado extends EstadoPrestamo {
 	}
 
 	@Override
-	public void rechazar(Prestamo p) throws RechazadoException {
-
-		throw new RechazadoException
-		("Estado Rechazado: el prestamo no esta");
-		
+	public void rechazar(Prestamo p){
+		p.setEstado(this);	
 	}
 
 	@Override
