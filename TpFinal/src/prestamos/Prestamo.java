@@ -360,15 +360,13 @@ public class Prestamo extends Observable {
 			for(Cuota c : this.getCuotas()){
 				if(!c.estaPaga()){
 					c.pagar(fechaDelPago);
+					this.verificarEstado();
 					break;
 				}
 			}
 		}
 	}
 	
-	/**
-	 * verifica el estado si es necesario despues de realizar un pago
-	 */
 	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
 	}
