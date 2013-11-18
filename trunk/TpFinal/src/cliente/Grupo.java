@@ -3,7 +3,9 @@ package cliente;
 import java.util.List;
 
 
+
 import estadoCliente.EstadoCliente;
+import exceptions.EstadoClienteException;
 import prestamos.Prestamo;
 
 public class Grupo extends Cliente {
@@ -76,6 +78,31 @@ public class Grupo extends Cliente {
 	@Override
 	public String obtenerDireccion() {
 		return this.getPersonaResponsable().obtenerDireccion();
+	}
+
+	@Override
+	public void finalizar() throws EstadoClienteException {
+		this.getPersonaResponsable().finalizar();
+		for(Cliente c : this.getClientes()){
+			c.finalizar();
+		}
+	}
+
+	@Override
+	public void aEnDeuda() throws EstadoClienteException {
+		this.getPersonaResponsable().aEnDeuda();
+		for(Cliente c : this.getClientes()){
+			c.aEnDeuda();
+		}
+		
+	}
+
+	@Override
+	public void aEnCurso() throws EstadoClienteException {
+		this.getPersonaResponsable().aEnCurso();
+		for(Cliente c : this.getClientes()){
+			c.aEnCurso();
+		}		
 	}
 
 

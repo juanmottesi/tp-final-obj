@@ -3,9 +3,6 @@ package prestamos;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 
-
-
-
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Observable;
@@ -19,6 +16,7 @@ import estadoPrestamos.*;
 import exceptions.AprobadoException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
+import exceptions.EstadoClienteException;
 import exceptions.EstadoCuotaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
@@ -274,36 +272,58 @@ public class Prestamo extends Observable {
 		}
 		return false;
 	}
-	//-***************************************************************************************
-//	private void verificarEstado(){
-//		if(this.estanTodasLasCuotasPagas()){
-//			try {
-//				this.getEstado().finalizar(this);
-//				this.getCliente().finalizar();
-//			} catch (FinalizadoException e) {
-//				System.out.println(e.getMessage());
-//			}
-//		}
-//		else{
-//			if(this.tengoAlgunaCuotaVencida()){
-//				try {
-//					this.getEstado().aEnDeuda(this);
-//					this.getCliente().aEnDeuda();
-//				} catch (EnDeudaException e) {
-//					System.out.println(e.getMessage());
-//				}
-//			}
-//			else{
-//				try {
-//					this.getEstado().aEnCurso(this);
-//					this.getCliente().aEnCurso();
-//				} catch (EnCursoException e) {
-//					System.out.println(e.getMessage());
-//				}
-//			}
-//		}
-//	}
-//	
+	
+	private void verificarEstado(){
+		if(this.estanTodasLasCuotasPagas()){
+			this.finalizarPrestamo();
+		}
+		else{
+			this.verificarSiQuendaSinPagarOVencidas();
+		}
+	}
+	
+	private void verificarSiQuendaSinPagarOVencidas(){
+		if(this.tengoAlgunaCuotaVencida()){
+			this.prestamoAEnDeuda();
+		}
+		else{
+			this.prestamoAEnCurso();
+		}
+	}
+	
+	private void prestamoAEnCurso(){
+		try {
+			this.getEstado().aEnCurso(this);
+			this.getCliente().aEnCurso();
+		} catch (EnCursoException e) {
+			System.out.println(e.getMessage());
+		}  catch (EstadoClienteException e) {
+			System.out.println(e.getMessage());
+		}				
+	}
+	
+	private void prestamoAEnDeuda(){
+		try {
+			this.getEstado().aEnDeuda(this);
+			this.getCliente().aEnDeuda();
+		} catch (EnDeudaException e) {
+			System.out.println(e.getMessage());
+		}  catch (EstadoClienteException e) {
+			System.out.println(e.getMessage());
+		}		
+	}
+	
+	private void finalizarPrestamo(){
+		try {
+			this.getEstado().finalizar(this);
+			this.getCliente().finalizar();				
+		} catch (FinalizadoException e) {
+			System.out.println(e.getMessage());
+		} catch (EstadoClienteException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	/**
 	 * @param fechaActual 
 	 * chequea todas sus cuotas si estas se encuentran vencidas.
@@ -327,17 +347,7 @@ public class Prestamo extends Observable {
 		}	
 		return true;	
 	}
-	
-	public void finalizarPrestamo(){
-		if(this.estanTodasLasCuotasPagas()){
-			try {
-				this.getEstado().finalizar(this);
-			} catch (FinalizadoException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-	}
-	
+		
 	// Metodos usados por el banco
 	
 	/**
