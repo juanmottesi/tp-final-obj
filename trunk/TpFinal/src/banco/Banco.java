@@ -1,11 +1,15 @@
 package banco;
 
 
+import installment.calculator.exceptions.InstallmentCountException;
+import installment.calculator.exceptions.InvalidAmountException;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Vector;
 
 import cliente.Cliente;
 import exceptions.AprobadoException;
@@ -14,6 +18,7 @@ import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
 import busqueda.BusquedaDePrestamo;
 import busqueda.Condicion;
+import prestamos.ConfiguracionPrestamo;
 import prestamos.Prestamo;
 
 public class Banco {
@@ -55,6 +60,13 @@ public class Banco {
 		this.busqueda = busqueda;
 	}
 	
+	public Banco(){
+		this.setBusqueda(null);
+		this.setClientes(new Vector<Cliente>());
+		this.setConfigGeneral(new Vector<ConfiguracionGeneral>());
+		this.setPrestamos(new Vector<Prestamo>());
+	}
+	
 	public void pagarCuota(Prestamo prestamo, GregorianCalendar fechaDelPago){
 		try {
 			prestamo.pagarCuota(fechaDelPago);
@@ -84,9 +96,7 @@ public class Banco {
 	}
 	
 	public List<Prestamo> filtradosPorCondiciones(Condicion condicion){
-		
 		this.setBusqueda(new BusquedaDePrestamo(condicion));
-		
 		return this.getBusqueda().buscar(this.getPrestamos());
 	}
 	
@@ -147,4 +157,50 @@ public class Banco {
 		texto = texto + nuevalinea + "</div>" + nuevalinea;
 		return texto + nuevalinea + "</html>";
 	}
+
+	public double consultarPrestamo(double monto, Integer cantCuotas, GregorianCalendar fecha){
+		ConfiguracionGeneral configGeneral = this.buscarConfiguracionGeneral(fecha);
+		Prestamo  p = new Prestamo(monto, cantCuotas, configGeneral);
+		try {
+			return p.calcularCuota(monto, configGeneral.consultarTem(cantCuotas), cantCuotas);
+		} catch (InstallmentCountException e) {
+			System.out.println(e.getMessage());
+			return 0;
+		} catch (InvalidAmountException e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
+	
+	private ConfiguracionGeneral buscarConfiguracionGeneral(GregorianCalendar fecha){
+		for(ConfiguracionGeneral cg : this.getConfigGeneral()){
+			if(cg.getFechaInicio().before(fecha) && cg.getFechaFin().after(fecha)){
+				return cg;
+			}
+		}
+		return  this.getConfigGeneral().get(0);
+	}
+	
+	public void agregarPrestamo(double monto, Integer cantCuotas, GregorianCalendar fecha, Cliente cliente, ConfiguracionPrestamo configuracionPrestamo){
+		if(cliente.puedoAgregarPrestamo()){
+			try {
+				Prestamo prestamoNuevo = new Prestamo(cliente, monto,cantCuotas,fecha,configuracionPrestamo,this.buscarConfiguracionGeneral(fecha));
+				cliente.agregarPrestamo(prestamoNuevo);
+				this.getPrestamos().add(prestamoNuevo);
+			} catch (InstallmentCountException | InvalidAmountException e) {
+				System.out.println(e.getMessage());
+			} 
+		}
+	}
+	
+	public void agregarConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral){
+		if(this.getConfigGeneral().isEmpty()){
+			this.getConfigGeneral().add(configuracionGeneral);
+		}
+		else{
+			this.getConfigGeneral().get(this.getConfigGeneral().size()-1).finConfiguracionGeneral(configuracionGeneral.getFechaInicio());
+			this.getConfigGeneral().add(configuracionGeneral);
+		}
+	}
+
 }
