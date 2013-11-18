@@ -5,9 +5,6 @@ import static org.mockito.Mockito.*;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 
-
-
-
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
@@ -21,9 +18,10 @@ import estadoCuotas.APagar;
 import estadoCuotas.Pagada;
 import estadoCuotas.Vencida;
 import estadoPrestamos.EnCurso;
-import estadoPrestamos.Finalizado;
+import estadoPrestamos.Rechazado;
 import exceptions.AprobadoException;
 import exceptions.EstadoCuotaException;
+import exceptions.RechazadoException;
 import otros.ConfiguracionGeneral;
 
 public class TestPrestamo {
@@ -88,13 +86,13 @@ public class TestPrestamo {
 	
 	@Test 
 	public void testObtenerDniCliente(){
-		when(mockedCliente.getDni()).thenReturn("36778000");
+		when(mockedCliente.obtenerDNI()).thenReturn("36778000");
 		assertEquals("36778000", prestamo.obtenerDniCliente());
 	}
 	
 	@Test
 	public void testObtenerApellidoCliente(){
-		when(mockedCliente.getApellido()).thenReturn("apellido");
+		when(mockedCliente.obtenerApellido()).thenReturn("apellido");
 		assertEquals("apellido", prestamo.obtenerApellidoCliente());		
 	}
 	
@@ -132,27 +130,6 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testFinalizarPrestamoConCuotasPagas() throws AprobadoException {
-		List<Cuota>cuotas = new Vector<Cuota>();
-		Cuota mockedCuota = mock(Cuota.class);
-		cuotas.add(mockedCuota);
-		when(mockedCuota.getEstadoCuota()).thenReturn(new APagar());
-		prestamo.aceptarPrestamo();
-		prestamo.setCuotas(cuotas);
-		prestamo.pagarCuota(new GregorianCalendar());
-		// modifica la cuota y la pasa a pagada pero al ser mock sigue valiendo lo que esta en el when
-		when(mockedCuota.getEstadoCuota()).thenReturn(new Pagada());
-		prestamo.finalizarPrestamo();
-		assertEquals(new Finalizado(), prestamo.getEstado());
-	}
-	
-	@Test
-	public void testFinalizarPrestamoSinCuotasPagas(){
-		prestamo.finalizarPrestamo();
-		assertNotEquals(new Finalizado(), prestamo.getEstado());
-	}
-	
-	@Test
 	public void testCuadroDeMarcha(){
 		List<Cuota> auxiliar = prestamo.cuadroDeMarcha();
 		assertEquals(auxiliar, prestamo.getCuotas());
@@ -178,11 +155,12 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testVerificarFechaCuotas() throws EstadoCuotaException{
+	public void testVerificarFechaCuotas() throws EstadoCuotaException, AprobadoException{
 		GregorianCalendar fechaHoy = new GregorianCalendar();
 		List<Cuota>cuotas = new Vector<Cuota>();
 		Cuota mockedCuota = mock(Cuota.class);
 		cuotas.add(mockedCuota);
+		prestamo.aceptarPrestamo();
 		prestamo.setCuotas(cuotas);
 		when(mockedCuota.getEstadoCuota()).thenReturn(new APagar());
 		prestamo.verificarFechaDeCuotas(fechaHoy);
@@ -196,10 +174,16 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testPagarCuota() throws AprobadoException{
+	public void testPagarCuota() throws AprobadoException, EstadoCuotaException{
 		prestamo.aceptarPrestamo();
 		prestamo.pagarCuota(new GregorianCalendar());
 		assertEquals(new Pagada(), prestamo.getCuotas().get(0).getEstadoCuota());
 	}
 	
+	@Test
+	public void testRechazarPrestamo() throws RechazadoException{
+		prestamo.rechazarPrestamo();
+		assertEquals(new Rechazado(),prestamo.getEstado());
+		
+	}
 }
