@@ -115,6 +115,36 @@ public class Banco {
 	}
 	
 	
-	public void generarCuadroDeMarchaHTMLDe(Prestamo prestamo){}
+	public void generarCuadroDeMarchaHTMLDe(Prestamo prestamo){
+		java.io.BufferedWriter bufferedWriter;
 	
+		try {
+			String texto = this.cuadroDeMarchaHTML(prestamo);
+			bufferedWriter = new BufferedWriter(new FileWriter("Prestamo.html"));
+			bufferedWriter.append(texto);
+			bufferedWriter.flush();
+			
+			System.out.print(texto);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	private String cuadroDeMarchaHTML(Prestamo prestamo){
+		String nuevalinea = System.getProperty("line.separator");
+		String texto = "<html lang =\"en\">" + nuevalinea;
+		texto = texto + nuevalinea;
+		texto = texto + "<head>" + nuevalinea;
+		texto = texto + nuevalinea + "    " + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"+ nuevalinea;
+		texto = texto + nuevalinea + "    " + "<title>Cuadro de Marcha</title>" +nuevalinea;
+		texto = texto + nuevalinea + "</head>" + nuevalinea;
+		texto = texto + nuevalinea + "<body>" + nuevalinea;
+		texto = texto + nuevalinea + "    " +"<div id = \"cuadro\">" + nuevalinea;		
+		texto = texto + prestamo.genererarCuotasHTML();
+		texto = texto + "    " + "</div>" + nuevalinea;
+		texto = texto + nuevalinea + "</div>" + nuevalinea;
+		return texto + nuevalinea + "</html>";
+	}
 }
