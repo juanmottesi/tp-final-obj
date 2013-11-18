@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 
 import prestamos.Prestamo;
 import estadoCliente.EstadoCliente;
+import exceptions.EstadoClienteException;
 
 public class TestGrupo {
 
@@ -85,5 +86,23 @@ private Grupo grupo;
 		verify(mockedPersona).obtenerDireccion();	
 	}
 	
-
+	@Test
+	public void testFinalizar() throws EstadoClienteException{
+		grupo.finalizar();
+		verify(mockedPersona).finalizar();
+	}
+	
+	@Test
+	public void testAEnDeuda() throws EstadoClienteException{
+		grupo.aEnDeuda();
+		verify(mockedPersona).aEnDeuda();
+	}
+	
+	@Test
+	public void testAEnCurso() throws EstadoClienteException{
+		grupo.aEnCurso();
+		verify(mockedPersona).aEnCurso();
+	}
+	
+	
 }
