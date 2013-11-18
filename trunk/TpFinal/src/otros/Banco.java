@@ -106,7 +106,7 @@ public class Banco {
 		
 	}
 	
-	public String cuadroDeMarchaXML(Prestamo prestamo){
+	private String cuadroDeMarchaXML(Prestamo prestamo){
 		String nuevalinea = System.getProperty("line.separator");
 		String texto = "<cuadroMarcha>";
 		texto = texto + nuevalinea;
