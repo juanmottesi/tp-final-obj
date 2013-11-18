@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import estadoCliente.EstadoCliente;
+import exceptions.EstadoClienteException;
 import prestamos.Prestamo;
 
 public abstract class Cliente implements Observer {
@@ -41,4 +42,10 @@ public abstract class Cliente implements Observer {
 	public abstract String obtenerDireccion();
 
 	public abstract void agregarObservadores(EstadoCliente ec);
+	
+	public abstract void finalizar()throws EstadoClienteException ;
+	
+	public abstract void aEnDeuda()throws EstadoClienteException ;
+	
+	public abstract void aEnCurso()throws EstadoClienteException ;
 }

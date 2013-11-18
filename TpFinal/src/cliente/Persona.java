@@ -115,5 +115,20 @@ public class Persona extends Cliente {
 		ec.addObserver(this.getEstadoCliente());
 	}
 
+	@Override
+	public void finalizar() throws EstadoClienteException {
+		this.getEstadoCliente().finalizar();		
+	}
+
+	@Override
+	public void aEnDeuda() throws EstadoClienteException {
+		this.getEstadoCliente().aEnDeuda();		
+	}
+
+	@Override
+	public void aEnCurso() throws EstadoClienteException {
+		this.getEstadoCliente().aEnCurso();
+	}
+
 	
 }
