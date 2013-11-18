@@ -20,6 +20,7 @@ import estadoCuotas.Vencida;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.Rechazado;
 import exceptions.AprobadoException;
+import exceptions.EstadoClienteException;
 import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
 import otros.ConfiguracionGeneral;
@@ -155,7 +156,7 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testVerificarFechaCuotas() throws EstadoCuotaException, AprobadoException{
+	public void testVerificarFechaCuotas() throws AprobadoException, EstadoClienteException, EstadoCuotaException{
 		GregorianCalendar fechaHoy = new GregorianCalendar();
 		List<Cuota>cuotas = new Vector<Cuota>();
 		Cuota mockedCuota = mock(Cuota.class);
@@ -168,22 +169,43 @@ public class TestPrestamo {
 	}
 	
 	@Test
-	public void testAceptarPrestamo() throws AprobadoException{
+	public void testAceptarPrestamo() throws AprobadoException, EstadoClienteException{
 		prestamo.aceptarPrestamo();
 		assertEquals(new EnCurso(), prestamo.getEstado());
 	}
 	
 	@Test
-	public void testPagarCuota() throws AprobadoException, EstadoCuotaException{
+	public void testPagarCuota() throws AprobadoException, EstadoClienteException, EstadoCuotaException{
 		prestamo.aceptarPrestamo();
 		prestamo.pagarCuota(new GregorianCalendar());
 		assertEquals(new Pagada(), prestamo.getCuotas().get(0).getEstadoCuota());
 	}
 	
 	@Test
-	public void testRechazarPrestamo() throws RechazadoException{
+	public void testRechazarPrestamo() throws RechazadoException, EstadoClienteException{
 		prestamo.rechazarPrestamo();
 		assertEquals(new Rechazado(),prestamo.getEstado());
+	}
+	
+	@Test
+	public void testGenererarCuotasXML(){
+		List<Cuota>cuotas = new Vector<Cuota>();
+		Cuota mockedCuota = mock(Cuota.class);
+		cuotas.add(mockedCuota);
+		prestamo.setCuotas(cuotas);
+		prestamo.genererarCuotasXML();
+		verify(mockedCuota).generarInfoCuotaXML();
+	}
+	
+	@Test
+	public void testGenererarCuotasHTML(){
+		List<Cuota>cuotas = new Vector<Cuota>();
+		Cuota mockedCuota = mock(Cuota.class);
+		cuotas.add(mockedCuota);
+		prestamo.setCuotas(cuotas);
+		prestamo.genererarCuotasHTML();
+		verify(mockedCuota).generarInfoCuotaHTML();
 		
 	}
+
 }

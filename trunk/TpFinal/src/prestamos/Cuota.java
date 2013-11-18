@@ -125,10 +125,12 @@ public class Cuota {
 		this.setInteres(interes);
 		this.setMontoCuota(monto);
 		this.setSaldoDeuda(saldoDeuda);
-		
 		this.setNroCuota(nroCuota);
 		this.setEstadoCuota(new APagar());
 		this.setFechaDePago(null);
+		this.setValorTotalCuota(0);
+		this.setSeguro(0);
+		this.setInteresPorMora(0);
 	}
 
 	
@@ -175,7 +177,6 @@ public class Cuota {
 		if(this.getFechaVencimiento().before(fechaActual)){
 			this.aVencido();
 		}
-		
 	}
 	
 	public void actualizarGastoTotal(double montoActuralizado){
@@ -190,7 +191,7 @@ public class Cuota {
 		s = s + "</numero>";		
 		s = s + nuevalinea2;
 		s = s + "<vencimiento>";
-		s = s + this.getFechaVencimiento().toString();
+		s = s + this.mostrarFecha(this.getFechaVencimiento());
 		s = s + "</vencimiento>";
 		s = s + nuevalinea2;
 		s = s + "<amortizacion>";
@@ -222,7 +223,7 @@ public class Cuota {
  	 	s = s + "</valortotalcuota>";	
  	 	s = s + nuevalinea2;
  	 	s = s + "<fechadepago>";
- 	 	s = s + this.getFechaDePago().toString();
+ 	 	s = s + this.mostrarFecha(this.getFechaDePago());
  	 	s = s + "</fechadepago>";	
  	 	s = s + nuevalinea2;
  	 	s = s + "<interesmora>";
@@ -232,6 +233,17 @@ public class Cuota {
 		return s;
 	}
 
+	private String mostrarFecha(GregorianCalendar fecha){
+		if(fecha == null){
+			return "0/0/0";
+		}
+		String ret = "";
+		ret = ret + fecha.get(1);
+		ret = ret + "/" + fecha.get(2);
+		ret = ret + "/" + fecha.get(5);
+		return ret;
+	} 
+	
 	public String generarInfoCuotaHTML(){
 		String nuevalinea = System.getProperty("line.separator");
 		String nuevalinea2 = nuevalinea+"            ";
@@ -240,7 +252,7 @@ public class Cuota {
 		s = s+"</li>";		
 		s = s+nuevalinea2;
 		s = s+"<li>";
-		s= s+"Vencimiento "+ this.getFechaVencimiento();
+		s= s+"Vencimiento "+ this.mostrarFecha(this.getFechaVencimiento());
 		s = s +"</li>";
 		s = s+nuevalinea2;
 		s = s +"<li>";
@@ -272,7 +284,7 @@ public class Cuota {
  	 	s = s +"</li>";	
  	 	s = s+nuevalinea2;
  	 	s = s +"<li>";
- 	 	s = s+"Fecha de Pago "+ this.getFechaDePago();
+ 	 	s = s+"Fecha de Pago "+ this.mostrarFecha(this.getFechaDePago());
  	 	s = s +"</li>";	
  	 	s = s+nuevalinea2;
  	 	s = s +"<li>";

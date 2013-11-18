@@ -6,7 +6,9 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import estadoCuotas.APagar;
 import estadoCuotas.Pagada;
+import estadoCuotas.Vencida;
 import exceptions.EstadoCuotaException;
 import exceptions.PagadaException;
 import prestamos.Cuota;
@@ -83,6 +85,39 @@ public class TestCuota {
 		cuota.pagar(new GregorianCalendar());
 	}
 	
-
+	@Test
+	public void testVerificarFechaConFechaDespuesDelVencimento() throws EstadoCuotaException{
+		GregorianCalendar fechaDespues= new GregorianCalendar(fechaVencimiento.get(1),fechaVencimiento.get(2),fechaVencimiento.get(5)+1); 
+		cuota.verificarFecha(fechaDespues);
+		assertEquals(new Vencida(), cuota.getEstadoCuota());
+	}
+	
+	@Test
+	public void testVerificarFechaConFechaAntesDelVencimento() throws EstadoCuotaException{
+		GregorianCalendar fechaAntes= new GregorianCalendar(fechaVencimiento.get(1),fechaVencimiento.get(2),fechaVencimiento.get(5)-1); 
+		cuota.verificarFecha(fechaAntes);
+		assertEquals(new APagar(), cuota.getEstadoCuota());
+	}
+	
+	@Test
+	public void testActualizarGastoTotal(){
+		Double nuevoGastoTotal = (double) 350000;
+		cuota.actualizarGastoTotal(nuevoGastoTotal);
+		assertEquals(nuevoGastoTotal, cuota.getGastoTotal(),0);
+		
+	}
+	
+	@Test
+	public void testGenerarInfoCuotaXML(){
+		String retorno ="<numero>1</numero>";
+		assertTrue(cuota.generarInfoCuotaXML().contains(retorno));		
+	}
+	
+	@Test
+	public void testGenerarInfoCuotaHTML(){
+		String retorno ="<li>Cuota 1</li>";
+		assertTrue(cuota.generarInfoCuotaHTML().contains(retorno));	
+	}
+	
 }
 
