@@ -1,4 +1,4 @@
-package otros;
+package banco;
 
 import static org.junit.Assert.*;
 import installment.calculator.exceptions.InstallmentCountException;
@@ -7,6 +7,8 @@ import installment.calculator.model.AdvanceModeInstallment;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import banco.CalculoValorCuota;
 
 public class TestCalculoValorCuota {
 	

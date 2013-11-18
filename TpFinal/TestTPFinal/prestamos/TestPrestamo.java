@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import banco.ConfiguracionGeneral;
 import cliente.Cliente;
 import estadoCuotas.APagar;
 import estadoCuotas.Pagada;
@@ -23,7 +24,6 @@ import exceptions.AprobadoException;
 import exceptions.EstadoClienteException;
 import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
-import otros.ConfiguracionGeneral;
 
 public class TestPrestamo {
 	

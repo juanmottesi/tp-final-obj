@@ -1,10 +1,11 @@
-package otros;
+package banco;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import gastos.Gasto;
 import gastos.GastoGlobal;
 import gastos.GastoMensual;
+
 
 
 
@@ -18,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import banco.ConfiguracionGeneral;
 import prestamos.Prestamo;
 
 public class TestConfiguracionGeneral {

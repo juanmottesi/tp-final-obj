@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Vector;
 
+import banco.*;
 import cliente.Cliente;
-import otros.*;
 import estadoCuotas.APagar;
 import estadoCuotas.Vencida;
 import estadoPrestamos.*;

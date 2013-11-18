@@ -1,4 +1,4 @@
-package otros;
+package banco;
 
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;

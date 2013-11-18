@@ -1,5 +1,5 @@
 
-package otros;
+package banco;
 
 
 import java.util.GregorianCalendar;
