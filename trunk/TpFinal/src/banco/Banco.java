@@ -1,4 +1,4 @@
-package otros;
+package banco;
 
 
 import java.io.BufferedWriter;
