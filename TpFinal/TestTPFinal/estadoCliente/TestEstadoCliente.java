@@ -130,8 +130,8 @@ public class TestEstadoCliente {
 	
 	@Test
 	public void testUpdate() throws EstadoClienteException{
-		estadoCliente.update(estadoCliente, estadoCliente);
-		verify(mockedEstado).aEnDeuda(estadoCliente);	
+		estadoCliente.update(estadoCliente,mockedEstado);
+		assertEquals(mockedEstado, estadoCliente.getEstados());
 	}
 }
 
