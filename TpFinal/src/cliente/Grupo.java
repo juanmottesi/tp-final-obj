@@ -105,5 +105,13 @@ public class Grupo extends Cliente {
 		}		
 	}
 
+	@Override
+	public void rechazar() throws EstadoClienteException {
+		this.getPersonaResponsable().getEstadoCliente().seRechazoUnPrestamo(this.getEstadoCliente().getEstados());
+		for(Cliente c : this.getClientes()){
+			c.getEstadoCliente().seRechazoUnPrestamo(this.getEstadoCliente().getEstados());
+		}		
+	}
+
 
 }
