@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,17 +11,10 @@ import prestamos.Prestamo;
 import estadoPrestamos.DeudorIncobrable;
 import estadoPrestamos.EnCurso;
 import estadoPrestamos.EnDeuda;
-import estadoPrestamos.EstadoPrestamo;
-import estadoPrestamos.Finalizado;
-import estadoPrestamos.Rechazado;
-import estadoPrestamos.Solicitado;
 import exceptions.AprobadoException;
-import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
-import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
-import exceptions.AprobadoException;
 
 public class TestEnDeuda {
 	
@@ -61,16 +53,22 @@ public class TestEnDeuda {
 		verify(mockedPrestamo).setEstado(any(DeudorIncobrable.class));
 	}
 	
-	@Test (expected = EnDeudaException.class)
-	public void testAEnDeuda() throws EnDeudaException{
-				
+	@Test 
+	public void testAEnDeuda(){
 		enDeuda.aEnDeuda(mockedPrestamo);
+		verify(mockedPrestamo).setEstado(enDeuda);
 	}
 	
 	@Test 
 	public void testAEnCurso() throws EnCursoException{
-		
 		enDeuda.aEnCurso(mockedPrestamo);
-		verify(mockedPrestamo).setEstado(any(EnCurso.class));
+		verify(mockedPrestamo).setEstado(new EnCurso());
 	}
+	
+	@Test
+	public void testPuedoPagar(){
+		assertTrue(enDeuda.puedoPagar());
+	}
+	
+	
 }

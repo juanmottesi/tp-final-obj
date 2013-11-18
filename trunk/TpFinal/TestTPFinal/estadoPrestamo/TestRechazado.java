@@ -1,25 +1,18 @@
 package estadoPrestamo;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import prestamos.Prestamo;
-import estadoPrestamos.EnCurso;
-import estadoPrestamos.EstadoPrestamo;
-import estadoPrestamos.Finalizado;
 import estadoPrestamos.Rechazado;
-import estadoPrestamos.Solicitado;
 import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
-import exceptions.RechazadoException;
 
 public class TestRechazado {
 	private Rechazado enRechazado;
@@ -38,10 +31,10 @@ public class TestRechazado {
 	
 	}
 	
-	@Test (expected = RechazadoException.class)
-	public void testRechazar() throws RechazadoException{
-				
+	@Test
+	public void testRechazar() {
 		enRechazado.rechazar(mockedPrestamo);
+		verify(mockedPrestamo).setEstado(enRechazado);
 	}
 	
 	@Test (expected = FinalizadoException.class)
@@ -66,5 +59,10 @@ public class TestRechazado {
 	public void testAEnCurso() throws EnCursoException{
 				
 		enRechazado.aEnCurso(mockedPrestamo);
+	}
+	
+	@Test
+	public void testPuedoPagar(){
+		assertFalse(enRechazado.puedoPagar());		
 	}
 }

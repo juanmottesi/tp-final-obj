@@ -4,22 +4,17 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import prestamos.Prestamo;
 import estadoPrestamos.EnCurso;
-import estadoPrestamos.EstadoPrestamo;
-import estadoPrestamos.Finalizado;
 import estadoPrestamos.Rechazado;
 import estadoPrestamos.Solicitado;
-import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
-import exceptions.RechazadoException;
 
 public class TestSolicitado {
 	
@@ -72,6 +67,10 @@ public class TestSolicitado {
 		enSolicitud.aEnCurso(mockedPrestamo);
 	}
 
+	@Test
+	public void testPuedoPagar(){
+		assertFalse(enSolicitud.puedoPagar());
+	}
 	
 }
 	

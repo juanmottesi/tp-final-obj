@@ -4,7 +4,6 @@ import exceptions.AprobadoException;
 import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
-import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
 
@@ -40,10 +39,8 @@ public  class Finalizado extends EstadoPrestamo {
 	}
 
 	@Override
-	public void finalizar(Prestamo p) throws FinalizadoException  {
-		
-		throw new FinalizadoException 
-			("Estado Finalizado: el prestamo ya está finalizado");
+	public void finalizar(Prestamo p){
+		p.setEstado(this);
 	}
 	
 	@Override
@@ -55,7 +52,6 @@ public  class Finalizado extends EstadoPrestamo {
 
 	@Override
 	public boolean puedoPagar() {
-		
 		return false;
 	}
 

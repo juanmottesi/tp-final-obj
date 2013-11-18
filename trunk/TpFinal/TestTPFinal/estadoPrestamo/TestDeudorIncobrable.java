@@ -2,23 +2,17 @@ package estadoPrestamo;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import prestamos.Prestamo;
 import estadoPrestamos.DeudorIncobrable;
-import estadoPrestamos.EnCurso;
-import estadoPrestamos.EstadoPrestamo;
 import exceptions.AprobadoException;
-import exceptions.DeudorIncobrableException;
 import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
-//import static org.mockito.Mock.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 
@@ -34,10 +28,10 @@ public class TestDeudorIncobrable {
 		
 	}
 	
-	@Test(expected = DeudorIncobrableException.class)
-	public void testADeudorIncobrable() throws DeudorIncobrableException {
-				
+	@Test
+	public void testADeudorIncobrable(){
 		enDeudorIncobrable.aDeudorIncobrable(mockedPrestamo);
+		verify(mockedPrestamo).setEstado(enDeudorIncobrable);
 		}
 	
 	@Test(expected = AprobadoException.class)
@@ -70,6 +64,12 @@ public class TestDeudorIncobrable {
 		enDeudorIncobrable.aEnCurso(mockedPrestamo);
 		
 	}
+	
+	@Test
+	public void testPuedoPagar(){
+		assertFalse(enDeudorIncobrable.puedoPagar());
+	}
+	
 }
 
 
