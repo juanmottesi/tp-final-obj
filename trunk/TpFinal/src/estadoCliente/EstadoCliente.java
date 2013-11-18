@@ -126,7 +126,7 @@ public class EstadoCliente extends Observable implements Observer{
 	public void update(Observable o, Object arg) {
 		this.cambiarEstadoA((Estado) arg);
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers(arg);
 	}
 		
 }
