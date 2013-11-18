@@ -1,11 +1,16 @@
 package otros;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import cliente.Cliente;
 import exceptions.AprobadoException;
+import exceptions.EstadoClienteException;
+import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
 import busqueda.BusquedaDePrestamo;
 import busqueda.Condicion;
@@ -22,10 +27,9 @@ public class Banco {
 		return clientes;
 	}
 	
-public void setClientes(List<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
-
 
 	public List<Prestamo> getPrestamos() {
 		return prestamos;
@@ -52,14 +56,20 @@ public void setClientes(List<Cliente> clientes) {
 	}
 	
 	public void pagarCuota(Prestamo prestamo, GregorianCalendar fechaDelPago){
-		prestamo.pagarCuota(fechaDelPago);
+		try {
+			prestamo.pagarCuota(fechaDelPago);
+		} catch (EstadoCuotaException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 		
 	public void aceptarPrestamo(Prestamo p){
 		try {
 			p.aceptarPrestamo();
 		} catch (AprobadoException e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
+		} catch (EstadoClienteException e){
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -67,8 +77,9 @@ public void setClientes(List<Cliente> clientes) {
 		try {
 			p.rechazarPrestamo();
 		} catch (RechazadoException e) {
-			// TODO Auto-generated catch block
-			e.getMessage();
+			System.out.println(e.getMessage());
+		}catch (EstadoClienteException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -79,6 +90,31 @@ public void setClientes(List<Cliente> clientes) {
 		return this.getBusqueda().buscar(this.getPrestamos());
 	}
 	
+	public void generarCuadroDeMarchaXMLDe(Prestamo prestamo){
+		java.io.BufferedWriter bufferedWriter;
+		try {
+			String texto = this.cuadroDeMarchaXML(prestamo);
+			bufferedWriter = new BufferedWriter(new FileWriter("Prestamo.xml"));
+			bufferedWriter.append(texto);
+			bufferedWriter.flush();
+			
+			System.out.print(texto);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
+	public String cuadroDeMarchaXML(Prestamo prestamo){
+		String nuevalinea = System.getProperty("line.separator");
+		String texto = "<cuadroMarcha>";
+		texto = texto + nuevalinea;
+		texto = texto + prestamo.genererarCuotasXML();
+		return texto+nuevalinea+"</cuadroMarcha>";
+	}
+	
+	
+	public void generarCuadroDeMarchaHTMLDe(Prestamo prestamo){}
 	
 }

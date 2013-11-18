@@ -375,12 +375,27 @@ public class Prestamo extends Observable {
 		return this.getCuotas();
 	}
 	
-	public void aceptarPrestamo() throws AprobadoException{
+	public void aceptarPrestamo() throws AprobadoException, EstadoClienteException{
 		this.getEstado().aprobar(this);
+		this.getCliente().aEnCurso();
 	}
 	
-	public void rechazarPrestamo() throws RechazadoException{
+	public void rechazarPrestamo() throws RechazadoException, EstadoClienteException{
 		this.getEstado().rechazar(this);
+		this.getCliente().rechazar();
 	}
 
+	public String genererarCuotasXML(){
+		String nuevalinea = System.getProperty("line.separator");
+		String nuevalinea2 = nuevalinea+"    ";
+		String texto = "";
+		for(Cuota cuota : this.getCuotas()){
+			texto = texto + nuevalinea2+"<cuota>";
+			texto = texto +nuevalinea;
+			texto = texto + cuota.generarInfoCuotaXML();
+			texto = texto + nuevalinea2 + "</cuota>" + nuevalinea;
+		}
+		return texto;
+	}
+	
 }

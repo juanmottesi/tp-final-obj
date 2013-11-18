@@ -48,4 +48,7 @@ public abstract class Cliente implements Observer {
 	public abstract void aEnDeuda()throws EstadoClienteException ;
 	
 	public abstract void aEnCurso()throws EstadoClienteException ;
+	
+	public abstract void rechazar()throws EstadoClienteException ;
 }
+

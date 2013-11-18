@@ -130,5 +130,10 @@ public class Persona extends Cliente {
 		this.getEstadoCliente().aEnCurso();
 	}
 
+	@Override
+	public void rechazar() throws EstadoClienteException {
+		this.getEstadoCliente().seRechazoUnPrestamo(this.getEstadoCliente().getEstados());
+	}
+
 	
 }

@@ -182,6 +182,54 @@ public class Cuota {
 		this.setGastoTotal(montoActuralizado);
 	}
 	
-
+	public String generarInfoCuotaXML(){
+		String nuevalinea = System.getProperty("line.separator");
+		String nuevalinea2 = nuevalinea+"        ";
+		String s = nuevalinea2+"<numero>";
+		s = s + this.getNroCuota().toString();
+		s = s + "</numero>";		
+		s = s + nuevalinea2;
+		s = s + "<vencimiento>";
+		s = s + this.getFechaVencimiento().toString();
+		s = s + "</vencimiento>";
+		s = s + nuevalinea2;
+		s = s + "<amortizacion>";
+		s = s + this.getAmortizacion();
+		s = s + "</amortizacion>";	
+		s = s + nuevalinea2;
+		s = s + "<interes>";
+		s = s + this.getInteres();
+		s = s + "</interes>";
+		s = s + nuevalinea2;
+		s = s + "<saldodeuda>";
+		s = s + this.getSaldoDeuda();
+ 	 	s = s + "</saldodeuda>";	
+		s = s + nuevalinea2;
+ 	 	s = s + "<seguro>";
+ 	 	s = s + this.getSeguro();
+	 	s = s + "</seguro>";	
+		s = s + nuevalinea2;
+ 	 	s = s + "<gastos>";
+ 	 	s = s + this.getGastoTotal();
+ 	 	s = s + "</gastos>";	
+		s = s + nuevalinea2;
+		s = s + "<valorcuota>";
+		s = s + this.getMontoCuota();
+		s = s + "</valorcuota>";	
+		s = s + nuevalinea2;
+ 	 	s = s + "<valortotalcuota>";
+ 	 	s = s + this.getValorTotalCuota();
+ 	 	s = s + "</valortotalcuota>";	
+ 	 	s = s + nuevalinea2;
+ 	 	s = s + "<fechadepago>";
+ 	 	s = s + this.getFechaDePago().toString();
+ 	 	s = s + "</fechadepago>";	
+ 	 	s = s + nuevalinea2;
+ 	 	s = s + "<interesmora>";
+ 	 	s = s + this.getInteresPorMora();
+ 	 	s = s + "</interesmora>";
+		s = s + nuevalinea2;
+		return s;
+	}
 	
 }
