@@ -5,7 +5,12 @@ import gastos.Gasto;
 import java.util.List;
 
 import seguro.ModoSeguroDeVida;
-
+/**
+ * Modela los gastos adicionales de un prestamo y el seguro de vida que quiere el cliente
+ * 
+ * @author Juan
+ *
+ */
 public class ConfiguracionPrestamo {
 	
 	private ModoSeguroDeVida modoSeguro;

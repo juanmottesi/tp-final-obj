@@ -3,6 +3,12 @@ package seguro;
 import prestamos.Cuota;
 import prestamos.Prestamo;
 
+/**
+ * Es un modo de seguro de vida en el que suma el saldo deuda de todas las cuotas y saca un promedio
+ * 
+ * @author Juan
+ *
+ */
 public class MontoPromedioEnCuota extends ModoSeguroDeVida {
 	
 	public MontoPromedioEnCuota(double coeficiente){

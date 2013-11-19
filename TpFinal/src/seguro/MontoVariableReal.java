@@ -3,6 +3,12 @@ package seguro;
 import prestamos.Cuota;
 import prestamos.Prestamo;
 
+/**
+ * Es un modo de seguro de vida en el que multiplica el saldo deuda por el coeficiente
+ * 
+ * @author Juan
+ *
+ */
 public class MontoVariableReal extends ModoSeguroDeVida {
 	
 	public MontoVariableReal(double coeficiente){

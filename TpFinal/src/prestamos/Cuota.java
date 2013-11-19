@@ -8,7 +8,8 @@ import exceptions.EstadoCuotaException;
 
 
 /**
-  *  
+  *  Modela una cuota con todos los datos que se encuentran en el cuadroDeMarcha. Esta tambien indica
+  *  en que estado se encuentra.
   * 
   * @author juan
   *
@@ -162,9 +163,6 @@ public class Cuota {
 	public void aVencido() throws EstadoCuotaException{
 		this.getEstadoCuota().aVencido(this);
 	}
-	
-
-	
 	
 	/**
 	 * @param fechaActual 

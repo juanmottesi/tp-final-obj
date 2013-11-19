@@ -2,6 +2,12 @@ package seguro;
 
 import prestamos.Prestamo;
 
+/**
+ * Modela los tipos de seguro de vida
+ * 
+ * @author Juan
+ *
+ */
 public abstract class ModoSeguroDeVida {
 	
 	private double coeficiente;
