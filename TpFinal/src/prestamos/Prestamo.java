@@ -280,6 +280,8 @@ public class Prestamo extends Observable {
 		else{
 			this.verificarSiQuendaSinPagarOVencidas();
 		}
+		this.setChanged();
+		this.notifyObservers(this.getEstado());
 	}
 	
 	private void verificarSiQuendaSinPagarOVencidas(){
@@ -369,10 +371,6 @@ public class Prestamo extends Observable {
 	
 	public double calcularCuota(double montoTotal, Double temCorrespondiente, Integer cantCuotas) throws InstallmentCountException, InvalidAmountException{
 		return CalculoValorCuota.calcularCuota(montoTotal,temCorrespondiente, cantCuotas);	
-	}
-	
-	public List<Cuota> cuadroDeMarcha(){
-		return this.getCuotas();
 	}
 	
 	public void aceptarPrestamo() throws AprobadoException, EstadoClienteException{
