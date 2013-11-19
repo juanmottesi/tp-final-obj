@@ -23,7 +23,7 @@ import exceptions.RechazadoException;
 
 /**
  * Al crear un prestamo genera automaticamente las cuotas necesarias segun lo pedido. Esto tambien genera 
- * los gastos automaticamente
+ * los gastos automaticamente.
  * 
  * @author juan
  *
