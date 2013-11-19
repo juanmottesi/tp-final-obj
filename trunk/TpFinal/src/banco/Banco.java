@@ -62,7 +62,7 @@ public class Banco {
 	
 	public Banco(){
 		this.setBusqueda(null);
-		this.setClientes(new Vector<Cliente>());
+		this.setClientes(new Vector<Cliente>()); 
 		this.setConfigGeneral(new Vector<ConfiguracionGeneral>());
 		this.setPrestamos(new Vector<Prestamo>());
 	}
@@ -175,7 +175,7 @@ public class Banco {
 	private ConfiguracionGeneral buscarConfiguracionGeneral(GregorianCalendar fecha){
 		ConfiguracionGeneral ret = this.getConfigGeneral().get(0);
 		for(ConfiguracionGeneral cg : this.getConfigGeneral()){
-			if(cg.getFechaInicio().before(fecha) && cg.getFechaFin().after(fecha)){
+			if(cg.getFechaInicio().before(fecha)){
 				ret = cg;
 			}
 		}
