@@ -130,11 +130,6 @@ public class TestPrestamo {
 		
 	}
 	
-	@Test
-	public void testCuadroDeMarcha(){
-		List<Cuota> auxiliar = prestamo.cuadroDeMarcha();
-		assertEquals(auxiliar, prestamo.getCuotas());
-	}
 	
 	@Test
 	public void testCalcularValorCuotaConPrestamoCorrecto(){
