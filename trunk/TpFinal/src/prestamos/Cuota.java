@@ -237,7 +237,7 @@ public class Cuota {
 		}
 		String ret = "";
 		ret = ret + fecha.get(1);
-		ret = ret + "/" + fecha.get(2);
+		ret = ret + "/" + (fecha.get(2) + 1);
 		ret = ret + "/" + fecha.get(5);
 		return ret;
 	} 
