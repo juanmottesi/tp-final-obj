@@ -1,7 +1,12 @@
 package estadoCuotas;
 
 import prestamos.Cuota;
-
+/**
+ * Modela una cuota que no esta vencida ni pagada
+ * 
+ * @author Juan
+ *
+ */
 public class APagar extends EstadoCuota{
 	
 	public APagar(){

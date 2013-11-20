@@ -1,7 +1,12 @@
 package gastos;
 
 import prestamos.Prestamo;
-
+/**
+ * Modela un gasto global con un tipo de gasto que puede ser fijo o porcentual
+ * 
+ * @author Juan
+ *
+ */
 public class GastoGlobal extends Gasto {
 	
 	public GastoGlobal(TipoDeGasto tipoDeGasto){

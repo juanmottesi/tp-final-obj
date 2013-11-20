@@ -1,7 +1,12 @@
 package estadoCliente;
 
 import exceptions.EstadoClienteException;
-
+/**
+ *  Modela si el cliente tiene algun prestamos solicitado
+ * 
+ * @author Juan
+ *
+ */
 public class Solicitado extends Estado{
 	
 	public Solicitado(){

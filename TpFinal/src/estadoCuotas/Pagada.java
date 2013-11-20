@@ -2,7 +2,12 @@ package estadoCuotas;
 
 import exceptions.PagadaException;
 import prestamos.Cuota;
-
+/**
+ * Modela una cuota que esta pagada
+ * 
+ * @author Juan
+ *
+ */
 public class Pagada extends EstadoCuota{
 	
 	public Pagada(){

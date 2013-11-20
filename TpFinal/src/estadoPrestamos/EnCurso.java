@@ -5,13 +5,14 @@ import exceptions.DeudorIncobrableException;
 import exceptions.EnDeudaException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
-
+/**
+ * Este Estado es le que toma el prestamo una ves Aprobado.
+ * 
+ * @author
+ *
+ */
 public class EnCurso extends EstadoPrestamo {
-	
-	/**
-	 * Este Estado es le que toma el prestamo una ves Aprobado.
-	 */
-	
+		
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
 		throw new DeudorIncobrableException

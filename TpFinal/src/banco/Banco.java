@@ -20,7 +20,11 @@ import busqueda.BusquedaDePrestamo;
 import busqueda.Condicion;
 import prestamos.ConfiguracionPrestamo;
 import prestamos.Prestamo;
-
+/**
+ * Modela la base de datos del banco.
+ * @author Juan
+ *
+ */
 public class Banco {
 	
 	private List<Cliente>clientes;

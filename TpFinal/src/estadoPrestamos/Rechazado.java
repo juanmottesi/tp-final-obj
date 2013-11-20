@@ -6,13 +6,14 @@ import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import prestamos.Prestamo;
-
+/**
+ * Este estado representa lo que le pasa a un Prestamo cuando no es 
+ * Aprobado.
+ * 
+ * @author
+ *
+ */
 public class Rechazado extends EstadoPrestamo {
-	
-	/**
-	 * Este estado representa lo que le pasa a un Prestamo cuando no es 
-	 * Aprobado.
-	 */
 	
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{
