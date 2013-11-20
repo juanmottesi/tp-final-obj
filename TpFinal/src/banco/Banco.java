@@ -175,7 +175,7 @@ public class Banco {
 	private ConfiguracionGeneral buscarConfiguracionGeneral(GregorianCalendar fecha){
 		ConfiguracionGeneral ret = this.getConfigGeneral().get(0);
 		for(ConfiguracionGeneral cg : this.getConfigGeneral()){
-			if(cg.getFechaInicio().before(fecha)){
+			if(cg.getFechaInicio().before(fecha) && cg.getFechaFin().after(fecha)){
 				ret = cg;
 			}
 		}
