@@ -71,6 +71,9 @@ public class ConfiguracionGeneral {
 		this.setFechaInicio(fechaInicio);
 		this.setTem(new TreeMap<Integer,Double>());
 		this.setGastos(gastos);
+		GregorianCalendar fechaPasada = new GregorianCalendar(fechaInicio.get(1)+10,fechaInicio.get(2),fechaInicio.get(5));
+		this.setFechaFin(fechaPasada);
+
 	}
 	
 	/**
