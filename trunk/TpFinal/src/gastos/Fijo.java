@@ -1,11 +1,15 @@
 package gastos;
-
+/**
+ * Modela un tipo de gasto Fijo con un monto
+ * 
+ * @author Juan
+ *
+ */
 public class Fijo extends TipoDeGasto {
 
 	public Fijo(double monto){
 		this.setMonto(monto);
 	}
-	
 	
 	@Override
 	/**
@@ -14,10 +18,7 @@ public class Fijo extends TipoDeGasto {
 	 * El paramatro montoAAplicarGastos no se usa.
 	 */
 	public double calcularGasto(double montoAAplicarGastos) {
-		
-		return this.getMonto();
-		
+		return this.getMonto();		
 	}
-	
-	
+		
 }

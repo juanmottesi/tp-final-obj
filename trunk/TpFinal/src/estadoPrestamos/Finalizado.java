@@ -6,14 +6,14 @@ import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
-
+/**
+ * Esta clase mustra el comporamiento de un Prestamo que se Finalizon en buenos 
+ * terminos
+ * 
+ * @author 
+ *
+ */
 public  class Finalizado extends EstadoPrestamo {
-	
-	/**
-	 * Esta clase mustra el comporamiento de un Prestamo que se Finalizon en buenos 
-	 * terminos
-	 */
-	
 
 	@Override
 	public void aDeudorIncobrable(Prestamo p) throws DeudorIncobrableException{

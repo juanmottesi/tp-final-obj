@@ -1,7 +1,12 @@
 package estadoCliente;
 
 import exceptions.EstadoClienteException;
-
+/**
+ *  Modela a un cliente sin prestamos
+ * 
+ * @author Juan
+ *
+ */
 public class SinPrestamo extends Estado{
 
 	@Override

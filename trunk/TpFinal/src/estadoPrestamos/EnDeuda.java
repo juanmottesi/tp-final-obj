@@ -5,14 +5,14 @@ import exceptions.EnCursoException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
-
+/**
+ * Este estado es el que toma el prestamo una ves que alguna cuota
+ * no es pagada a tiempo. 
+ * 
+ * @author 
+ *
+ */
 public class EnDeuda extends EstadoPrestamo {
-	
-	/**
-	 * Este estado es el que toma el prestamo una ves que alguna cuota
-	 * no es pagada a tiempo. 
-	 */
-	
 
 	@Override
 	public void aDeudorIncobrable(Prestamo p){

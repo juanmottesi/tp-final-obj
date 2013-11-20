@@ -5,13 +5,14 @@ import exceptions.EnCursoException;
 import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import prestamos.Prestamo;
-
+/**
+ * Este estado es el primero que toma un Prestamo apenas es creado,
+ * luego este prestamo puede pasar al estado enCurso o rechazado.
+ * 
+ * @author 
+ *
+ */
 public class Solicitado extends EstadoPrestamo {
-	
-	/**
-	 * Este estado es el primero que toma un Prestamo apenas es creado,
-	 * luego este prestamo puedepasar al estado enCurso o rechazado.
-	 */
 
 	@Override
 	public void aprobar(Prestamo p) {

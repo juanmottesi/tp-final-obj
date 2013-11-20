@@ -6,7 +6,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import exceptions.EstadoClienteException;
-
+/**
+ * Modela la cantidad de prestamos que tiene en este momento el cliente y el estado.
+ * 
+ * @author Juan
+ *
+ */
 public class EstadoCliente extends Observable implements Observer{
 
 	private int cantidadPrestamos;

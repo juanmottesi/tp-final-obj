@@ -1,7 +1,12 @@
 package estadoCuotas;
 
 import prestamos.Cuota;
-
+/**
+ * Modela una cuota que esta vencida
+ * 
+ * @author Juan
+ *
+ */
 public class Vencida extends EstadoCuota{
 	
 	public Vencida(){

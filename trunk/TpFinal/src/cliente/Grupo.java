@@ -7,7 +7,12 @@ import java.util.List;
 import estadoCliente.EstadoCliente;
 import exceptions.EstadoClienteException;
 import prestamos.Prestamo;
-
+/**
+ * Modela un grupo de clientes con una persona responsable
+ * 
+ * @author Juan
+ *
+ */
 public class Grupo extends Cliente {
 
 	private List<Cliente> clientes;

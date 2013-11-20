@@ -6,15 +6,15 @@ import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
-
-
+/**
+ * Esta clase representa el Estado del prestamo cuando pasa de Deudor a
+ * Deudor incobrable
+ * 
+ * @author 
+ *
+ */
 public class DeudorIncobrable extends EstadoPrestamo {
-	
-	/**
-	 * Esta clase representa el Estado del prestamo cuando pasa de Deudor a
-	 * Deudor incobrable
-	 */
-	
+
 	@Override
 	public void aDeudorIncobrable(Prestamo p){
 		p.setEstado(this);

@@ -2,7 +2,12 @@ package gastos;
 
 import prestamos.Cuota;
 import prestamos.Prestamo;
-
+/**
+ * Modela un gasto mensual con un tipo de gasto que puede ser fijo o porcentual
+ * 
+ * @author Juan
+ *
+ */
 public class GastoMensual extends Gasto {
 
 	public GastoMensual(TipoDeGasto tipoDeGasto){

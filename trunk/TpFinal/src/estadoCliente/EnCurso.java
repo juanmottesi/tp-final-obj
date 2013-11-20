@@ -1,7 +1,12 @@
 package estadoCliente;
 
 import exceptions.EstadoClienteException;
-
+/**
+ *  Modela si el cliente tiene sus prestamos al dia
+ * 
+ * @author Juan
+ *
+ */
 public class EnCurso extends Estado{
 
 	public EnCurso(){

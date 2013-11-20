@@ -10,7 +10,12 @@ import java.util.TreeMap;
 
 import prestamos.Prestamo;
 import gastos.Gasto;
-
+/**
+ * Modela la informacion de gastos comun a todos los prestamos
+ * 
+ * @author Juan
+ *
+ */
 public class ConfiguracionGeneral {
 
 	private GregorianCalendar fechaInicio;

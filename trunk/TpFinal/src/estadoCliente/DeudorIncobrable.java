@@ -1,7 +1,12 @@
 package estadoCliente;
 
 import exceptions.EstadoClienteException;
-
+/**
+ * Modela si el cliente es un Deudor Incobrable
+ * 
+ * @author Juan
+ *
+ */
 public class DeudorIncobrable extends Estado{
 	
 	public DeudorIncobrable(){

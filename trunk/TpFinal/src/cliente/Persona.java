@@ -8,7 +8,12 @@ import java.util.Vector;
 import estadoCliente.EstadoCliente;
 import exceptions.EstadoClienteException;
 import prestamos.Prestamo;
-
+/**
+ * Modela la informacion necesaria para identificar una persona
+ * 
+ * @author Juan
+ *
+ */
 public class Persona extends Cliente {
 	
 	private String apellido;

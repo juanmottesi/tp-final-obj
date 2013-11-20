@@ -7,15 +7,14 @@ import exceptions.EnDeudaException;
 import exceptions.FinalizadoException;
 import exceptions.RechazadoException;
 import prestamos.Prestamo;
-
+/**
+ * Esta es la Clase Abstracta de los Estados de los Prestamos.
+ * 
+ * @author 
+ *
+ */
 public abstract class EstadoPrestamo {
-	
-	/**
-	 * 
-	 * ESta es la Clase Abstracta de los Estados de los Prestamos.
-	 * 
-	 */
-	
+		
 	public abstract void aprobar(Prestamo p) throws AprobadoException;
 	
 	public abstract void rechazar(Prestamo p) throws RechazadoException;
