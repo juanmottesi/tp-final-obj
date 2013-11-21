@@ -7,12 +7,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import prestamos.Cuota;
+import prestamos.Prestamo;
 
 public class TestPorXML {
 
@@ -20,6 +23,7 @@ public class TestPorXML {
 
 	@Mock
 	Cuota mockedCuota = mock(Cuota.class);
+	Prestamo mockedPrestamo = mock(Prestamo.class);
 	
 	@Before
 	public void setUp(){
@@ -217,4 +221,92 @@ public class TestPorXML {
 		assertEquals("Prestamo.xml", porXML.nombreArchivo());
 	}
 
+	@Test
+	public void testImrimir(){
+		String texto = "";
+		texto = texto + porXML.generarCabecera();
+		texto = texto + this.generarTextoParaTestGenerarCuerpo();
+		texto = texto + porXML.generarFinCabecera();
+		
+		assertEquals(texto, porXML.imprimir(mockedPrestamo));
+	}
+	
+	public String generarTextoParaTestGenerarCuerpo(){
+		List<Cuota> cuotas = new Vector<Cuota>();
+		cuotas.add(mockedCuota);
+		when(mockedPrestamo.getCuotas()).thenReturn(cuotas);
+		String texto = "";
+		texto = texto + porXML.generarCuerpo();
+		texto = texto + this.generarTextoParaTestGenerarInfo();
+		texto = texto + porXML.generarFinCuerpo();
+		return texto;
+	}
+	
+	@Test
+	public void testGenerarCurpo(){
+		
+		String texto = this.generarTextoParaTestGenerarCuerpo();
+		assertEquals(texto, porXML.generarCuerpo(mockedPrestamo));
+	}
+	
+	public String generarTextoParaTestGenerarInfo(){
+		when(mockedCuota.getNroCuota()).thenReturn(1);
+		when(mockedCuota.mostrarFecha(mockedCuota.getFechaVencimiento())).thenReturn("fecha");
+		when(mockedCuota.getAmortizacion()).thenReturn((double) 1);
+		when(mockedCuota.getInteres()).thenReturn((double) 1);
+		when(mockedCuota.getSaldoDeuda()).thenReturn((double) 1);
+		when(mockedCuota.getSeguro()).thenReturn((double) 1);
+		when(mockedCuota.getGastoTotal()).thenReturn((double) 1);
+		when(mockedCuota.getMontoCuota()).thenReturn((double) 1);
+		when(mockedCuota.getValorTotalCuota()).thenReturn((double) 1);
+		when(mockedCuota.mostrarFecha(mockedCuota.getFechaDePago())).thenReturn("fecha");
+		when(mockedCuota.getInteresPorMora()).thenReturn((double) 1);
+		
+		String nuevalinea = System.getProperty("line.separator");
+		String nuevalinea2 = nuevalinea+"        ";
+		String texto = "";
+
+		texto = texto+nuevalinea2+"<numero>";
+		texto = texto + 1;
+		texto = texto + "</numero>";
+		texto = texto + nuevalinea2+"<vencimiento>";
+		texto = texto + "fecha";
+		texto = texto + "</vencimiento>";
+		texto = texto+nuevalinea2+"<amortizacion>";
+		texto = texto + 1.00;
+		texto = texto + "</amortizacion>";
+		texto = texto+nuevalinea2+"<interes>";
+		texto = texto + 1.00;
+		texto = texto + "</interes>";
+		texto = texto+nuevalinea2+"<saldodeuda>";
+		texto = texto + 1.00;
+		texto = texto + "</saldodeuda>";
+		texto = texto+nuevalinea2+"<seguro>";
+		texto = texto + 1.00;
+		texto = texto + "</seguro>";
+		texto = texto+nuevalinea2+"<gastos>";
+		texto = texto + 1.00;
+		texto = texto + "</gastos>";
+		texto = texto+nuevalinea2+"<valorcuota>";
+		texto = texto + 1.00;
+		texto = texto + "</valorcuota>";
+		texto = texto + nuevalinea2+"<valortotalcuota>";
+		texto = texto + 1.00;
+		texto = texto + "</valortotalcuota>";
+		texto = texto + nuevalinea2+"<fechadepago>";
+		texto = texto + "fecha";
+		texto = texto + "</fechadepago>";
+		texto = texto+nuevalinea2+"<interesmora>";
+		texto = texto + 1.00;
+		texto = texto + "</interesmora>";	
+		return texto;
+	}
+	
+	@Test
+	public void testGenerarInfo(){
+		String s = this.generarTextoParaTestGenerarInfo();
+		assertEquals(s, porXML.generarInfo(mockedCuota));
+		
+	}
+	
 }

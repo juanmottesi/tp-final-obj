@@ -16,7 +16,8 @@ public abstract class TipoDeImpresion {
 			
 			bufferedWriter.append(this.imprimir(prestamo));
 			bufferedWriter.flush();
-			System.out.print(this.imprimir(prestamo));
+			
+			System.out.println(this.imprimir(prestamo));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -32,17 +33,17 @@ public abstract class TipoDeImpresion {
 	public String generarTexto(Prestamo prestamo){
 		String texto = "";
 		texto = texto + this.generarCabecera();
-		texto = texto + this.generarCurpo(prestamo);
+		texto = texto + this.generarCuerpo(prestamo);
 		texto = texto + this.generarFinCabecera();
 		return texto;
 	}
 	
-	public String generarCurpo(Prestamo prestamo){
+	public String generarCuerpo(Prestamo prestamo){
 		String texto = "";
 		
 		for(Cuota cuota : prestamo.getCuotas()){
 			texto = texto + this.generarCuerpo();
-			texto = texto + generarInfo(cuota);
+			texto = texto + this.generarInfo(cuota);
 			texto = texto + this.generarFinCuerpo();
 		}
 		
