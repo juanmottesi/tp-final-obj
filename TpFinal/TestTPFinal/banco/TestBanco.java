@@ -1,11 +1,10 @@
 package banco;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,8 +79,9 @@ public class TestBanco {
 	public void  testFiltradosPorCondicionesVerdaderas(){
 		when(mockedCondicion.respetaCondicion(mockedPrestamo)).thenReturn(true);
 		banco.getPrestamos().add(mockedPrestamo);
-		assertEquals(1,banco.filtradosPorCondiciones(mockedCondicion).size());
-		
+		List<Prestamo> result = banco.filtradosPorCondiciones(mockedCondicion);
+		assertEquals(1,result.size());
+		assertEquals(mockedPrestamo, result.get(0));
 	}
 	
 	@Test

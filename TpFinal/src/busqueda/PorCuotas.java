@@ -3,7 +3,7 @@ package busqueda;
 import prestamos.Prestamo;
 
 /**
- * La condicion de cantidad de coutas, recibe dos Intege.
+ * La condicion de cantidad de cuotas, recibe dos Integer.
  * Estas tienen que ser mayores y menores pero no iguales a ninguno de los
  * dos variables.
  * 

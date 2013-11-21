@@ -45,7 +45,7 @@ public class Ejemplo {
 		banco.agregarPrestamo(25000, 12, fechaHoy, primerCliente, configuracionPrestamo);
 		//me guardo el prestamo en una variable auxiliar
 		Prestamo primerPrestamo = banco.getPrestamos().get(0);
-		//aseptamos el prestamo 
+		//aceptamos el prestamo 
 		banco.aceptarPrestamo(primerPrestamo);
 		//generamos el cuadro de marcha html
 		banco.generarCuadroDeMarchaHTMLDe(primerPrestamo);

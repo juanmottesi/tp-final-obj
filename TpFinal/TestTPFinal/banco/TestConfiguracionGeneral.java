@@ -69,7 +69,7 @@ public class TestConfiguracionGeneral {
 
 		configuracionGeneral.agregarClaveValorATem(12, 3);
 		assertEquals("Se fija si el tem tiene un elemento",1, configuracionGeneral.getTem().size());
-		assertNotEquals("Si guarda el 3 como 0.3",(Integer)3,configuracionGeneral.consultarTem(12));
+		assertNotEquals("Si guarda el 3 como 0.3",3,configuracionGeneral.consultarTem(12));
 	}
 	
 	@Test
