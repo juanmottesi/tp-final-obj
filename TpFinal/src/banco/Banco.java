@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import cliente.Cliente;
 import exceptions.AprobadoException;
+import exceptions.ConfiguracionGeneralException;
 import exceptions.EstadoClienteException;
 import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
@@ -146,12 +147,12 @@ public class Banco {
 		}
 	}
 	
-	public void agregarConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral){
+	public void agregarConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral) throws ConfiguracionGeneralException{
 		if(this.getConfigGeneral().isEmpty()){
 			this.getConfigGeneral().add(configuracionGeneral);
 		}
 		else{
-			this.getConfigGeneral().get(this.getConfigGeneral().size()-1).finConfiguracionGeneral(configuracionGeneral.getFechaInicio());
+			this.getConfigGeneral().get(this.getConfigGeneral().size()-1).finConfiguracionGeneral(configuracionGeneral);
 			this.getConfigGeneral().add(configuracionGeneral);
 		}
 	}
