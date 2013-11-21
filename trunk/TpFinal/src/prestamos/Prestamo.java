@@ -383,30 +383,5 @@ public class Prestamo extends Observable {
 		this.getCliente().rechazar();
 	}
 
-	public String genererarCuotasXML(){
-		String nuevalinea = System.getProperty("line.separator");
-		String nuevalinea2 = nuevalinea+"    ";
-		String texto = "";
-		for(Cuota cuota : this.getCuotas()){
-			texto = texto + nuevalinea2+"<cuota>";
-			texto = texto +nuevalinea;
-			texto = texto + cuota.generarInfoCuotaXML();
-			texto = texto + nuevalinea2 + "</cuota>" + nuevalinea;
-		}
-		return texto;
-	}
-	
-	public String genererarCuotasHTML(){
-		String nuevalinea = System.getProperty("line.separator");
-		String nuevalinea2 = nuevalinea+"       ";
-		String texto = "";
-		for(Cuota cuota : this.getCuotas()){
-			texto = texto+nuevalinea2+"<ul>";
-			texto = texto+nuevalinea;// + nuevalinea;
-			texto = texto + cuota.generarInfoCuotaHTML();
-			texto = texto+nuevalinea2+"</ul>"+nuevalinea;
-		}
-		return texto + nuevalinea;
-	}
 	
 }

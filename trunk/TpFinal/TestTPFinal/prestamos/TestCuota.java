@@ -106,17 +106,18 @@ public class TestCuota {
 		assertEquals(nuevoGastoTotal, cuota.getGastoTotal(),0);
 		
 	}
-	
+		
 	@Test
-	public void testGenerarInfoCuotaXML(){
-		String retorno ="<numero>1</numero>";
-		assertTrue(cuota.generarInfoCuotaXML().contains(retorno));		
+	public void testMostrarFechaConFechaNull(){
+		assertEquals("0/0/0", cuota.mostrarFecha(null));		
 	}
 	
 	@Test
-	public void testGenerarInfoCuotaHTML(){
-		String retorno ="<li>Cuota 1</li>";
-		assertTrue(cuota.generarInfoCuotaHTML().contains(retorno));	
+	public void testMostrarFechaConFecha(){
+		GregorianCalendar hoy = new GregorianCalendar();
+		String fechaRetorno = hoy.get(1) + "/" + (hoy.get(2)+1)+ "/" + hoy.get(5);
+		
+		assertEquals(fechaRetorno, cuota.mostrarFecha(hoy));		
 	}
 	
 }

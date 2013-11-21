@@ -12,6 +12,7 @@ import org.mockito.Mock;
 
 import prestamos.ConfiguracionPrestamo;
 import prestamos.Prestamo;
+import tipoDeImpresion.TipoDeImpresion;
 import busqueda.Condicion;
 import cliente.Cliente;
 import exceptions.AprobadoException;
@@ -126,14 +127,16 @@ public class TestBanco {
 	 
 	 @Test
 	 public void testGenerarCuadroDeMarchaXMLDe(){
-		 banco.generarCuadroDeMarchaXMLDe(mockedPrestamo);
-		 verify(mockedPrestamo).genererarCuotasXML();
+		 TipoDeImpresion mockedTipoDeImpresion = mock(TipoDeImpresion.class);
+		 banco.generarCuadroDeMarcha(mockedPrestamo, mockedTipoDeImpresion);
+		 verify(mockedTipoDeImpresion).generarCuadroDeMarcha(mockedPrestamo);
 	 }
 	 
 	 @Test
 	 public void testGenerarCuadroDeMarchaHTMLDe(){
-		 banco.generarCuadroDeMarchaHTMLDe(mockedPrestamo);
-		 verify(mockedPrestamo).genererarCuotasHTML();
+		 TipoDeImpresion mockedTipoDeImpresion = mock(TipoDeImpresion.class);
+		 banco.generarCuadroDeMarcha(mockedPrestamo, mockedTipoDeImpresion);
+		 verify(mockedTipoDeImpresion).generarCuadroDeMarcha(mockedPrestamo);
 	 }
 	 
 	 @Test

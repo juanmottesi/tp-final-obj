@@ -182,25 +182,5 @@ public class TestPrestamo {
 		assertEquals(new Rechazado(),prestamo.getEstado());
 	}
 	
-	@Test
-	public void testGenererarCuotasXML(){
-		List<Cuota>cuotas = new Vector<Cuota>();
-		Cuota mockedCuota = mock(Cuota.class);
-		cuotas.add(mockedCuota);
-		prestamo.setCuotas(cuotas);
-		prestamo.genererarCuotasXML();
-		verify(mockedCuota).generarInfoCuotaXML();
-	}
-	
-	@Test
-	public void testGenererarCuotasHTML(){
-		List<Cuota>cuotas = new Vector<Cuota>();
-		Cuota mockedCuota = mock(Cuota.class);
-		cuotas.add(mockedCuota);
-		prestamo.setCuotas(cuotas);
-		prestamo.genererarCuotasHTML();
-		verify(mockedCuota).generarInfoCuotaHTML();
-		
-	}
 
 }
