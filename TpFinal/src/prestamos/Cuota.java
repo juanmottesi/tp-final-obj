@@ -181,57 +181,7 @@ public class Cuota {
 		this.setGastoTotal(montoActuralizado);
 	}
 	
-	public String generarInfoCuotaXML(){
-		String nuevalinea = System.getProperty("line.separator");
-		String nuevalinea2 = nuevalinea+"        ";
-		String s = nuevalinea2+"<numero>";
-		s = s + this.getNroCuota();
-		s = s + "</numero>";		
-		s = s + nuevalinea2;
-		s = s + "<vencimiento>";
-		s = s + this.mostrarFecha(this.getFechaVencimiento());
-		s = s + "</vencimiento>";
-		s = s + nuevalinea2;
-		s = s + "<amortizacion>";
-		s = s + this.getAmortizacion();
-		s = s + "</amortizacion>";	
-		s = s + nuevalinea2;
-		s = s + "<interes>";
-		s = s + this.getInteres();
-		s = s + "</interes>";
-		s = s + nuevalinea2;
-		s = s + "<saldodeuda>";
-		s = s + this.getSaldoDeuda();
- 	 	s = s + "</saldodeuda>";	
-		s = s + nuevalinea2;
- 	 	s = s + "<seguro>";
- 	 	s = s + this.getSeguro();
-	 	s = s + "</seguro>";	
-		s = s + nuevalinea2;
- 	 	s = s + "<gastos>";
- 	 	s = s + this.getGastoTotal();
- 	 	s = s + "</gastos>";	
-		s = s + nuevalinea2;
-		s = s + "<valorcuota>";
-		s = s + this.getMontoCuota();
-		s = s + "</valorcuota>";	
-		s = s + nuevalinea2;
- 	 	s = s + "<valortotalcuota>";
- 	 	s = s + this.getValorTotalCuota();
- 	 	s = s + "</valortotalcuota>";	
- 	 	s = s + nuevalinea2;
- 	 	s = s + "<fechadepago>";
- 	 	s = s + this.mostrarFecha(this.getFechaDePago());
- 	 	s = s + "</fechadepago>";	
- 	 	s = s + nuevalinea2;
- 	 	s = s + "<interesmora>";
- 	 	s = s + this.getInteresPorMora();
- 	 	s = s + "</interesmora>";
-		s = s + nuevalinea2;
-		return s;
-	}
-
-	private String mostrarFecha(GregorianCalendar fecha){
+	public String mostrarFecha(GregorianCalendar fecha){
 		if(fecha == null){
 			return "0/0/0";
 		}
@@ -242,54 +192,5 @@ public class Cuota {
 		return ret;
 	} 
 	
-	public String generarInfoCuotaHTML(){
-		String nuevalinea = System.getProperty("line.separator");
-		String nuevalinea2 = nuevalinea+"            ";
-		String s = nuevalinea2+"<li>";
-		s = s + "Cuota " + this.getNroCuota();
-		s = s+"</li>";		
-		s = s+nuevalinea2;
-		s = s+"<li>";
-		s= s+"Vencimiento "+ this.mostrarFecha(this.getFechaVencimiento());
-		s = s +"</li>";
-		s = s+nuevalinea2;
-		s = s +"<li>";
-		s = s+"Amortizacion "+ this.getAmortizacion();
-		s = s +"</li>";	
-		s = s+nuevalinea2;
-		s = s +"<li>";
-		s = s+"Interes "+ this.getInteres();
-		s = s +"</li>";
-		s = s+nuevalinea2;
-		s = s +"<li>";
-		s = s+"Saldo Deuda "+ this.getSaldoDeuda();
- 	 	s = s +"</li>";	
-		s = s+nuevalinea2;
- 	 	s = s +"<li>";
- 	 	s = s+"Seguro "+ this.getSeguro();
-	 	s = s +"</li>";	
-		s = s+nuevalinea2;
- 	 	s = s +"<li>";
- 	 	s = s+"Gastos "+ this.getGastoTotal();
- 	 	s = s +"</li>";	
-		s = s+nuevalinea2;
-		s = s +"<li>";
-		s = s+"Valor Cuota "+ this.getMontoCuota();
-		s = s +"</li>";	
-		s = s+nuevalinea2;
- 	 	s = s +"<li>";
- 	 	s = s+"Valor Total Cuota "+ this.getValorTotalCuota();
- 	 	s = s +"</li>";	
- 	 	s = s+nuevalinea2;
- 	 	s = s +"<li>";
- 	 	s = s+"Fecha de Pago "+ this.mostrarFecha(this.getFechaDePago());
- 	 	s = s +"</li>";	
- 	 	s = s+nuevalinea2;
- 	 	s = s +"<li>";
- 	 	s = s+"Interes por Mora "+ this.getInteresPorMora();
- 	 	s = s +"</li>";
-		s = s+nuevalinea2;
-		return s;
-	}
 	
 }

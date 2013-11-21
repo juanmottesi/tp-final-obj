@@ -4,9 +4,6 @@ package banco;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
@@ -20,6 +17,7 @@ import busqueda.BusquedaDePrestamo;
 import busqueda.Condicion;
 import prestamos.ConfiguracionPrestamo;
 import prestamos.Prestamo;
+import tipoDeImpresion.TipoDeImpresion;
 /**
  * Modela la base de datos del banco.
  * @author Juan
@@ -104,64 +102,10 @@ public class Banco {
 		return this.getBusqueda().buscar(this.getPrestamos());
 	}
 	
-	public void generarCuadroDeMarchaXMLDe(Prestamo prestamo){
-		java.io.BufferedWriter bufferedWriter;
-		try {
-			String texto = this.cuadroDeMarchaXML(prestamo);
-			bufferedWriter = new BufferedWriter(new FileWriter("Prestamo.xml"));
-			bufferedWriter.append(texto);
-			bufferedWriter.flush();
-			
-			System.out.print(texto);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+	public void generarCuadroDeMarcha(Prestamo prestamo, TipoDeImpresion tipoDeImpresion){
+		tipoDeImpresion.generarCuadroDeMarcha(prestamo);
 	}
 	
-	private String cuadroDeMarchaXML(Prestamo prestamo){
-		String nuevalinea = System.getProperty("line.separator");
-		String texto = "<cuadroMarcha>";
-		texto = texto + nuevalinea;
-		texto = texto + prestamo.genererarCuotasXML();
-		return texto+nuevalinea+"</cuadroMarcha>";
-	}
-	
-	
-	public void generarCuadroDeMarchaHTMLDe(Prestamo prestamo){
-		java.io.BufferedWriter bufferedWriter;
-	
-		try {
-			String texto = this.cuadroDeMarchaHTML(prestamo);
-			bufferedWriter = new BufferedWriter(new FileWriter("Prestamo.html"));
-			bufferedWriter.append(texto);
-			bufferedWriter.flush();
-			
-			System.out.print(texto);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	
-	}
-	
-	private String cuadroDeMarchaHTML(Prestamo prestamo){
-		String nuevalinea = System.getProperty("line.separator");
-		String texto = "<html lang =\"en\">" + nuevalinea;
-		texto = texto + nuevalinea;
-		texto = texto + "<head>" + nuevalinea;
-		texto = texto + nuevalinea + "    " + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"+ nuevalinea;
-		texto = texto + nuevalinea + "    " + "<title>Cuadro de Marcha</title>" +nuevalinea;
-		texto = texto + nuevalinea + "</head>" + nuevalinea;
-		texto = texto + nuevalinea + "<body>" + nuevalinea;
-		texto = texto + nuevalinea + "    " +"<div id = \"cuadro\">" + nuevalinea;		
-		texto = texto + prestamo.genererarCuotasHTML();
-		texto = texto + "    " + "</div>" + nuevalinea;
-		texto = texto + nuevalinea + "</div>" + nuevalinea;
-		return texto + nuevalinea + "</html>";
-	}
-
 	public double consultarPrestamo(double monto, Integer cantCuotas, GregorianCalendar fecha){
 		ConfiguracionGeneral configGeneral = this.buscarConfiguracionGeneral(fecha);
 		Prestamo  p = new Prestamo(monto, cantCuotas, configGeneral);

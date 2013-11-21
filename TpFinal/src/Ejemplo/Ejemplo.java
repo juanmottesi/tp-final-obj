@@ -8,6 +8,9 @@ import prestamos.ConfiguracionPrestamo;
 import prestamos.Prestamo;
 import seguro.MontoVariableReal;
 import seguro.SinSeguroDeVida;
+import tipoDeImpresion.PorHTML;
+import tipoDeImpresion.PorXML;
+import tipoDeImpresion.TipoDeImpresion;
 import cliente.Cliente;
 import cliente.Persona;
 import estadoCliente.EstadoCliente;
@@ -48,10 +51,12 @@ public class Ejemplo {
 		//aceptamos el prestamo 
 		banco.aceptarPrestamo(primerPrestamo);
 		//generamos el cuadro de marcha html
-		banco.generarCuadroDeMarchaHTMLDe(primerPrestamo);
+		TipoDeImpresion ti = new PorHTML();
+		banco.generarCuadroDeMarcha(primerPrestamo, ti);
 		// pagamos una cuota del prestamo
 		banco.pagarCuota(primerPrestamo, fechaHoy);
 		//generamos el cuadro de marcha xml
-		banco.generarCuadroDeMarchaXMLDe(primerPrestamo);
+		ti = new PorXML();
+		banco.generarCuadroDeMarcha(primerPrestamo, ti);
 	}
 }
