@@ -14,6 +14,7 @@ import tipoDeImpresion.TipoDeImpresion;
 import cliente.Cliente;
 import cliente.Persona;
 import estadoCliente.EstadoCliente;
+import exceptions.ConfiguracionGeneralException;
 import exceptions.EstadoClienteException;
 import banco.Banco;
 import banco.ConfiguracionGeneral;
@@ -25,7 +26,7 @@ import gastos.GastoMensual;
 public class Ejemplo {
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ConfiguracionGeneralException {
 		//Creo dos fechas
 		GregorianCalendar fechaHoy = new GregorianCalendar();
 		GregorianCalendar fechaDeCreacionBanco = new GregorianCalendar(fechaHoy.get(1), fechaHoy.get(2), fechaHoy.get(5)-1);

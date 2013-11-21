@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import exceptions.ConfiguracionGeneralException;
 import prestamos.Prestamo;
 import gastos.Gasto;
 /**
@@ -64,7 +65,7 @@ public class ConfiguracionGeneral {
 		this.setFechaInicio(fechaInicio);
 		this.setTem(tem);
 		this.setGastos(gastos);
-		GregorianCalendar fechaPasada = new GregorianCalendar(fechaInicio.get(1)+10,fechaInicio.get(2),fechaInicio.get(5));
+		GregorianCalendar fechaPasada = new GregorianCalendar(fechaInicio.get(1)+100,fechaInicio.get(2),fechaInicio.get(5));
 		this.setFechaFin(fechaPasada);
 	}
 	/**
@@ -76,7 +77,7 @@ public class ConfiguracionGeneral {
 		this.setFechaInicio(fechaInicio);
 		this.setTem(new TreeMap<Integer,Double>());
 		this.setGastos(gastos);
-		GregorianCalendar fechaPasada = new GregorianCalendar(fechaInicio.get(1)+10,fechaInicio.get(2),fechaInicio.get(5));
+		GregorianCalendar fechaPasada = new GregorianCalendar(fechaInicio.get(1)+100,fechaInicio.get(2),fechaInicio.get(5));
 		this.setFechaFin(fechaPasada);
 
 	}
@@ -119,8 +120,13 @@ public class ConfiguracionGeneral {
 		}
 	}
 	
-	public void finConfiguracionGeneral(GregorianCalendar fechaFin){
-		this.setFechaFin(fechaFin);
+	public void finConfiguracionGeneral(ConfiguracionGeneral configuracionGeneral) throws ConfiguracionGeneralException{
+		if(this.getFechaInicio().after(configuracionGeneral.getFechaInicio())){
+			throw new ConfiguracionGeneralException("la fecha inicio es anterior a la configuracion actual");
+		}
+		else{
+			this.setFechaFin(configuracionGeneral.getFechaInicio());
+		}
 	}
 }
 	

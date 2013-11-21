@@ -16,6 +16,7 @@ import tipoDeImpresion.TipoDeImpresion;
 import busqueda.Condicion;
 import cliente.Cliente;
 import exceptions.AprobadoException;
+import exceptions.ConfiguracionGeneralException;
 import exceptions.EstadoClienteException;
 import exceptions.EstadoCuotaException;
 import exceptions.RechazadoException;
@@ -32,7 +33,7 @@ public class TestBanco {
 	ConfiguracionPrestamo mockedConfiguracionPrestamo = mock(ConfiguracionPrestamo.class);
 	
 	@Before 
-	public void setUp(){
+	public void setUp() throws ConfiguracionGeneralException{
 		banco = new Banco();
 		banco.agregarConfiguracionGeneral(mockedConfiguracionGeneral);
 		
@@ -93,7 +94,7 @@ public class TestBanco {
 	}
 	
 	@Test
-	public void testAgregarConfiguracionGeneral(){
+	public void testAgregarConfiguracionGeneral() throws ConfiguracionGeneralException{
 		GregorianCalendar hoy = new GregorianCalendar();
 		GregorianCalendar fechaFin = new GregorianCalendar(hoy.get(1)+100,hoy.get(2),hoy.get(5)-1);
 		//Segunda config general.
@@ -103,7 +104,7 @@ public class TestBanco {
 		
 		banco.agregarConfiguracionGeneral(mockedConfiguracionGeneral2);
 		
-		verify(mockedConfiguracionGeneral).finConfiguracionGeneral(fechaFin);
+		verify(mockedConfiguracionGeneral).finConfiguracionGeneral(mockedConfiguracionGeneral2);
 	}
 	
 	@Test

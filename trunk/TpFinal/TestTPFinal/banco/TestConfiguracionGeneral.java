@@ -2,9 +2,11 @@ package banco;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import exceptions.ConfiguracionGeneralException;
 import gastos.Gasto;
 import gastos.GastoGlobal;
 import gastos.GastoMensual;
+
 
 
 
@@ -98,12 +100,28 @@ public class TestConfiguracionGeneral {
 	}
 	
 	@Test
-	public void TestFinConfiguracionGeneral(){
-		GregorianCalendar hoy = new GregorianCalendar();
-		GregorianCalendar fechaFin = new GregorianCalendar(hoy.get(1),hoy.get(2)+1,hoy.get(5)); 
+	public void TestFinConfiguracionGeneralValida() throws ConfiguracionGeneralException{
 		
-		configuracionGeneral.finConfiguracionGeneral(fechaFin);
+		GregorianCalendar fechaFin = new GregorianCalendar(fechaInicio.get(1),fechaInicio.get(2)+2,fechaInicio.get(5)); 
+		
+		ConfiguracionGeneral mockedConfiguracionGeneral = mock(ConfiguracionGeneral.class);
+		when(mockedConfiguracionGeneral.getFechaInicio()).thenReturn(fechaFin);
+		
+		configuracionGeneral.finConfiguracionGeneral(mockedConfiguracionGeneral);
 		assertEquals("Se fija si la fecha corresponde",fechaFin, configuracionGeneral.getFechaFin());
 		
 	}
+	
+	@Test(expected = ConfiguracionGeneralException.class)
+	public void TestFinConfiguracionGeneralInvalida() throws ConfiguracionGeneralException{
+		GregorianCalendar fechaAnterior = new GregorianCalendar(fechaInicio.get(1),fechaInicio.get(2)-2,fechaInicio.get(5)); 
+		
+		ConfiguracionGeneral mockedConfiguracionGeneral = mock(ConfiguracionGeneral.class);
+		when(mockedConfiguracionGeneral.getFechaInicio()).thenReturn(fechaAnterior);
+				
+		configuracionGeneral.finConfiguracionGeneral(mockedConfiguracionGeneral);
+		
+	}
+	
+	
 }
