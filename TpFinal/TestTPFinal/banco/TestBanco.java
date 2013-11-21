@@ -78,7 +78,7 @@ public class TestBanco {
 	@Test
 	public void  testFiltradosPorCondicionesVerdaderas(){
 		when(mockedCondicion.respetaCondicion(mockedPrestamo)).thenReturn(true);
-		banco.getPrestamos().add(mockedPrestamo);
+		banco.agregarABancoPrestamo(mockedPrestamo);
 		List<Prestamo> result = banco.filtradosPorCondiciones(mockedCondicion);
 		assertEquals(1,result.size());
 		assertEquals(mockedPrestamo, result.get(0));
@@ -87,7 +87,7 @@ public class TestBanco {
 	@Test
 	public void  testFiltradosPorCondicionesFalsas(){
 		when(mockedCondicion.respetaCondicion(mockedPrestamo)).thenReturn(false);
-		banco.getPrestamos().add(mockedPrestamo);
+		banco.agregarABancoPrestamo(mockedPrestamo);
 		assertTrue(banco.filtradosPorCondiciones(mockedCondicion).isEmpty());
 	}
 	
@@ -167,6 +167,12 @@ public class TestBanco {
 		  
 		 banco.agregarPrestamo(25000, 12, new GregorianCalendar(), mockedCliente, mockedConfiguracionPrestamo);
 		 assertEquals(0,banco.getPrestamos().size());
+	 }
+	 
+	 @Test
+	 public void testAgregarABancoPrestamo(){
+		 banco.agregarABancoPrestamo(mockedPrestamo);
+		 assertEquals(mockedPrestamo, banco.getPrestamos().get(0));
 	 }
 }
 
