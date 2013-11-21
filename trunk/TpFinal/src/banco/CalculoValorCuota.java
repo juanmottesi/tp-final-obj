@@ -3,7 +3,12 @@ package banco;
 import installment.calculator.exceptions.InstallmentCountException;
 import installment.calculator.exceptions.InvalidAmountException;
 import installment.calculator.model.AdvanceModeInstallment;
-
+/**
+ * Modela la creacion del monto de la cuota.
+ * 
+ * @author Juan
+ *
+ */
 public class CalculoValorCuota {
 
 	public CalculoValorCuota(){

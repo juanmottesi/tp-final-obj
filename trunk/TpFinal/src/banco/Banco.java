@@ -186,12 +186,16 @@ public class Banco {
 		return  ret;
 	}
 	
+	public void agregarABancoPrestamo(Prestamo prestamo){
+		this.getPrestamos().add(prestamo);
+	}
+	
 	public void agregarPrestamo(double monto, Integer cantCuotas, GregorianCalendar fecha, Cliente cliente, ConfiguracionPrestamo configuracionPrestamo){
 		if(cliente.puedoAgregarPrestamo()){
 			try {
 				Prestamo prestamoNuevo = new Prestamo(cliente, monto,cantCuotas,fecha,configuracionPrestamo,this.buscarConfiguracionGeneral(fecha));
 				cliente.agregarPrestamo(prestamoNuevo);
-				this.getPrestamos().add(prestamoNuevo);
+				this.agregarABancoPrestamo(prestamoNuevo);
 			} catch (InstallmentCountException | InvalidAmountException e) {
 				System.out.println(e.getMessage());
 			} 
