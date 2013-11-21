@@ -13,7 +13,7 @@ public class Fijo extends TipoDeGasto {
 	
 	@Override
 	/**
-	 * CalcularGasto es una funcion que retorna el valor que tiene guardado
+	 * CalcularGasto es un metodo que retorna el valor que tiene guardado
 	 * en su variable privada.
 	 * El paramatro montoAAplicarGastos no se usa.
 	 */
