@@ -125,7 +125,9 @@ public class ConfiguracionGeneral {
 			throw new ConfiguracionGeneralException("la fecha inicio es anterior a la configuracion actual");
 		}
 		else{
-			this.setFechaFin(configuracionGeneral.getFechaInicio());
+			GregorianCalendar fechaConfiNueva = configuracionGeneral.getFechaInicio();
+			GregorianCalendar fechaFin = new GregorianCalendar(fechaConfiNueva.get(1),fechaConfiNueva.get(2),(fechaConfiNueva.get(5)-1));
+			this.setFechaFin(fechaFin);
 		}
 	}
 }
