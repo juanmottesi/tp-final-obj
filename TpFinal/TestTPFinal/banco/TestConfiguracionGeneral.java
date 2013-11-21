@@ -106,9 +106,10 @@ public class TestConfiguracionGeneral {
 		
 		ConfiguracionGeneral mockedConfiguracionGeneral = mock(ConfiguracionGeneral.class);
 		when(mockedConfiguracionGeneral.getFechaInicio()).thenReturn(fechaFin);
+		GregorianCalendar fechaFinSeteada = new GregorianCalendar(fechaFin.get(1),fechaFin.get(2),(fechaFin.get(5)-1));
 		
 		configuracionGeneral.finConfiguracionGeneral(mockedConfiguracionGeneral);
-		assertEquals("Se fija si la fecha corresponde",fechaFin, configuracionGeneral.getFechaFin());
+		assertEquals("Se fija si la fecha corresponde",fechaFinSeteada, configuracionGeneral.getFechaFin());
 		
 	}
 	
