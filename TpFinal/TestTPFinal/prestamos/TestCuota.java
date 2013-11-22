@@ -37,6 +37,7 @@ public class TestCuota {
 		assertEquals("Chequea el amortizacion",amortizacion,cuota.getAmortizacion(),0);
 		assertEquals("Chequea el interes",interes,cuota.getInteres(),0);
 		assertEquals("Chequea el saldoDeuda",saldoDeuda,cuota.getSaldoDeuda(),0);
+		assertEquals("Chequea el inters por mora",0,cuota.getInteresPorMora(),0);
 	}
 	@Test
 	public void testConstructor2(){

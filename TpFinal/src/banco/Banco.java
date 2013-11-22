@@ -135,12 +135,30 @@ public class Banco {
 		this.getPrestamos().add(prestamo);
 	}
 	
+	private void agregarCliente(Cliente cliente){
+		boolean loTengoQueAgregar = true;
+		if(this.getClientes().isEmpty()){
+			this.getClientes().add(cliente);
+		}
+		for(Cliente clienteAux : this.getClientes()){
+			if(clienteAux == cliente){
+				loTengoQueAgregar = false;
+				break;
+			}
+		}
+		if(loTengoQueAgregar){
+			this.getClientes().add(cliente);
+		}
+	}
+	
+	
 	public void agregarPrestamo(double monto, Integer cantCuotas, GregorianCalendar fecha, Cliente cliente, ConfiguracionPrestamo configuracionPrestamo){
 		if(cliente.puedoAgregarPrestamo()){
 			try {
 				Prestamo prestamoNuevo = new Prestamo(cliente, monto,cantCuotas,fecha,configuracionPrestamo,this.buscarConfiguracionGeneral(fecha));
 				cliente.agregarPrestamo(prestamoNuevo);
 				this.agregarABancoPrestamo(prestamoNuevo);
+				this.agregarCliente(cliente);
 			} catch (InstallmentCountException | InvalidAmountException e) {
 				System.out.println(e.getMessage());
 			} 
